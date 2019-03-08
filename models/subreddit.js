@@ -8,7 +8,7 @@ const subredditSchema = new Schema({
   },
   icon: {
     type: String,
-    default: 'icon url'
+    default: 'logo.svg'
   },
   subscribers: {
     type: Number,
