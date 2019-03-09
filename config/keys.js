@@ -1,5 +1,5 @@
 module.exports = {
-  mongoURI: `mongodb+srv://mernRedditAdmin :Xp80OBVKPbLkpJGw@cluster0-zmcyw.mongodb.net/mernRedditClone?retryWrites=true`,
+  mongoURI: ``,
   secret:'JosephIsBestJojo',
   adminUsername:'',
   adminPassword:'',

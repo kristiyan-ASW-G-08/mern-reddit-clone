@@ -16,7 +16,14 @@ const Router = () => (
     <>
       <Navbar isAuth={isAuth} />
       <Switch>
- 
+      <Route
+          path="/signup"
+          render={() => (
+            <Suspense fallback={<Loader/>}>
+              <SignupForm />
+            </Suspense>
+          )}
+        />
       </Switch>
     </>
   </BrowserRouter>
