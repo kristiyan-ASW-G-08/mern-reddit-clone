@@ -7,6 +7,7 @@ const User = require('../models/user');
 exports.signup = async (req, res, next) => {
   try {
     const errors = validationResult(req);
+    console.log(req.body)
     if (!errors.isEmpty()) {
       const error = new Error('Validation failed.');
       error.statusCode = 422;
