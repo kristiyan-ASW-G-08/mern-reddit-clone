@@ -1,12 +1,17 @@
-import React from 'react'
+import React,{useState,useMemo} from 'react'
+const errorFunc = (errorArr,name) => {
+  let error = false
+if(errorArr.length > 0){
+  if(errorArr.includes(name)){
+    error = true
+  }
+  
+}
+return error
+}
  const Input = props => {
   const {name,setHook,placeholder,value,type,errorArr} = props
-  let error = false
-  if(errorArr.length > 0){
-    if(errorArr.includes(name)){
-      error = true
-    }
-  }
+  const error = useMemo(() => errorFunc(errorArr,name),[errorArr,name])
     return (
         <input
         className={`input ${error ? 'error': ''}`}

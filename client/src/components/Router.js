@@ -5,12 +5,14 @@ import Loader from './Loader'
 // const  Home = lazy(() => import('./Home') )
 import {AuthContextConsumer} from '../AuthContext/AuthContext';
 const SignupForm = lazy(() => import('./SignupForm/SignupForm'));
-
+const LoginForm = lazy(() => import('./LoginForm/LoginForm'));
 const Router = () =>  (
     <AuthContextConsumer>
         {consumerData =>  {
-            const {authState} = consumerData
-            let {isAuth,} = authState
+            const {authState,loginReducer,logoutReducer} = consumerData
+            let {isAuth} = authState
+            console.log(authState)
+
             return (
 <BrowserRouter>
     <>
@@ -21,6 +23,14 @@ const Router = () =>  (
           render={() => (
             <Suspense fallback={<Loader/>}>
               <SignupForm   />
+            </Suspense>
+          )}
+        />
+        <Route
+          path="/login"
+          render={() => (
+            <Suspense fallback={<Loader/>}>
+              <LoginForm  loginReducer={loginReducer} logoutReducer={logoutReducer}  />
             </Suspense>
           )}
         />

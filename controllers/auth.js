@@ -38,6 +38,7 @@ exports.login = async (req, res, next) => {
     const user = await User.findOne({ email });
     if (!user) {
       const error = new Error('A user with this email could not be found.');
+      error.data = {location: "body", param: "email", value:email, msg: 'A user with this email could not be found.',authError:true}
       error.statusCode = 401;
       throw error;
     }
@@ -45,6 +46,7 @@ exports.login = async (req, res, next) => {
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
       const error = new Error('Wrong password!');
+      error.data = {location: "body", param: "password", value:password, msg: "password dosnt match",authError:true}
       error.statusCode = 401;
       throw error;
     }

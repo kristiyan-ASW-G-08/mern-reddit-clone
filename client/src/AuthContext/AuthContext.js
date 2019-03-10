@@ -9,15 +9,14 @@ const AuthContext = props => {
     userId: null
   });
 
-  console.log(authState)
-  const login = (email,password) => dispatch({ type:LOGIN,authData:{email,password}})
-  const logout = () => dispatch({type:LOGOUT,authData:{}})
+  const loginReducer = (authData) => dispatch({ type:LOGIN,authData})
+  const logoutReducer = () => dispatch({type:LOGOUT,authData:{}})
   return (
     <Context.Provider
       value={{
         authState,
-        login,
-        logout
+        loginReducer,
+        logoutReducer
       }}
     >
       {props.children}

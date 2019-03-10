@@ -10,10 +10,6 @@ const SignupForm = props => {
   const [password, setPassword] = useState('');
   const [matchPassword, setMatchPassword] = useState('');
   const [errorArr,setErrorsArr] = useState([])
-//   const [usernameError, setUsernameError] = useState(false);
-//   const [emailError, setEmailError] = useState(false);
-//   const [passwordError, setPasswordError] = useState(false);
-//   const [matchPasswordError, setMatchPasswordError] = useState(false);
   const submitHandler = async e => {
     e.preventDefault();
     const signupProcess = await signup({
@@ -23,6 +19,7 @@ const SignupForm = props => {
       username
     });
     const signupProcessData = await signupProcess;
+    console.log(signupProcessData)
     if (signupProcessData.authErrors) {
       setAuthErrors(signupProcessData.authErrors);
       const errors =  signupProcessData.authErrors.map(error => {
@@ -30,15 +27,10 @@ const SignupForm = props => {
       })
       setErrorsArr(errors)
     } else {
-      setUsername('');
-      setEmail('');
-      setPassword('');
-      setMatchPassword('');
+      props.history.push(`/login`)
     }
   };
-  if (authErrors) {
-    console.log(authErrors);
-  }
+
   return (
     <form onSubmit={e => submitHandler(e)}>
       {authErrors ? <ErrorMessage errors={authErrors} /> : <></>}
@@ -69,7 +61,7 @@ const SignupForm = props => {
       <Input
         setHook={setMatchPassword}
         value={matchPassword}
-        placeholder={'Repeat Password'}
+        placeholder={'Repeat your password'}
         type={'password'}
         name={'matchPassword'}
         errorArr={errorArr}

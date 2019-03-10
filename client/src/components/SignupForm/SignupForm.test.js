@@ -1,6 +1,7 @@
 import React from 'react'
 
 import {render,fireEvent, getByValue,waitForElement} from 'react-testing-library'
+import { BrowserRouter } from 'react-router-dom';
 import SignupForm from './SignupForm'
 
 describe('<SignupForm />',() => {
@@ -8,7 +9,7 @@ describe('<SignupForm />',() => {
     const email = "testEmail@email.com";
     const password = 'testpass1012'
     const matchPassword = 'testpass1012'
-    const { container, getByPlaceholderText, getByValue,getByText } = render (<SignupForm  />)
+    const { container, getByPlaceholderText, getByValue,getByText } = render (<BrowserRouter><SignupForm/></BrowserRouter>)
     beforeEach(() => {    
         const usernameInput = getByPlaceholderText('Username')
         fireEvent.change(usernameInput, {target : {value : username}})
@@ -32,20 +33,4 @@ describe('<SignupForm />',() => {
         expect(updatedPasswordInput).toBeTruthy
         expect(updatedMatchPasswordInput).toBeTruthy
       });
-
-    // describe('submittig',async () => {
-    //     beforeEach(() => {
-    //         const submitButton = getByText('Submit')
-    //         fireEvent.click(submitButton)
-    //     })
-    //     it('addTask should be called once',() => {
-    //         expect(addTask).toBeCalledTimes(1)
-    //     })
-    //     it("values should be reset", async () => {
-    //         const updatedTitle = await waitForElement(() => getByValue(''))
-    //         const updatedDescription = await waitForElement(() => getByValue(''))
-    //         expect(updatedTitle).toBeTruthy
-    //         expect(updatedDescription).toBeTruthy
-    //       });
-    // })
 })

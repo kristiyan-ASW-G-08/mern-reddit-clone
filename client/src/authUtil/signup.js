@@ -17,7 +17,6 @@ const signup = async (authData) => {
       const responseData = await response.json();
       if (response.status === 422) {
         const authErrors = responseData.data
-        console.log(authErrors)
         return {
           authErrors,
         };
@@ -28,7 +27,7 @@ const signup = async (authData) => {
         console.log('Error!');
         throw new Error('Creating a user failed!');
       } else 
-      if (response.status === 200) {    
+      if (response.status === 201) {    
         return {
           authErrors:false,
         };
