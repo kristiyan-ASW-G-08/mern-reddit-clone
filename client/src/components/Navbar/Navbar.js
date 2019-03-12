@@ -1,36 +1,40 @@
 import React, { Fragment } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import Dropdown from '../Dropdown/Dropdown'
+import logo from '../../assets/logo.svg'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 const Navbar = props => {
   const { isAuth } = props;
   return (
     <nav className="navbar">
-      <ul className="nav-list">
-        <li>
-          <NavLink to="/" activeClassName="active">
-            Home
-          </NavLink>
-        </li>
+        <Link to="/" className="navbar__logo">
+            <img src={logo} alt="logo"/>
+         </Link>
+      <ul className="nav-list nav-list-mobile">
         {isAuth ? (
           <li>
-            <NavLink data-testid="logout"  to="/logout" activeClassName="active">
+            <Link data-testid="logout"  to="/logout" >
               Logout
-            </NavLink>
+            </Link>
           </li>
         ) : (
           <>
             <li>
-              <NavLink data-testid="signup" to="/signup" activeClassName="active">
+              <Link data-testid="signup" to="/signup" >
                 SignUp
-              </NavLink>
+              </Link>
             </li>
             <li>
-              <NavLink data-testid="login" to="/login" activeClassName="active">
+              <Link data-testid="login" to="/login" >
                 Login
-              </NavLink>
+              </Link>
             </li>
           </>
         )}
       </ul>
+      <Dropdown isAuth={isAuth} />
     </nav>
   );
 };

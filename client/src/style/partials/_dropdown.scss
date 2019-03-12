@@ -1,0 +1,53 @@
+.dropdown {
+  &__button {
+    border: solid 0.5px lighten($lighter-dark, 50%);
+    border-radius: 7px;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    width: 3.6rem;
+    &:hover{
+      border: solid 0.5px lighten($lighter-dark, 40%);
+    }
+    &__icon {
+      font-size: 1rem;
+      color: $lighter-dark;
+      &--dark {
+        color: $dark;
+      }
+    }
+  }
+  &__body {
+    width: 12rem;
+    height: 15rem;
+    border: solid 0.5px lighten($lighter-dark, 50%);
+    border-radius: 7px;
+    background: $white;
+    transform: translateX(-7rem);
+    position: absolute;
+    padding: 0.3rem;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
+    align-items: center;
+    list-style: none;
+    li {
+      width: 100%;
+      display: inherit;
+      justify-content: left;
+      padding: 0.6rem 1rem 0.6rem 1rem;
+      font-size: 0.8rem;
+      a{
+        color: $dark;
+          text-decoration: none;
+      }
+    }
+  }
+  hr{
+      border:solid 0.4px lighten($lighter-dark, 50%);
+      width: 100%;
+  }
+}

@@ -1,0 +1,26 @@
+.navbar{
+    background:$white;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 1px 10px 0 rgba(0,0,0,0.15);
+    &__logo{
+        img{
+            width: 2rem;
+            height: 2rem;
+        }
+      
+    }
+    .nav-list-auth{
+        display: flex;
+        flex-flow: column;
+        flex-wrap: wrap row;
+    }
+    .nav-list-mobile{
+        display: none;
+    }
+    .button-mobile-menu{
+        font-size: 1rem;
+    }
+}

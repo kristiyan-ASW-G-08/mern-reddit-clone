@@ -17,7 +17,9 @@ const Router = () =>  (
 <BrowserRouter>
     <>
       <Navbar isAuth={isAuth} />
+      <div className="main--container">
       <Switch>
+       
       <Route
           path="/signup"
           render={() => (
@@ -35,6 +37,7 @@ const Router = () =>  (
           )}
         />
       </Switch>
+      </div>
     </>
   </BrowserRouter>
             )

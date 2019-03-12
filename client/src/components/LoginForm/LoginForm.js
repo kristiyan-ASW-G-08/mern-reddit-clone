@@ -25,7 +25,7 @@ const LoginForm = props => {
     }
   };
   return (
-    <form onSubmit={e => submitHandler(e)}>
+    <form className="form" onSubmit={e => submitHandler(e)}>
       {errorArr ? <ErrorMessage errors={errorArr} /> : <></>}
       <Input
         setHook={setEmail}

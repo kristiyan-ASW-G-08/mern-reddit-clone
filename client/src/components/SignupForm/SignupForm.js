@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import signup from '../../authUtil/signup';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Input from '../Input/Input';
+import Logo from '../../assets/logo.svg'
 const SignupForm = props => {
   const [authErrors, setAuthErrors] = useState(false);
   const [username, setUsername] = useState('');
@@ -32,8 +33,11 @@ const SignupForm = props => {
   };
 
   return (
-    <form onSubmit={e => submitHandler(e)}>
+    <form className="form" onSubmit={e => submitHandler(e)} >
       {authErrors ? <ErrorMessage errors={authErrors} /> : <></>}
+      <div className="form--logo">
+      <img src={Logo} alt="logo" />
+      </div>
       <Input
         setHook={setEmail}
         value={email}
@@ -66,7 +70,7 @@ const SignupForm = props => {
         name={'matchPassword'}
         errorArr={errorArr}
       />
-      <button>Submit</button>
+      <button className="button">SIGN UP</button>
     </form>
   );
 };

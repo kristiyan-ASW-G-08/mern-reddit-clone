@@ -2,14 +2,22 @@
 @import 'modules/variables';
 @import 'modules/mixins';
 @import 'modules/media-queries';
+@import 'partials/layout';
 @import 'partials/loader';
+@import 'partials/button';
+@import 'partials/navbar';
+@import 'partials/dropdown';
+@import 'partials/form';
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
+:root {
+    --theme-bg:#ffffff;
+    --theme-text:#3b3b3b;
+  }
 html,body{
     width: 100%;
     height: 100%;

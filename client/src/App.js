@@ -7,12 +7,11 @@ const  App  = () => {
   const [loading, setLoading] = useState(true);
   console.log(loading)
     return (
+      <div className='layout'>
       <AuthContext>
-        <Router>
-      <div className="App">
-      </div>
-      </Router>
+        <Router />
       </AuthContext>
+      </div>
     );
   
 }
