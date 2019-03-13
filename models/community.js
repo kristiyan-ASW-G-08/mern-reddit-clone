@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const subredditSchema = new Schema({
+const CommunitySchema = new Schema({
   name: {
     type: String,
     required: true
@@ -15,7 +15,7 @@ const subredditSchema = new Schema({
     default: 0
   },
 
-  decription: {
+  description: {
     type: String,
     required: true
   },
@@ -44,4 +44,4 @@ const subredditSchema = new Schema({
   ]
 });
 
-module.exports = mongoose.model('Subreddit', subredditSchema);
+module.exports = mongoose.model('Community', CommunitySchema);

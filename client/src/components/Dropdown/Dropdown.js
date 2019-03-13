@@ -10,7 +10,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 library.add(faCaretDown, faCog, faMoon, faUser);
 const Dropdown = props => {
-  const {isAuth} = props
+  const {isAuth,logoutReducer} = props
   const [active, setActive] = useState(false);
   let dropdownBody;
   const dropDownHandler = () => {
@@ -39,6 +39,9 @@ const Dropdown = props => {
             <li>My Profile</li>
             <li>
               User Settings
+            </li>
+            <li>
+              <button onClick={logoutReducer}>Logout</button>
             </li>
             </>
         ) : (

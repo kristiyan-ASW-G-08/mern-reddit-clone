@@ -6,7 +6,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Navbar = props => {
-  const { isAuth } = props;
+  const { isAuth,logoutReducer } = props;
   return (
     <nav className="navbar">
         <Link to="/" className="navbar__logo">
@@ -34,7 +34,7 @@ const Navbar = props => {
           </>
         )}
       </ul>
-      <Dropdown isAuth={isAuth} />
+      <Dropdown isAuth={isAuth} logoutReducer={logoutReducer} />
     </nav>
   );
 };

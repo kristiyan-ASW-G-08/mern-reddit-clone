@@ -14,7 +14,7 @@ return error
   const error = useMemo(() => errorFunc(errorArr,name),[errorArr,name])
     return (
         <input
-        className={`input ${error ? 'error': ''}`}
+        className={`input  ${error ? 'input--error': ''}`}
         onChange={e => setHook(e.target.value)}
         value={value}
         type={type}

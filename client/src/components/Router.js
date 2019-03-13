@@ -8,15 +8,16 @@ const HomePage = lazy(() => import('./HomePage/HomePage'));
 const SignupForm = lazy(() => import('./SignupForm/SignupForm'));
 const LoginForm = lazy(() => import('./LoginForm/LoginForm'));
 const CommunityForm = lazy(() => import('./CommunityForm/CommunityForm'));
+const Community = lazy(() => import('./Community/Community'));
 const Router = () => (
   <AuthContextConsumer>
     {consumerData => {
       const { authState, loginReducer, logoutReducer } = consumerData;
-      let { isAuth } = authState;
+      let { isAuth, token } = authState;
       return (
         <BrowserRouter>
           <>
-            <Navbar isAuth={isAuth} />
+            <Navbar isAuth={isAuth} logoutReducer={logoutReducer} />
             <div className="main--container">
               <Switch>
                 <Route
@@ -38,8 +39,22 @@ const Router = () => (
                     </Suspense>
                   )}
                 />
-                 <ProtectedRoute exact isAuth={isAuth} Component={CommunityForm}  path="/create-community"/>
-                  <Route
+                <Route
+                  path="/:communityName"
+                  render={props => (
+                    <Suspense fallback={<Loader />}>
+                      <Community {...props} />
+                    </Suspense>
+                  )}
+                />
+                <ProtectedRoute
+                  exact
+                  authState={authState}
+                  Component={CommunityForm}
+                  path="/create-community"
+                />
+                
+                <Route
                   exact
                   path="/"
                   render={() => (
@@ -48,7 +63,7 @@ const Router = () => (
                     </Suspense>
                   )}
                 />
-               
+                
               </Switch>
             </div>
           </>

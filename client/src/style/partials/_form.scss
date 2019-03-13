@@ -20,7 +20,7 @@
         }
 
     }
-    input{
+    .input{
         padding: 0.7rem;
         font-size: 0.8rem;
         @include border;
@@ -30,6 +30,9 @@
         }
         &:focus{
             border: solid 0.5px $primary;
+        }
+        &--error{
+            border: solid 0.5px $danger
         }
     }
     button{

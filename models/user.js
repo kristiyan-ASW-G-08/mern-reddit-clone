@@ -22,16 +22,10 @@ const userSchema = new Schema({
     type: Number,
     default: 0
   },
-  createdSubreddits: [
+  communities: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Subreddit'
-    }
-  ],
-  subreddits: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Subreddit'
+      ref: 'Community'
     }
   ],
   comments: [

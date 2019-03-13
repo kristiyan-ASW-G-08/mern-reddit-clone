@@ -4,13 +4,39 @@ import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Input from '../Input/Input';
 import Logo from '../../assets/logo.svg';
 const CommunityForm = props => {
+  console.log(props);
+  const { token } = props.authState;
   const [authErrors, setAuthErrors] = useState(false);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [errorArr, setErrorsArr] = useState([]);
   const submitHandler = async e => {
     e.preventDefault();
+    const response = await fetch('http://localhost:8080/create-community', {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name,
+        description
+      })
+    });
 
+    const responseData = await response.json();
+    console.log(responseData);
+    if (responseData.message === 'Validation failed.') {
+      setAuthErrors(responseData.data);
+      const errors = responseData.data.map(error => {
+        return error.param;
+      });
+      console.log(errors);
+      setErrorsArr(errors);
+    } else if (responseData.message === 'Community created!') {
+      const {communityName} = responseData
+      props.history.push(`/community/${communityName}`);
+    }
   };
 
   return (
@@ -28,7 +54,7 @@ const CommunityForm = props => {
         name={'name'}
         errorArr={errorArr}
       />
-     <Input
+      <Input
         setHook={setDescription}
         value={description}
         placeholder={'Community Description'}

@@ -4,7 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const multer = require('multer');
-
+const communityRoutes = require('./routes/community')
 const authRoutes = require('./routes/auth');
 const { mongoURI } = require('./config/keys');
 const app = express();
@@ -46,7 +46,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/auth', authRoutes);
-
+app.use(communityRoutes)
 app.use((error, req, res, next) => {
   const status = error.statusCode || 500;
   const message = error.message;

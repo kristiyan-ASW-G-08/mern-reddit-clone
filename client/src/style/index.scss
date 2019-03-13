@@ -8,6 +8,7 @@
 @import 'partials/navbar';
 @import 'partials/dropdown';
 @import 'partials/error-list';
+@import 'partials/community';
 @import 'partials/form';
 
 * {
@@ -29,7 +30,4 @@ body {
   font-size: 10px;
   color: $dark;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-.error {
-  border: Solid 3px red;
 }

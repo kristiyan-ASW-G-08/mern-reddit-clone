@@ -20,7 +20,6 @@ const SignupForm = props => {
       username
     });
     const signupProcessData = await signupProcess;
-    console.log(signupProcessData);
     if(signupProcessData === undefined){
       setAuthErrors([{param:'server-error',msg:`Server isn't availdable.Please try again later!`}])
     }
