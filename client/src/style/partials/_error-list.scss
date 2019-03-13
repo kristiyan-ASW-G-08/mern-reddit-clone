@@ -1,0 +1,13 @@
+.error--list {
+  list-style: none;
+  font-size: 0.8rem;
+  width: 90%;
+  text-align: center;
+  background: $danger;
+  @include border;
+  li {
+    padding: 0.5rem;
+    line-height: 1.4;
+    color: $white;
+  }
+}

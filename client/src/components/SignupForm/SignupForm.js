@@ -3,14 +3,14 @@ import { withRouter } from 'react-router-dom';
 import signup from '../../authUtil/signup';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Input from '../Input/Input';
-import Logo from '../../assets/logo.svg'
+import Logo from '../../assets/logo.svg';
 const SignupForm = props => {
   const [authErrors, setAuthErrors] = useState(false);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [matchPassword, setMatchPassword] = useState('');
-  const [errorArr,setErrorsArr] = useState([])
+  const [errorArr, setErrorsArr] = useState([]);
   const submitHandler = async e => {
     e.preventDefault();
     const signupProcess = await signup({
@@ -20,24 +20,27 @@ const SignupForm = props => {
       username
     });
     const signupProcessData = await signupProcess;
-    console.log(signupProcessData)
-    if (signupProcessData.authErrors) {
+    console.log(signupProcessData);
+    if(signupProcessData === undefined){
+      setAuthErrors([{param:'server-error',msg:`Server isn't availdable.Please try again later!`}])
+    }
+   else if (signupProcessData.authErrors) {
       setAuthErrors(signupProcessData.authErrors);
-      const errors =  signupProcessData.authErrors.map(error => {
-          return error.param
-      })
-      setErrorsArr(errors)
+      const errors = signupProcessData.authErrors.map(error => {
+        return error.param;
+      });
+      setErrorsArr(errors);
     } else {
-      props.history.push(`/login`)
+      props.history.push(`/login`);
     }
   };
 
   return (
-    <form className="form" onSubmit={e => submitHandler(e)} >
-      {authErrors ? <ErrorMessage errors={authErrors} /> : <></>}
+    <form className="form" onSubmit={e => submitHandler(e)}>
       <div className="form--logo">
-      <img src={Logo} alt="logo" />
+        <img src={Logo} alt="logo" />
       </div>
+      {authErrors ? <ErrorMessage errors={authErrors} /> : <></>}
       <Input
         setHook={setEmail}
         value={email}

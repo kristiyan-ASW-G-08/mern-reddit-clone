@@ -11,8 +11,7 @@
     justify-items: center;
     align-content: center;
     grid-gap: 1.2rem;
-    border: solid 0.5px lighten($lighter-dark, 40%);
-    border-radius: 7px;
+    @include border;
     padding: 1rem;
     .form--logo{
         img{
@@ -24,8 +23,7 @@
     input{
         padding: 0.7rem;
         font-size: 0.8rem;
-        border: solid 0.5px lighten($lighter-dark, 40%);
-        border-radius: 7px;
+        @include border;
         outline: none;
         @include medium-screen{
             width: 25rem

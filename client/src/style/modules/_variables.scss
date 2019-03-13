@@ -4,8 +4,5 @@ $dark: #383838;
 $lighter-dark:lighten($dark,20%) ;
 $light:#F5F5F5;
 $white: rgb(255, 255, 255);
-
+$danger:#ff5252;
 //I'm using css varible because it will be changed with js
-:root {
-    --nav:#ff5252;
-}

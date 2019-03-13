@@ -1,5 +1,5 @@
-
-const login = async (authData,autoLogout,logout) => {
+import autoLogout from '../authUtil/autoLogout'
+const login = async (authData,logout) => {
     try {
       const { email, password } = authData;
       const response = await fetch('http://localhost:8080/auth/login', {
@@ -27,6 +27,7 @@ const login = async (authData,autoLogout,logout) => {
         const remainingMilliseconds = 60 * 60 * 1000;
         const expiryDate = new Date(new Date().getTime() + remainingMilliseconds);
         localStorage.setItem('expiryDate', expiryDate.toISOString());
+        console.log(autoLogout)
         autoLogout(remainingMilliseconds,logout)
         return {
           isAuth: true,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,Fragment } from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
@@ -15,30 +15,32 @@ const Dropdown = props => {
   let dropdownBody;
   const dropDownHandler = () => {
     setActive(!active);
-    console.log(active);
   };
   if (active) {
     dropdownBody = (
       <ul className="dropdown__body">
         <li>
-          <div >
-            {/* <FontAwesomeIcon icon="moon" /> */}
-          </div>
           Night Mode
         </li>
-        <li>My Profile</li>
         <li>
-          {/* <FontAwesomeIcon icon="cog" /> */}
-          User Settings
-        </li>
+            <Link data-testid="create-community"  to="/create-community" >
+              Create Community
+            </Link>
+          </li>
         <li>Visit Reddit</li>
-        <hr />
         {isAuth ? (
+          <>
           <li>
             <Link data-testid="logout"  to="/logout" >
               Logout
             </Link>
           </li>
+          <li>My Profile</li>
+            <li>My Profile</li>
+            <li>
+              User Settings
+            </li>
+            </>
         ) : (
           <>
             <li>

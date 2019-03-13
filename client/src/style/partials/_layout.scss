@@ -1,21 +1,15 @@
-.layout{
-    width: 100vw;
-    height: 100%;
-    display: grid;
-    grid:
-    "navbar" 
-    "container"/ 1fr;
-    grid-gap: 1rem;
-    // @include large-screen{
-    //     grid-gap: 1.5rem;
-    //     grid:
-    //     "navbar navbar navbar navbar" 4rem
-    //     "container container container container "/2fr 1fr 17fr 2fr;
-    // }
-    .navbar{
-        grid-area:navbar;
-    }
-    .main--container{
-        grid-area: container
-    }
+.layout {
+  width: 100vw;
+  height: 100%;
+  display: grid;
+  grid:
+    'navbar'
+    'container'/ 1fr;
+  grid-gap: 1rem;
+  .navbar {
+    grid-area: navbar;
+  }
+  .main--container {
+    grid-area: container;
+  }
 }

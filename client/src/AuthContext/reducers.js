@@ -5,7 +5,6 @@ export const LOGOUT = 'LOGOUT';
 const login =  authData => {
   try {
     console.log(authData)
-    console.log('login reducer')
       return authData
   } catch (err) {
     console.log(err);
@@ -21,7 +20,6 @@ const logout = () => {
 };
 
 export const authReducer = (isAuth, action) => {
-  console.log(isAuth,action)
   switch (action.type) {
     case LOGIN:
       return login(action.authData);
