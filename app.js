@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 const communityRoutes = require('./routes/community')
 const authRoutes = require('./routes/auth');
+const subscribeRoutes = require('./routes/subscribe');
 const { mongoURI } = require('./config/keys');
 const app = express();
 

@@ -40,5 +40,6 @@ const AuthContext = props => {
     </Context.Provider>
   );
 };
+export const AuthContextData = Context ;
 export const AuthContextConsumer = Context.Consumer
 export default AuthContext;

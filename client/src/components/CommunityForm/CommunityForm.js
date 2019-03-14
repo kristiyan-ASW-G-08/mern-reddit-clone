@@ -1,15 +1,19 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment,useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Input from '../Input/Input';
 import Logo from '../../assets/logo.svg';
+import {AuthContextData} from '../../AuthContext/AuthContext'
+
 const CommunityForm = props => {
   console.log(props);
-  const { token } = props.authState;
+  const {authState} = useContext(AuthContextData)
+  const { token } = authState.authData;
   const [authErrors, setAuthErrors] = useState(false);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [errorArr, setErrorsArr] = useState([]);
+
   const submitHandler = async e => {
     e.preventDefault();
     const response = await fetch('http://localhost:8080/create-community', {

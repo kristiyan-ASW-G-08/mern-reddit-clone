@@ -1,23 +1,52 @@
 .community{
     width: 100%;
-    .community-details{
+    @include large-screen{
+    display: grid;
+    grid:'. posts-container details .'/2fr 5fr 2fr 2fr;
+    grid-gap: 1rem;
+    &-details{
+        grid-area: details;
+        background: darken($white,1%)
+    }
+    &-posts-container{
+        grid-area: posts-container;
+        background: red;
+        height: 500px;
+    }
+    }
+   
+    &-details{
+        &-title{
+            display: none;
+            @include large-screen{
+                display: block;
+            }
+        }
     width: 100%;
-    height: 15rem;
+    height: 20rem;
     display: grid;
     justify-items: center;
     align-content: center;
     grid-gap: 0.7rem;
-
+    @include large-screen{
+        @include border;
     }
-    .community-banner{
+    }
+    &-subscribers{
+        color: $lighter-dark;
+    }
+    &-banner{
         width: 100%;
         height: 10rem;
         display: grid;
         justify-items: center;
         align-content: center;
         background: $primary;
+        @include large-screen{
+            background:$primary
+        }
     }
-    .community-logo{
+    &-logo{
         height: 5rem;
         width: 5rem;
         border-radius: 100%;
@@ -41,6 +70,9 @@
             font-size: 1rem;
             padding: 0.5rem;
             color: $white;
+            &:hover{
+                background: darken($primary,10%);
+            }
         }
     }
 }

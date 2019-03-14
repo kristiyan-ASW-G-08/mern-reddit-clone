@@ -60,4 +60,17 @@ const userSchema = new Schema({
   ]
 });
 
+userSchema.methods.subscribe = function(communityId) {
+  const updatedCommunities = [...this.communities, communityId];
+  this.communityId = updatedCommunities;
+  return this.save();
+};
+
+userSchema.methods.unsubscribe = function(unsubscribeId) {
+  const updatedCommunities = this.communities.filter(
+    communityId => communityId !== unsubscribeId
+  );
+  this.communities = updatedCommunities;
+  return this.save();
+};
 module.exports = mongoose.model('User', userSchema);

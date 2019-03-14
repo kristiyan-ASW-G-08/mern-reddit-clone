@@ -32,19 +32,6 @@ router.post(
 
 router.get('/community/:communityName',communityController.getCommunity);
 
-// router.put(
-//   '/post/:postId',
-//   isAuth,
-//   [
-//     body('title')
-//       .trim()
-//       .isLength({ min: 5 }),
-//     body('content')
-//       .trim()
-//       .isLength({ min: 5 })
-//   ],
-//   feedController.updatePost
-// );
 
-// router.delete('/post/:postId', isAuth, feedController.deletePost);low s
+
 module.exports = router;

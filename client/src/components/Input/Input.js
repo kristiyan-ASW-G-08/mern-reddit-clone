@@ -10,18 +10,29 @@ if(errorArr.length > 0){
 return error
 }
  const Input = props => {
-  const {name,setHook,placeholder,value,type,errorArr} = props
+  const {name,setHook,placeholder,value,type,errorArr,textArea} = props
   const error = useMemo(() => errorFunc(errorArr,name),[errorArr,name])
-    return (
-        <input
-        className={`input  ${error ? 'input--error': ''}`}
-        onChange={e => setHook(e.target.value)}
-        value={value}
-        type={type}
-        placeholder={placeholder}
-        name={name}
-        required
-      />
-    )
+  let component = <input
+  className={`input  ${error ? 'input--error': ''}`}
+  onChange={e => setHook(e.target.value)}
+  value={value}
+  type={type}
+  placeholder={placeholder}
+  name={name}
+  required
+/>
+  if(textArea){
+    component = <textarea
+    className={`input  ${error ? 'input--error': ''}`}
+    onChange={e => setHook(e.target.value)}
+    type={type}
+    placeholder={placeholder}
+    name={name}
+    rows={7}
+    value={value}
+    required
+  ></textarea>
+  }
+    return component
 }
 export default Input

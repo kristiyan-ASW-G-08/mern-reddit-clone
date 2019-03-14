@@ -17,7 +17,7 @@ exports.createCommunity = async (req, res, next) => {
       creator: req.userId
     });
     await community.save();
-    res.status(201).json({ message: 'Community created!', communityName: community.name });
+    res.status(201).json({ message: 'Community created!', communityName: community.name,communityId:community._id});
   } 
   catch (err) {
       console.log(err)

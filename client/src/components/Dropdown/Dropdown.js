@@ -22,14 +22,15 @@ const Dropdown = props => {
         <li>
           Night Mode
         </li>
-        <li>
+        
+        <li>Visit Reddit</li>
+        {isAuth ? (
+          <>
+          <li>
             <Link data-testid="create-community"  to="/create-community" >
               Create Community
             </Link>
           </li>
-        <li>Visit Reddit</li>
-        {isAuth ? (
-          <>
           <li>
             <Link data-testid="logout"  to="/logout" >
               Logout

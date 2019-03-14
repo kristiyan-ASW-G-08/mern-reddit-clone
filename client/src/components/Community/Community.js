@@ -4,13 +4,11 @@ import CommunityDetails from './CommunityDetails/CommunityDetails';
 import Loader from '../Loader'
 const Community = props => {
     const [community, setComminity] = useState(false)
-    console.log(props)
     const {communityName} = props.match.params
-    console.log(communityName)
     useEffect( () => {
         getCommunityData(communityName)
         .then(data => {
-            console.log(data)
+
             if(data.message = 'Succsess'){
                 setComminity(data.community)
             }
@@ -22,6 +20,7 @@ const Community = props => {
            {community ? 
                <>
                <CommunityDetails name={community.name} icon={community.icon} subscribers={community.subscribers}/>
+               <div className="community-posts-container"></div>
                </>
            : <Loader />}
         </div>

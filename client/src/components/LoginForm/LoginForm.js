@@ -4,11 +4,13 @@ import { withRouter } from 'react-router-dom';
 import login from '../../authUtil/login';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Logo from '../../assets/logo.svg'
+import {AuthContextData} from '../../AuthContext/AuthContext'
 const LoginForm = props => {
+  const {authState} = useContext(AuthContextData)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorArr, setErrorArr] = useState(false);
-  const { logoutReducer, loginReducer } = props;
+  const { logoutReducer, loginReducer } = authState;
   const submitHandler = async e => {
     e.preventDefault();
     const loginProcess = await login({
