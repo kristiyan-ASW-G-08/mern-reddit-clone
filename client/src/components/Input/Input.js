@@ -1,7 +1,8 @@
 import React,{useState,useMemo} from 'react'
 const errorFunc = (errorArr,name) => {
   let error = false
-if(errorArr.length > 0){
+  console.log(errorArr,name)
+if(errorArr && errorArr.length > 0){
   if(errorArr.includes(name)){
     error = true
   }

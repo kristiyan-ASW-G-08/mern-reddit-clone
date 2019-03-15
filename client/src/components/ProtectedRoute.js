@@ -1,17 +1,9 @@
-import React,{Suspense,useState} from "react";
+import React,{Suspense} from "react";
 import { Route, Redirect } from "react-router-dom";
 import Loader from './Loader'
-import {AuthContextData} from '../AuthContext/AuthContext'
-import React from 'react'
-const ComponentName= props => {
-
-    return (
-
-    )
-}
-export default ComponentName
  const ProtectedRoute = ({
   Component,
+  authState,
   ...rest
 }) => {
   return (

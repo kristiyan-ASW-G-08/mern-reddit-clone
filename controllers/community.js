@@ -5,7 +5,7 @@ exports.createCommunity = async (req, res, next) => {
     const errors = validationResult(req);
     console.log(req.body)
     if (!errors.isEmpty()) {
-      const error = new Error('Validation failed.');
+      const error = new Error();
       error.statusCode = 422;
       error.data = errors.array();
       throw error;
@@ -17,7 +17,7 @@ exports.createCommunity = async (req, res, next) => {
       creator: req.userId
     });
     await community.save();
-    res.status(201).json({ message: 'Community created!', communityName: community.name,communityId:community._id});
+    res.status(201).json({communityName: community.name,communityId:community._id});
   } 
   catch (err) {
       console.log(err)
@@ -32,11 +32,11 @@ exports.getCommunity = async (req, res, next) => {
         const {communityName} = req.params;
    const community =  await Community.findOne({name:communityName})
    if(!community){
-    const error = new Error('Could not find post.');
+    const error = new Error('Could not find community.');
     error.statusCode = 404;
     throw error;
    }
-   res.status(200).json({ message: 'Succsess', community });
+   res.status(200).json({ community });
       
     }
     catch(err){

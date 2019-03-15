@@ -1,19 +1,16 @@
-import React, { useState, Fragment,useContext } from 'react';
+import React, { useState, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
+// import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Input from '../Input/Input';
 import Logo from '../../assets/logo.svg';
-import {AuthContextData} from '../../AuthContext/AuthContext'
 
 const CommunityForm = props => {
   console.log(props);
-  const {authState} = useContext(AuthContextData)
-  const { token } = authState.authData;
+  const { token } = props.authState;
   const [authErrors, setAuthErrors] = useState(false);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [errorArr, setErrorsArr] = useState([]);
-
   const submitHandler = async e => {
     e.preventDefault();
     const response = await fetch('http://localhost:8080/create-community', {
@@ -30,8 +27,10 @@ const CommunityForm = props => {
 
     const responseData = await response.json();
     console.log(responseData);
+
     if (responseData.message === 'Validation failed.') {
       setAuthErrors(responseData.data);
+      console.log(responseData)
       const errors = responseData.data.map(error => {
         return error.param;
       });
@@ -49,7 +48,7 @@ const CommunityForm = props => {
         <img src={Logo} alt="logo" />
       </div> */}
       <h2>Create a Community</h2>
-      {authErrors ? <ErrorMessage errors={authErrors} /> : <></>}
+   
       <Input
         setHook={setName}
         value={name}
@@ -70,4 +69,4 @@ const CommunityForm = props => {
     </form>
   );
 };
-export default withRouter(CommunityForm);
+export default withRouter(CommunityForm)

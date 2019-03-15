@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import Input from '../Input/Input';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
+// import ErrorMessage from '../ErrorMessage/ErrorMessage';
 const PostForm = props => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [errorArr, setErrorArr] = useState(false);
   return (
     <form className="form">
-      {errorArr ? <ErrorMessage errors={errorArr} /> : <></>}
+    
       <Input
         setHook={setTitle}
         value={title}

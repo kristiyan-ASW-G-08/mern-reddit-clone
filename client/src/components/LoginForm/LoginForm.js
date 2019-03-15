@@ -2,15 +2,14 @@ import React, { useState } from 'react';
 import Input from '../Input/Input';
 import { withRouter } from 'react-router-dom';
 import login from '../../authUtil/login';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import ValidationErrorsList from '../ValidationErrorsList/ValidationErrorsList';
 import Logo from '../../assets/logo.svg'
-import {AuthContextData} from '../../AuthContext/AuthContext'
+import useValidationErrors from '../../hooks/useValidationErrors'
 const LoginForm = props => {
-  const {authState} = useContext(AuthContextData)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorArr, setErrorArr] = useState(false);
-  const { logoutReducer, loginReducer } = authState;
+  const [validationErrorMessages,validationErrorParams,toggleValidationErrors] = useValidationErrors()
+  const { logoutReducer, loginReducer } = props;
   const submitHandler = async e => {
     e.preventDefault();
     const loginProcess = await login({
@@ -18,11 +17,13 @@ const LoginForm = props => {
       password
     });
     const loginProcessData = await loginProcess;
+    console.log(loginProcessData)
     if(loginProcessData === undefined){
-      setErrorArr([{param:'server-error',msg:`Server isn't availdable.Please try again later!`}])
-    }
+      toggleValidationErrors([{param:'server-error',msg:`Server isn't availdable.Please try again later!`}])
+     }
     else if (loginProcessData.data) {
-      setErrorArr([loginProcessData.data.param]);
+      toggleValidationErrors(loginProcessData.data);
+  
     } 
     else {
       loginReducer(loginProcessData,logoutReducer);
@@ -35,14 +36,14 @@ const LoginForm = props => {
       <div className="form--logo">
       <img src={Logo} alt="logo" />
       </div>
-      {errorArr ? <ErrorMessage errors={errorArr} /> : <></>}
+      <ValidationErrorsList validationErrors={validationErrorMessages} />
       <Input
         setHook={setEmail}
         value={email}
         placeholder={'Email'}
         type={'email'}
         name={'email'}
-        errorArr={errorArr}
+        errorArr={validationErrorParams}
       />
       <Input
         setHook={setPassword}
@@ -50,7 +51,7 @@ const LoginForm = props => {
         placeholder={'Password'}
         type={'password'}
         name={'password'}
-        errorArr={errorArr}
+        errorArr={validationErrorParams}
       />
       <button>Login</button>
     </form>

@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import signup from '../../authUtil/signup';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import ValidationErrorsList from '../ValidationErrorsList/ValidationErrorsList';
 import Input from '../Input/Input';
 import Logo from '../../assets/logo.svg';
 const SignupForm = props => {
@@ -20,6 +20,7 @@ const SignupForm = props => {
       username
     });
     const signupProcessData = await signupProcess;
+    console.log(signupProcessData)
     if(signupProcessData === undefined){
       setAuthErrors([{param:'server-error',msg:`Server isn't availdable.Please try again later!`}])
     }
@@ -39,7 +40,7 @@ const SignupForm = props => {
       <div className="form--logo">
         <img src={Logo} alt="logo" />
       </div>
-      {authErrors ? <ErrorMessage errors={authErrors} /> : <></>}
+      {/* {authErrors ? <ErrorMessage errors={authErrors} /> : <></>} */}
       <Input
         setHook={setEmail}
         value={email}

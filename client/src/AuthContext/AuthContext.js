@@ -7,7 +7,7 @@ const AuthContext = props => {
   const [authState, dispatch] = useReducer(authReducer, {
     isAuth: false,
     token: null,
-    userId: null
+    userId: null,
   });
   const loginReducer = (authData) => dispatch({ type:LOGIN,authData})
   const logoutReducer = () => dispatch({type:LOGOUT,authData:{}})
