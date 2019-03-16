@@ -32,6 +32,6 @@ router.post(
 
 router.get('/community/:communityName',communityController.getCommunity);
 
-
+router.get('/posts/:communityId',communityController.getPosts)
 
 module.exports = router;

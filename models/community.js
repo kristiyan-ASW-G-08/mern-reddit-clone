@@ -24,12 +24,6 @@ const CommunitySchema = new Schema({
     ref: 'User',
     required: true
   },
-  posts: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Post'
-    }
-  ],
   moderators: [
     {
       type: Schema.Types.ObjectId,

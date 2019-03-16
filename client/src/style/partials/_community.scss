@@ -1,5 +1,6 @@
 .community{
     width: 100%;
+    
     @include large-screen{
     display: grid;
     grid:'. posts-container details .'/2fr 5fr 2fr 2fr;
@@ -8,10 +9,8 @@
         grid-area: details;
         background: darken($white,1%)
     }
-    &-posts-container{
+    .posts-container{
         grid-area: posts-container;
-        background: red;
-        height: 500px;
     }
     }
    

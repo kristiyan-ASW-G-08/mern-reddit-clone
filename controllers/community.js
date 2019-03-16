@@ -1,4 +1,5 @@
 const Community  = require('../models/community')
+const Post  = require('../models/post')
 const { validationResult } = require('express-validator/check');
 exports.createCommunity = async (req, res, next) => {
   try {
@@ -29,7 +30,7 @@ exports.createCommunity = async (req, res, next) => {
 
 exports.getCommunity = async (req, res, next) => {
     try{
-        const {communityName} = req.params;
+    const {communityName} = req.params;
    const community =  await Community.findOne({name:communityName})
    if(!community){
     const error = new Error('Could not find community.');
@@ -44,5 +45,14 @@ exports.getCommunity = async (req, res, next) => {
     }
     
 }
-
-
+ 
+exports.getPosts = async (req,res,next) => {
+  try{
+    const {communityId} = req.params;
+    const posts = await Post.find({community:communityId})
+    res.status(200).json({posts}); 
+  }
+  catch(err){
+    console.log(err)
+  }
+}

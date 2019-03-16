@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState ,useContext} from 'react';
 import Input from '../Input/Input';
+import { withRouter,} from 'react-router-dom';
 import ValidationErrorsList from '../ValidationErrorsList/ValidationErrorsList';
 import useValidationErrors from '../../hooks/useValidationErrors'
-
+import createPost from './createPost'
+import {AuthContextData} from '../../AuthContext/AuthContext'
 const PostForm = props => {
+  const {communityId} = props.match.params
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [validationErrorMessages,validationErrorParams,toggleValidationErrors] = useValidationErrors()
-  const submitHandler = () => {
-    
+  const authState = useContext(AuthContextData)
+  const submitHandler = e => {
+    e.preventDefault()
+    const {token} = authState.authState
+    createPost(communityId,title,content,token)
   }
   return (
     <form className="form" onSubmit={e => submitHandler(e)}>
@@ -34,4 +40,4 @@ const PostForm = props => {
     </form>
   );
 };
-export default PostForm;
+export default withRouter(PostForm);

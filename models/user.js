@@ -22,18 +22,13 @@ const userSchema = new Schema({
     type: Number,
     default: 0
   },
-  communities: [
+  communities:[
     {
-      type: Schema.Types.ObjectId,
-      ref: 'Community'
+    type: Schema.Types.ObjectId,
+    ref: 'Post'
     }
   ],
-  comments: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Comment'
-    }
-  ],
+  
   saved: [
     {
       type: Schema.Types.ObjectId,
@@ -52,12 +47,6 @@ const userSchema = new Schema({
       ref: 'Post'
     }
   ],
-  posts: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Post'
-    }
-  ]
 });
 
 userSchema.methods.subscribe = function(communityId) {
