@@ -19,7 +19,7 @@ const Community = props => {
         <div className="community">
            {community ? 
                <>
-               <CommunityDetails name={community.name} icon={community.icon} subscribers={community.subscribers}/>
+               <CommunityDetails name={community.name} icon={community.icon} subscribers={community.subscribers} id={community._id}/> 
                <div className="community-posts-container"></div>
                </>
            : <Loader />}

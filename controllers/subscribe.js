@@ -2,10 +2,18 @@ const Community  = require('../models/community')
 const User =   require('../models/user')
 exports.subscribe = async (req, res, next) => {
   try {
-    const {communityId}  = req.body
-    const user = await User.findById(req.userId)
-    await user.subscribe(communityId)
-    res.status(201).json({ message: 'Subscribed'});
+    const {communityId}  = req.params
+    const user = await User.findById(req.userId).select("-password")
+    
+    if(user.checkSubscriptions(communityId)){
+      const error = new Error('User is already subscribed');
+      error.statusCode = 500 ;
+      throw error;
+    }else {
+      await user.subscribe(communityId)
+    res.status(201).json({ message: 'Subscribed',userData:user});
+    }
+    
   } 
   catch (err) {
       console.log(err)
@@ -17,10 +25,10 @@ exports.subscribe = async (req, res, next) => {
 
 exports.unsubscribe = async (req, res, next) => {
     try{
-    const {communityId}  = req.body
-    const user = await User.findById(req.userId)
+    const {communityId}  = req.params
+    const user = await User.findById(req.userId).select("-password")
     await user.unsubscribe(communityId)
-    res.status(201).json({ message: 'Unsubscribed'});
+    res.status(201).json({ message: 'Unsubscribed',userData:user});
    }
     catch(err){
         console.log(err)

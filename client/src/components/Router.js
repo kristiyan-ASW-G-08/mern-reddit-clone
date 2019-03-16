@@ -3,41 +3,36 @@ import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import Navbar from './Navbar/Navbar';
 import Loader from './Loader';
 import ProtectedRoute from './ProtectedRoute';
+import AntiLoggedInProtectedRoute from './AntiLoggedInProtectedRoute'
 import { AuthContextConsumer } from '../AuthContext/AuthContext';
 const HomePage = lazy(() => import('./HomePage/HomePage'));
 const SignupForm = lazy(() => import('./SignupForm/SignupForm'));
 const LoginForm = lazy(() => import('./LoginForm/LoginForm'));
 const CommunityForm = lazy(() => import('./CommunityForm/CommunityForm'));
+const PostForm = lazy(() => import('./PostForm/PostForm'));
 const Community = lazy(() => import('./Community/Community'));
 const Router = () => (
   <AuthContextConsumer>
     {consumerData => {
-      const { authState, loginReducer, logoutReducer } = consumerData;
-      let { isAuth, token } = authState;
+      const { authState } = consumerData;
       return (
         <BrowserRouter>
           <>
-            <Navbar isAuth={isAuth} logoutReducer={logoutReducer} />
+            <Navbar />
             <div className="main--container">
               <Switch>
-                <Route
-                  path="/signup"
-                  render={() => (
-                    <Suspense fallback={<Loader />}>
-                      <SignupForm />
-                    </Suspense>
-                  )}
-                />
-                <Route
+                
+                <AntiLoggedInProtectedRoute
+                  exact
+                  authState={authState}
+                  Component={LoginForm}
                   path="/login"
-                  render={() => (
-                    <Suspense fallback={<Loader />}>
-                      <LoginForm
-                        loginReducer={loginReducer}
-                        logoutReducer={logoutReducer}
-                      />
-                    </Suspense>
-                  )}
+                />
+                 <AntiLoggedInProtectedRoute
+                  exact
+                  authState={authState}
+                  Component={SignupForm}
+                  path="/signup"
                 />
                 <Route
                   path="/community/:communityName"
@@ -47,13 +42,19 @@ const Router = () => (
                     </Suspense>
                   )}
                 />
+                   <ProtectedRoute
+                  exact
+                  authState={authState}
+                  Component={PostForm}
+                  path="/create-post/:communityId"
+                />
                 <ProtectedRoute
                   exact
                   authState={authState}
                   Component={CommunityForm}
                   path="/create-community"
                 />
-                
+
                 <Route
                   exact
                   path="/"
@@ -63,7 +64,6 @@ const Router = () => (
                     </Suspense>
                   )}
                 />
-                
               </Switch>
             </div>
           </>

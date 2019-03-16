@@ -10,6 +10,6 @@ router.post(
   subscribeController.subscribe
 );
 
-router.get('/unsubscribe/:communityId',subscribeController.unsubscribe);
+router.post('/unsubscribe/:communityId',isAuth,subscribeController.unsubscribe);
 
 module.exports = router;

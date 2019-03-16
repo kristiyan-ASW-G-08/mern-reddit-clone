@@ -62,15 +62,25 @@ const userSchema = new Schema({
 
 userSchema.methods.subscribe = function(communityId) {
   const updatedCommunities = [...this.communities, communityId];
-  this.communityId = updatedCommunities;
-  return this.save();
+  this.communities = updatedCommunities;
+  this.save();
 };
 
-userSchema.methods.unsubscribe = function(unsubscribeId) {
+userSchema.methods.unsubscribe = function(communityId) {
+  const id = mongoose.Types.ObjectId(communityId);
   const updatedCommunities = this.communities.filter(
-    communityId => communityId !== unsubscribeId
+    community => !community.equals(id)
   );
+  console.log(updatedCommunities)
   this.communities = updatedCommunities;
-  return this.save();
+  this.save();
 };
+
+userSchema.methods.checkSubscriptions = function(communityId){
+  const id = mongoose.Types.ObjectId(communityId);
+  const subscribeCheck = this.communities.find(community => {
+    return community.equals(id)
+  })
+  return subscribeCheck
+}
 module.exports = mongoose.model('User', userSchema);

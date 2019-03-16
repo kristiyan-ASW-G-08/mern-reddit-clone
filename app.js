@@ -48,6 +48,7 @@ app.use((req, res, next) => {
 
 app.use('/auth', authRoutes);
 app.use(communityRoutes)
+app.use(subscribeRoutes)
 app.use((error, req, res, next) => {
   const status = error.statusCode || 500;
   const data = error.data;

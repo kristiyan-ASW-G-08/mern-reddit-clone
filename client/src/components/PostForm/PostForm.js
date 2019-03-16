@@ -1,20 +1,25 @@
 import React, { useState } from 'react';
 import Input from '../Input/Input';
-// import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import ValidationErrorsList from '../ValidationErrorsList/ValidationErrorsList';
+import useValidationErrors from '../../hooks/useValidationErrors'
+
 const PostForm = props => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [errorArr, setErrorArr] = useState(false);
-  return (
-    <form className="form">
+  const [validationErrorMessages,validationErrorParams,toggleValidationErrors] = useValidationErrors()
+  const submitHandler = () => {
     
+  }
+  return (
+    <form className="form" onSubmit={e => submitHandler(e)}>
+          <ValidationErrorsList validationErrorMessages={validationErrorMessages} />
       <Input
         setHook={setTitle}
         value={title}
         placeholder={'Title'}
         type={'text'}
         name={'title'}
-        errorArr={errorArr}
+        validationErrorParams={validationErrorParams}
       />
         <Input
         setHook={setContent}
@@ -22,7 +27,7 @@ const PostForm = props => {
         placeholder={'Text (optional)'}
         type={'text'}
         name={'content'}
-        errorArr={errorArr}
+        validationErrorParams={validationErrorParams}
         textArea={true}
       />
       <button className="button">Post</button>

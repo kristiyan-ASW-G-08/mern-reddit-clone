@@ -1,11 +1,10 @@
 import React from 'react';
 const ValidationErrorsList = props => {
-  const { validationErrors } = props;
-  console.log(validationErrors)
+  const { validationErrorMessages } = props;
   let errorsList = ''
-  if(validationErrors.length > 0){
+  if(validationErrorMessages.length > 0){
    errorsList =  <ul className="error--list">
-      {validationErrors.map((error, index) => {
+      {validationErrorMessages.map((error, index) => {
         return <li key={`${error}-${index}`}>{error}</li>;
       })}
     </ul>

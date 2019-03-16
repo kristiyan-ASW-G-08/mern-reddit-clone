@@ -35,7 +35,7 @@ exports.login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     let loadedUser;
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email })
     if (!user) {
       const error = new Error('A user with this email could not be found.');
       error.data = [{location: "body", param: "email", value:email, msg: 'A user with this email could not be found.',authError:true}]
@@ -58,8 +58,34 @@ exports.login = async (req, res, next) => {
       secret,
       { expiresIn: '1h' }
     );
-    res.status(200).json({ token: token, userId: loadedUser._id.toString() });
+    const {
+      username,
+      cakeDay,
+      karma,
+      communities,
+      comments,
+      saved,
+      upvoted,
+      downvoted,
+      posts,
+    } = user
+
+    
+    const userData = {
+      email,
+      username,
+      cakeDay,
+      karma,
+      communities,
+      comments,
+      saved,
+      upvoted,
+      downvoted,
+      posts,
+    }
+    res.status(200).json({ token: token, userId: loadedUser._id.toString(),userData });
   } catch (err) {
+    console.log(err)
     if (!err.statusCode) {
       err.statusCode = 500;
     }

@@ -2,15 +2,19 @@ import React, { useState, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import signup from '../../authUtil/signup';
 import ValidationErrorsList from '../ValidationErrorsList/ValidationErrorsList';
+import useValidationErrors from '../../hooks/useValidationErrors';
 import Input from '../Input/Input';
 import Logo from '../../assets/logo.svg';
 const SignupForm = props => {
-  const [authErrors, setAuthErrors] = useState(false);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [matchPassword, setMatchPassword] = useState('');
-  const [errorArr, setErrorsArr] = useState([]);
+  const [
+    validationErrorMessages,
+    validationErrorParams,
+    toggleValidationErrors
+  ] = useValidationErrors();
   const submitHandler = async e => {
     e.preventDefault();
     const signupProcess = await signup({
@@ -20,16 +24,15 @@ const SignupForm = props => {
       username
     });
     const signupProcessData = await signupProcess;
-    console.log(signupProcessData)
-    if(signupProcessData === undefined){
-      setAuthErrors([{param:'server-error',msg:`Server isn't availdable.Please try again later!`}])
-    }
-   else if (signupProcessData.authErrors) {
-      setAuthErrors(signupProcessData.authErrors);
-      const errors = signupProcessData.authErrors.map(error => {
-        return error.param;
-      });
-      setErrorsArr(errors);
+    if (signupProcessData === undefined) {
+      toggleValidationErrors([
+        {
+          param: 'server-error',
+          msg: `Server isn't availdable.Please try again later!`
+        }
+      ]);
+    } else if (signupProcessData.authErrors) {
+      toggleValidationErrors(signupProcessData.authErrors);
     } else {
       props.history.push(`/login`);
     }
@@ -40,14 +43,14 @@ const SignupForm = props => {
       <div className="form--logo">
         <img src={Logo} alt="logo" />
       </div>
-      {/* {authErrors ? <ErrorMessage errors={authErrors} /> : <></>} */}
+      <ValidationErrorsList validationErrorMessages={validationErrorMessages} />
       <Input
         setHook={setEmail}
         value={email}
         placeholder={'Email'}
         type={'email'}
         name={'email'}
-        errorArr={errorArr}
+        validationErrorParams={validationErrorParams}
       />
       <Input
         setHook={setUsername}
@@ -55,7 +58,7 @@ const SignupForm = props => {
         placeholder={'Username'}
         type={'text'}
         name={'username'}
-        errorArr={errorArr}
+        validationErrorParams={validationErrorParams}
       />
       <Input
         setHook={setPassword}
@@ -63,7 +66,7 @@ const SignupForm = props => {
         placeholder={'Password'}
         type={'password'}
         name={'passowrd'}
-        errorArr={errorArr}
+        validationErrorParams={validationErrorParams}
       />
       <Input
         setHook={setMatchPassword}
@@ -71,7 +74,7 @@ const SignupForm = props => {
         placeholder={'Repeat your password'}
         type={'password'}
         name={'matchPassword'}
-        errorArr={errorArr}
+        validationErrorParams={validationErrorParams}
       />
       <button className="button">SIGN UP</button>
     </form>

@@ -1,6 +1,7 @@
-import React, { useState,Fragment } from 'react';
+import React, { useState, Fragment, useContext } from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { AuthContextData } from '../../AuthContext/AuthContext';
 import { Link } from 'react-router-dom';
 import {
   faCog,
@@ -10,7 +11,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 library.add(faCaretDown, faCog, faMoon, faUser);
 const Dropdown = props => {
-  const {isAuth,logoutReducer} = props
+  const { authState, logoutReducer } = useContext(AuthContextData);
+  const { isAuth } = authState;
   const [active, setActive] = useState(false);
   let dropdownBody;
   const dropDownHandler = () => {
@@ -19,41 +21,37 @@ const Dropdown = props => {
   if (active) {
     dropdownBody = (
       <ul className="dropdown__body">
-        <li>
-          Night Mode
-        </li>
-        
+        <li>Night Mode</li>
+
         <li>Visit Reddit</li>
         {isAuth ? (
           <>
-          <li>
-            <Link data-testid="create-community"  to="/create-community" >
-              Create Community
-            </Link>
-          </li>
-          <li>
-            <Link data-testid="logout"  to="/logout" >
-              Logout
-            </Link>
-          </li>
-          <li>My Profile</li>
-            <li>My Profile</li>
             <li>
-              User Settings
+              <Link data-testid="create-community" to="/create-community">
+                Create Community
+              </Link>
             </li>
+            <li>
+              <Link data-testid="logout" to="/logout">
+                Logout
+              </Link>
+            </li>
+            <li>My Profile</li>
+            <li>My Profile</li>
+            <li>User Settings</li>
             <li>
               <button onClick={logoutReducer}>Logout</button>
             </li>
-            </>
+          </>
         ) : (
           <>
             <li>
-              <Link data-testid="signup" to="/signup" >
+              <Link data-testid="signup" to="/signup">
                 SignUp
               </Link>
             </li>
             <li>
-              <Link data-testid="login" to="/login" >
+              <Link data-testid="login" to="/login">
                 Login
               </Link>
             </li>

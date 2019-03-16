@@ -1,16 +1,21 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment,useContext } from 'react';
 import { withRouter } from 'react-router-dom';
-// import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Input from '../Input/Input';
 import Logo from '../../assets/logo.svg';
-
+import ValidationErrorsList from '../ValidationErrorsList/ValidationErrorsList';
+import useValidationErrors from '../../hooks/useValidationErrors';
+import {AuthContextData} from '../../AuthContext/AuthContext'
 const CommunityForm = props => {
-  console.log(props);
-  const { token } = props.authState;
-  const [authErrors, setAuthErrors] = useState(false);
+  const {authState} = useContext(AuthContextData)
+  const {token} = authState
+  
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [errorArr, setErrorsArr] = useState([]);
+  const [
+    validationErrorMessages,
+    validationErrorParams,
+    toggleValidationErrors
+  ] = useValidationErrors();
   const submitHandler = async e => {
     e.preventDefault();
     const response = await fetch('http://localhost:8080/create-community', {
@@ -26,36 +31,31 @@ const CommunityForm = props => {
     });
 
     const responseData = await response.json();
-    console.log(responseData);
-
+    console.log(responseData)
+    console.log(response.status)
     if (responseData.message === 'Validation failed.') {
-      setAuthErrors(responseData.data);
-      console.log(responseData)
+      toggleValidationErrors(responseData.data);
       const errors = responseData.data.map(error => {
         return error.param;
       });
-      console.log(errors);
-      setErrorsArr(errors);
-    } else if (responseData.message === 'Community created!') {
-      const {communityName} = responseData
+      toggleValidationErrors(errors);
+    } else if (response.status  === 201) {
+      const { communityName } = responseData;
       props.history.push(`/community/${communityName}`);
     }
   };
 
   return (
     <form className="form" onSubmit={e => submitHandler(e)}>
-      {/* <div className="form--logo">
-        <img src={Logo} alt="logo" />
-      </div> */}
       <h2>Create a Community</h2>
-   
+      <ValidationErrorsList validationErrorMessages={validationErrorMessages} />
       <Input
         setHook={setName}
         value={name}
         placeholder={'Community Name'}
         type={'text'}
         name={'name'}
-        errorArr={errorArr}
+        validationErrorParams={validationErrorParams}
       />
       <Input
         setHook={setDescription}
@@ -63,10 +63,10 @@ const CommunityForm = props => {
         placeholder={'Community Description'}
         type={'text'}
         name={'description'}
-        errorArr={errorArr}
+        validationErrorParams={validationErrorParams}
       />
       <button className="button">START</button>
     </form>
   );
 };
-export default withRouter(CommunityForm)
+export default withRouter(CommunityForm);
