@@ -1,5 +1,7 @@
 const Post = require('../models/post');
 const User = require('../models/user');
+const mongoose = require('mongoose')
+const Community = require('../models/community');
 const { validationResult } = require('express-validator/check');
 // const errorFunc = require('../util/errorFunc');
 
@@ -7,6 +9,7 @@ exports.createPost = async (req, res, next) => {
   try {
     const { title, content,communityId, } = req.body;
     const user = await User.findById(req.userId)
+    const community = await Community.findById(communityId)
     const errors = validationResult(req);
     console.log(user)
     if (!errors.isEmpty()) {
@@ -19,6 +22,7 @@ exports.createPost = async (req, res, next) => {
         community:communityId,
         authorId: req.userId,
         author:user.username,
+        communityName:community.name
       });
       await post.save();
       res.status(200).json({ msg: 'Post succesfully added', postId: post._id });
@@ -28,16 +32,28 @@ exports.createPost = async (req, res, next) => {
     // errorFunc(err, next);
   }
 };
-// exports.deletePost = async (req, res, next) => {
-//   try {
-//     const { postId } = req.params;
-//     await Post.findByIdAndDelete({ _id: postId });
-//     res.status(200).json({ msg: 'postDeleted' });
-//   } catch (err) {
-//         console.log(err)
-//     // errorFunc(err, next);
-//   }
-// };
+exports.getPost = async (req, res, next) => {
+  try {
+    const { postId, } = req.params;
+    const post = await Post.findById(postId)
+    mongoose.Types.ObjectId
+      res.status(200).json({post });
+    }
+   catch (err) {
+        console.log(err)
+    // errorFunc(err, next);
+   }
+};
+exports.deletePost = async (req, res, next) => {
+  try {
+    const { postId } = req.params;
+    await Post.findByIdAndDelete(postId);
+    res.status(200).json({ msg: 'Post Deleted' });
+  } catch (err) {
+        console.log(err)
+    // errorFunc(err, next);
+  }
+};
 // exports.editPost = async (req, res, next) => {
 //   try {
 //     const errors = validationResult(req);

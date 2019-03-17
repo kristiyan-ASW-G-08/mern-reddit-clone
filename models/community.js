@@ -38,4 +38,16 @@ const CommunitySchema = new Schema({
   ]
 });
 
+CommunitySchema.methods.incrementSubscribers = function() {
+  this.subscribers++
+  this.save();
+};
+
+CommunitySchema.methods.descrementSubscribers = function() {
+  if(this.subscribers >0){
+    this.subscribers--
+  }
+  this.save();
+};
+
 module.exports = mongoose.model('Community', CommunitySchema);

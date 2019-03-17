@@ -10,6 +10,7 @@ const SignupForm = lazy(() => import('./SignupForm/SignupForm'));
 const LoginForm = lazy(() => import('./LoginForm/LoginForm'));
 const CommunityForm = lazy(() => import('./CommunityForm/CommunityForm'));
 const PostForm = lazy(() => import('./PostForm/PostForm'));
+const PostFull = lazy(() => import('./PostFull/PostFull'));
 const Community = lazy(() => import('./Community/Community'));
 const Router = () => (
   <AuthContextConsumer>
@@ -39,6 +40,14 @@ const Router = () => (
                   render={props => (
                     <Suspense fallback={<Loader />}>
                       <Community {...props} />
+                    </Suspense>
+                  )}
+                />
+                 <Route
+                  path="/post/:postId"
+                  render={props => (
+                    <Suspense fallback={<Loader />}>
+                      <PostFull {...props} />
                     </Suspense>
                   )}
                 />

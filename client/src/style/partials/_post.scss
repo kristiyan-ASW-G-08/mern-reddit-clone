@@ -5,6 +5,11 @@
     grid-gap: 0.3rem;
     width: 100%;
     padding: 0.5rem;
+    &-link{
+        display: block;
+        padding: 0.5rem;
+        text-decoration: none;
+    }
     &-author{
         color: lighten($lighter-dark,25%);
         font-size: 0.8rem;
@@ -13,12 +18,17 @@
     }
     &-title{
         font-size: 1.2rem;
+        color: $dark;
     }
     &-info{
         &-button{
             color: lighten($lighter-dark,5%);
             padding: 0.3rem;
             font-size:0.8rem;
+            cursor: pointer;
+            span{
+                padding: 0 0.3rem 0 0.3rem;
+            }
         }
     }
 }

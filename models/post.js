@@ -17,6 +17,11 @@ const postSchema = new Schema({
     ref: 'Community',
     required: true
   },
+  communityName: {
+    type: String,
+    ref: 'Community',
+    required: true
+  },
   title: {
     type: String,
     required: true
@@ -30,6 +35,10 @@ const postSchema = new Schema({
   link: {
     type: String
   },
+  comments:{
+    type:Number,
+    default:0,
+},
   upvotes:{
       type:Number,
       default:0,
