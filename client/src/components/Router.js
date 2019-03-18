@@ -57,6 +57,12 @@ const Router = () => (
                   Component={PostForm}
                   path="/create-post/:communityId"
                 />
+                  <ProtectedRoute
+                  exact
+                  authState={authState}
+                  Component={PostForm}
+                  path="/edit-post/:postId"
+                />
                 <ProtectedRoute
                   exact
                   authState={authState}

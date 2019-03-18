@@ -1,8 +1,10 @@
 import React from 'react'
 import useToggle from '../../hooks/useToggle'
+import Portal from '../Portal/Portal';
 const Modal = props => {
     const [on,toggle] = useToggle(false)
     return (
+        <Portal>
         <div className="modal">
         <div className="modal-header">
         <h1 className="modal-title"></h1>
@@ -14,6 +16,7 @@ const Modal = props => {
         </div>
         </div>
         </div>
+        </Portal>
     )
 }
 export default Modal 

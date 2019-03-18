@@ -1,11 +1,13 @@
-import React, { useState ,useContext} from 'react';
+import React, { useState ,useContext,useEffect} from 'react';
 import Input from '../Input/Input';
 import { withRouter,} from 'react-router-dom';
 import ValidationErrorsList from '../ValidationErrorsList/ValidationErrorsList';
 import useValidationErrors from '../../hooks/useValidationErrors'
 import createPost from './createPost'
 import {AuthContextData} from '../../AuthContext/AuthContext'
+import editPost from './editPost';
 const PostForm = props => {
+  console.log(props)
   const {communityId} = props.match.params
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -14,8 +16,26 @@ const PostForm = props => {
   const submitHandler = e => {
     e.preventDefault()
     const {token} = authState.authState
-    createPost(communityId,title,content,token)
+    if(props.match.params.postId){
+      const {postId} = props.match.params
+      editPost(postId,title,content,token)
+    }else {
+      
+      createPost(communityId,title,content,token)
+    }
+   
   }
+  
+  useEffect(() => {
+    if(props.match.params.postId){
+      const {postId} = props.match.params
+      const {post} = props.history.location
+      const {content,title} = post
+      setTitle(title)
+      setContent(content)
+      console.log(post)
+    }
+  },[])
   return (
     <form className="form" onSubmit={e => submitHandler(e)}>
           <ValidationErrorsList validationErrorMessages={validationErrorMessages} />

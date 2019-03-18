@@ -21,21 +21,21 @@ router.post(
   postController.createPost
 );
 
-// router.post(
-//     '/edit-post/:postId',
-//      [
-//       body('title', 'Title should be atleast 1 character long')
-//     .isLength({ min: 1 })
-//     .isString()
-//     .trim(),
-//      body('content', 'Content should be atleast 1 character long')
-//     .isLength({ min: 1 })
-//     .isString()
-//     .trim()
-//   ],
-//     isAuth,
-//     postController.editPost
-//   );
+router.post(
+    '/edit-post/:postId',
+     [
+      body('title', 'Title should be atleast 1 character long')
+    .isLength({ min: 1 })
+    .isString()
+    .trim(),
+     body('content', 'Content should be atleast 1 character long')
+    .isLength({ min: 1 })
+    .isString()
+    .trim()
+  ],
+    isAuth,
+    postController.editPost
+  );
 
 router.delete(
     '/delete-post/:postId',

@@ -30,7 +30,7 @@ const PostFull= props => {
       <p className="post-content">
       {post.content}
       </p>
-      <PostBar  comments={post.comments} authorId={post.authorId} userId={userId} token={token} postId={post._id} communityName={post.communityName}/>
+      <PostBar  comments={post.comments} authorId={post.authorId} userId={userId} token={token} postId={post._id} communityName={post.communityName} post={post}/>
       </div>
       
       </>

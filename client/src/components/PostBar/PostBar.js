@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import {withRouter} from 'react-router-dom'
+import {withRouter,Link} from 'react-router-dom'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import deletePost from './deletePost';
@@ -10,7 +10,7 @@ import {
 library.add(faShare,faCommentAlt,faBookmark,faTrashAlt,faPen);
 
 const PostBar= props => {
-    const {comments,authorId,userId,token,communityName,postId} = props
+    const {comments,authorId,userId,token,communityName,postId,post} = props
     const deleteHandler = () => {
         console.log('handler')
         console.log(postId)
@@ -30,12 +30,16 @@ const PostBar= props => {
         console.log('authorized')
         autorizedContent = 
         <>
+        
          <button onClick={deleteHandler} className="button post-info-button">
         <FontAwesomeIcon icon="trash-alt" /><span>Delete</span>
         </button>
-        <button onClick={deleteHandler} className="button post-info-button">
+        
+        <Link to={{pathname:`/edit-post/${postId}`, post}}>
+        <button className="button post-info-button">
         <FontAwesomeIcon icon="pen" /><span>Edit</span>
         </button>
+        </Link>
         </>
     }
     

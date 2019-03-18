@@ -1,6 +1,6 @@
 module.exports = {
   mongoURI: ``,
-  secret:'JosephIsBestJojo',
+  secret:'',
   adminPassword:'',
   adminEmail:'',
 };

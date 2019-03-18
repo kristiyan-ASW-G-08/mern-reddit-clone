@@ -54,25 +54,25 @@ exports.deletePost = async (req, res, next) => {
     // errorFunc(err, next);
   }
 };
-// exports.editPost = async (req, res, next) => {
-//   try {
-//     const errors = validationResult(req);
-//     if (!errors.isEmpty()) {
-//       const errorMsg = errors.array()[0].msg;
-//       res.json({ error: errorMsg });
-//     } else {
-//       const { title, postContent } = req.body;
-//       const { postId } = req.params;
-//       const post = {
-//         title,
-//         postContent
-//       };
-//       await Post.findOneAndUpdate({ _id: postId }, post);
-//       res.status(200).json({ msg: 'updated' });
-//     }
-//   } catch (err) {
-//     errorFunc(err, next);
-//   }
-// };
+exports.editPost = async (req, res, next) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      const errorMsg = errors.array()[0].msg;
+      res.json({ error: errorMsg });
+    } else {
+      const { title, content } = req.body;
+      const { postId } = req.params;
+      const post = {
+        title,
+        content
+      };
+      await Post.findOneAndUpdate({ _id: postId }, post);
+      res.status(200).json({ msg: 'updated' });
+    }
+  } catch (err) {
+    errorFunc(err, next);
+  }
+};
 
 
