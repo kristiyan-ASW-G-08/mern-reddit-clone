@@ -12,6 +12,7 @@ const CommunityForm = lazy(() => import('./CommunityForm/CommunityForm'));
 const PostForm = lazy(() => import('./PostForm/PostForm'));
 const PostFull = lazy(() => import('./PostFull/PostFull'));
 const Community = lazy(() => import('./Community/Community'));
+const ModTools = lazy(() => import('./ModTools/ModTools'));
 const Router = () => (
   <AuthContextConsumer>
     {consumerData => {
@@ -35,6 +36,13 @@ const Router = () => (
                   Component={SignupForm}
                   path="/signup"
                 />
+                 <ProtectedRoute
+                  exact
+                  authState={authState}
+                  Component={ModTools}
+                  path="/mod-tools/:communityName"
+                />
+
                 <Route
                   path="/community/:communityName"
                   render={props => (
@@ -51,6 +59,7 @@ const Router = () => (
                     </Suspense>
                   )}
                 />
+                 
                    <ProtectedRoute
                   exact
                   authState={authState}

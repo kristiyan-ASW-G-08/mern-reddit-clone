@@ -9,7 +9,12 @@ const ruleSchema = new Schema({
   description: {
     type: String,
     required: true
-  }
+  },
+  community: {
+    type: Schema.Types.ObjectId,
+    ref: 'Community',
+    required: true
+  },
 });
 
 module.exports = mongoose.model('Rule', ruleSchema);

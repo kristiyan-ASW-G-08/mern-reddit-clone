@@ -1,17 +1,31 @@
 import React,{useContext,Fragment} from 'react'
 import {AuthContextData} from '../../../AuthContext/AuthContext'
-import { Link,} from 'react-router-dom';
+
 import SubscribeButton from '../../SubscribeButton/SubscribeButton'
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect,Link} from "react-router-dom";
+
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+ faShieldAlt
+} from '@fortawesome/free-solid-svg-icons';
+import Community from '../Community';
+library.add(faShieldAlt);
+
 const CommunityDetails = props => {
     const {authState} = useContext(AuthContextData)
-    const {isAuth,token} = authState
-    const {name,icon,subscribers,id} = props
-  
+    const {isAuth,token,userId} = authState
+    const {name,icon,subscribers,id,creator,community} = props
+    console.log(authState)
+    console.log(userId,creator)
     return (
         <>
         <div className="community-details">
-        <h3 className="community-details-title">Community Details</h3>
+        <div className="community-details-header">
+        <h3 className="community-details-title">Community Details </h3>
+        {creator === userId ? <Link to={`/mod-tools/${community.name}`}><button className="button post-info-button"><FontAwesomeIcon icon="shield-alt" /><span>Mod Tools</span>
+        </button></Link> : <></> }
+        </div>
         <div className="community-banner">
             <div className="community-logo">
             <img src={`http://localhost:8080/images/${icon}`} alt={`${name}`}/>

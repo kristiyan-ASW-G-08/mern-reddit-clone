@@ -16,12 +16,12 @@ const Community = props => {
         })
         
     },[])
-
+    console.log(community)
     return (
         <div className="community">
            {community ? 
                <>
-               <CommunityDetails name={community.name} icon={community.icon} subscribers={community.subscribers} id={community._id}/> 
+               <CommunityDetails name={community.name} icon={community.icon} subscribers={community.subscribers} id={community._id} creator={community.creator} community={community}/> 
                <PostsContainer communityId={community._id} author={community._id} />
                </>
            : <Loader />}
