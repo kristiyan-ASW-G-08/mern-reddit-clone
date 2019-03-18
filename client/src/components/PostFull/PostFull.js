@@ -16,7 +16,6 @@ const PostFull= props => {
             }
         })
     },[])
-    console.log(authState)
     let content = 'No posts';
     if (post) {
       content = <>
