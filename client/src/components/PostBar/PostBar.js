@@ -5,9 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import deletePost from './deletePost';
 import { AuthContextData } from '../../AuthContext/AuthContext';
 import {
-  faShare,faCommentAlt, faBookmark,faTrashAlt
+  faShare,faCommentAlt, faBookmark,faTrashAlt,faPen
 } from '@fortawesome/free-solid-svg-icons';
-library.add(faShare,faCommentAlt,faBookmark,faTrashAlt);
+library.add(faShare,faCommentAlt,faBookmark,faTrashAlt,faPen);
 
 const PostBar= props => {
     const {comments,authorId,userId,token,communityName,postId} = props
@@ -22,6 +22,9 @@ const PostBar= props => {
             }
         })
     }
+    const editHandler = () => {
+        
+    }
     let autorizedContent = ''
     if(authorId === userId){
         console.log('authorized')
@@ -29,6 +32,9 @@ const PostBar= props => {
         <>
          <button onClick={deleteHandler} className="button post-info-button">
         <FontAwesomeIcon icon="trash-alt" /><span>Delete</span>
+        </button>
+        <button onClick={deleteHandler} className="button post-info-button">
+        <FontAwesomeIcon icon="pen" /><span>Edit</span>
         </button>
         </>
     }

@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,lazy,Suspense } from 'react';
+import Loader from '../Loader'
 import getPosts from './getPosts';
-import Post from '../Post/Post';
+const Post = lazy(() => import('../Post/Post'));
 const PostsContainer = props => {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState(false);
   const { communityId } = props;
   useEffect(() => {
     getPosts(communityId).then(data => {
@@ -10,12 +11,9 @@ const PostsContainer = props => {
       setPosts(data.posts);
     });
   }, []);
-  let content = 'No posts';
-  if (posts.length > 0) {
-    content = posts.map(post => {
-      return <Post key={post._id} post={post} />;
-    });
-  }
-  return <div className='posts-container'>{content}</div>;
+ 
+  return <div className='posts-container'>{posts ? <Suspense fallback={<Loader/>} >{posts.map(post => {
+    return <Post key={post._id} post={post} />
+  })}</Suspense> : <h1>No Posts</h1>}</div>;
 };
 export default PostsContainer;
