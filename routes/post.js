@@ -48,12 +48,12 @@ router.get(
     '/get-post/:postId',
     postController.getPost
 )
-router.get(
+router.post(
   '/upvote/:postId',
   isAuth,
   postController.upvote
 )
-router.get(
+router.post(
   '/downvote/:postId',
   isAuth,
   postController.downvote

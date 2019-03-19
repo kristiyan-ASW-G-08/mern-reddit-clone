@@ -11,20 +11,18 @@ library.add( faCaretUp,faCaretDown);
 const VotesContainer = props => {
     const {authState} = useContext(AuthContextData)
     // const {token,isAuth} = authState.authState
+    let token
+    let isAuth;
+    if(authState.isAuth){
+         token = authState.token
+         isAuth  = authState.isAuth
+    }
     const {post} = props
     const {upvotes,downvotes} = post
     const [totalVotes,setTotalVotes] = useState(0)
-    const [isAuth,setAuth] = useState(false)
-    const [token,setToken] = useState(false)
     useEffect(() => {
         setTotalVotes(upvotes - downvotes)
-        console.log(authState)
-        if(authState.authState){
-            const {token,isAuth} = authState.authState
-            console.log(isAuth)
-            setAuth(isAuth)
-            setToken(token)
-        }
+
     },[])
 
     const upvoteHandler = () => {
@@ -32,7 +30,7 @@ const VotesContainer = props => {
         console.log(isAuth)
         if(isAuth){
             console.log('auth')
-            upvote(post.postId,token)
+            upvote(post._id,token)
             .then(data => {
                 console.log(data)
             })
@@ -40,7 +38,15 @@ const VotesContainer = props => {
       
     }
     const downvoteHandler = () => {
-
+        console.log('downvote')
+        console.log(isAuth)
+        if(isAuth){
+            console.log('auth')
+            downvote(post._id,token)
+            .then(data => {
+                console.log(data)
+            })
+        }
     }
     return (
         <div className="post-votes-container">
@@ -48,7 +54,7 @@ const VotesContainer = props => {
         <FontAwesomeIcon icon="caret-up" />
         </button>
         <span className="post-votes-container-number">{totalVotes}</span>
-        <button className="button ">
+        <button onClick={downvoteHandler} className="button ">
         <FontAwesomeIcon icon="caret-down" />
         </button>
         </div>

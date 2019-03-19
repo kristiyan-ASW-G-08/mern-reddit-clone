@@ -64,12 +64,24 @@ postSchema.methods.incrementDownvotes = function() {
 };
 
 postSchema.methods.decrementUpvotes = function() {
-  this.upvotes++
+  if(this.upvotes > 0){
+    this.upvotes--
   this.save();
+  }
+  
 };
 
 postSchema.methods.decrementDownvotes = function() {
-  this.downvotes++
+  if(this.downvotes > 0){
+    this.downvotes--
+  this.save();
+  }
+};
+postSchema.methods.equalizeDownvotesAndUpvotes = function() {
+  this.downvotes--
+  this.upvotes--
   this.save();
 };
+
+
 module.exports = mongoose.model('Post', postSchema);

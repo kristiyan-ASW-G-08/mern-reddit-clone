@@ -76,16 +76,23 @@ exports.editPost = async (req, res, next) => {
 exports.upvote = async (req, res, next) => {
   try {
     const { postId } = req.params;
-    const user = User.findById(req.userId);
-    if (user.upvoted.includes(postId)) {
+    console.log(postId)
+    const post  = await Post.findById(postId)
+    const user = await User.findById(req.userId);
+    console.log(user.checkUpvoted(postId))
+    if (user.checkUpvoted(postId)) {
+      console.log('first upvote')
       user.removeUpvoted(postId);
       post.decrementUpvotes()
     } else {
+      if (user.checkDownvoted(postId)) {
+             console.log('second upvote')
+       user.removeDownvoted(postId);
+        post.decrementDownvotes()
+      }else {
+      console.log('third upvote')
       user.addUpvoted(postId);
       post.incrementUpvotes();
-      if (user.downvoted.includes(postId)) {
-        user.removeDownvoted(postId);
-        post.decrementDownvotes();
       }
     }
     res.status(200).json({ postUpvotes: post.upvotes,postDownvotes:post.downvotes });
@@ -98,15 +105,20 @@ exports.upvote = async (req, res, next) => {
 exports.downvote = async (req, res, next) => {
   try {
     const { postId } = req.params;
-    const user = User.findById(req.userId);
-    if (user.downvoted.includes(postId)) {
+    console.log(postId)
+    const user = await User.findById(req.userId);
+    const post  = await Post.findById(postId)
+    console.log(user.checkDownvoted(postId))
+    if (user.checkDownvoted(postId)) {
       user.removeDownvoted(postId);
       post.decrementDownvotes();
     } else {
-      user.addDownvoted(postId);
-      post.incrementDownvotes();
-      if (user.upvoted.includes(postId)) {
+      if (user.checkUpvoted(postId)) {
         user.removeUpvoted(postId);
+        post.decrementUpvotes()
+      }else {
+        user.addDownvoted(postId);
+      post.incrementDownvotes();
       }
     }
   } catch (err) {

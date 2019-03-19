@@ -78,7 +78,8 @@ userSchema.methods.addUpvoted = function(postId) {
   this.save()
 };
 userSchema.methods.removeUpvoted = function(postId) {
-  const updatedUpvoted = this.upvoted.filter(upvotedPostId => upvotedPostId !== postId)
+  const id = mongoose.Types.ObjectId(postId);
+  const updatedUpvoted = this.downvoted.filter(upvotedPostId => !upvotedPostId.equals(id))
   this.upvoted = updatedUpvoted
   this.save()
 };
@@ -88,8 +89,34 @@ userSchema.methods.addDownvoted = function(postId) {
   this.save()
 };
 userSchema.methods.removeDownvoted = function(postId) {
-  const updatedDownvoted = this.downvoted.filter(upvotedPostId => upvotedPostId !== postId)
-  this.upvoted = updatedDownvoted
+  const id = mongoose.Types.ObjectId(postId);
+  const updatedDownvoted = this.downvoted.filter(downvotedPostId => !downvotedPostId.equals(id))
+  this.downvoted = updatedDownvoted
   this.save()
 };
+
+userSchema.methods.checkUpvoted = function(postId){
+  const id = mongoose.Types.ObjectId(postId);
+  const upvotedCheck = this.upvoted.find(post => {
+    return post.equals(id)
+  })
+  return upvotedCheck
+}
+userSchema.methods.checkDownvoted = function(postId){
+  const id = mongoose.Types.ObjectId(postId);
+  const downvotedCheck = this.downvoted.find(post => {
+    return post.equals(id)
+  })
+  return downvotedCheck
+}
+
+userSchema.methods.equalizeUpdvotesAndDownvotes = function(postId){
+  const id = mongoose.Types.ObjectId(postId);
+  const updatedDownvoted = this.downvoted.filter(downvotedPostId => !downvotedPostId.equals(id))
+  const updatedUpvoted = this.downvoted.filter(upvotedPostId => !upvotedPostId.equals(id))
+  this.downvoted = updatedDownvoted;
+  this.upvoted = updatedUpvoted;
+  this.save()
+
+}
 module.exports = mongoose.model('User', userSchema);
