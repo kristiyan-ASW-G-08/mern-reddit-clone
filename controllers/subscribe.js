@@ -1,8 +1,9 @@
 const Community  = require('../models/community')
 const User =   require('../models/user')
+const mongoose = require('mongoose')
 exports.subscribe = async (req, res, next) => {
   try {
-    const {communityId}  = req.params
+    const {communityId}  =  req.params
     const user = await User.findById(req.userId).select("-password")
     const community = await Community.findById(communityId)
     if(user.checkSubscriptions(communityId)){

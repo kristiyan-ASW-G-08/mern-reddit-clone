@@ -18,6 +18,7 @@ const SubscribeButtop = props => {
     }
   }
   const subscribeHandler = () => {
+    console.log(id)
     if (isAuth && !subscribed) {
       subscribe(id, token).then(data => {
         if (data) {

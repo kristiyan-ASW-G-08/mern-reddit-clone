@@ -48,4 +48,14 @@ router.get(
     '/get-post/:postId',
     postController.getPost
 )
+router.get(
+  '/upvote/:postId',
+  isAuth,
+  postController.upvote
+)
+router.get(
+  '/downvote/:postId',
+  isAuth,
+  postController.downvote
+)
 module.exports = router;

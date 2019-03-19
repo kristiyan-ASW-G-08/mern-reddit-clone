@@ -3,8 +3,10 @@
   justify-items: center;
   align-content: center;
   grid: '. description .' / 1fr 31fr 1fr;
+  width: 100%;
   .post-description {
     grid-area: description;
+    width: 100%;
     @include border;
     display: grid;
     justify-items: left;

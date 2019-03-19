@@ -15,9 +15,8 @@ library.add(faShieldAlt);
 const CommunityDetails = props => {
     const {authState} = useContext(AuthContextData)
     const {isAuth,token,userId} = authState
-    const {name,icon,subscribers,id,creator,community} = props
-    console.log(authState)
-    console.log(userId,creator)
+    const {community} = props
+    const {name,icon,subscribers,_id,creator} = community
     return (
         <>
         <div className="community-details">
@@ -34,9 +33,9 @@ const CommunityDetails = props => {
             <h1 className="community-name">{name}</h1>
             <h2 className="community-subscribers">Subscribers {subscribers}</h2>
             <div className="buttons-container">
-            <SubscribeButton id={id}/>
+            <SubscribeButton id={_id}/>
             <button className="button">
-                <Link data-testid="create-post"  to={`/create-post/${id}`}>
+                <Link data-testid="create-post"  to={`/create-post/${_id}`}>
                 Create Post
                 </Link>
             </button>

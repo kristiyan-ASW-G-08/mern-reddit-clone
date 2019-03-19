@@ -51,6 +51,25 @@ const postSchema = new Schema({
     type:Number,
     default:0,
 },
-});
 
+});
+postSchema.methods.incrementUpvotes = function() {
+  this.upvotes++
+  this.save();
+};
+
+postSchema.methods.incrementDownvotes = function() {
+  this.downvotes++
+  this.save();
+};
+
+postSchema.methods.decrementUpvotes = function() {
+  this.upvotes++
+  this.save();
+};
+
+postSchema.methods.decrementDownvotes = function() {
+  this.downvotes++
+  this.save();
+};
 module.exports = mongoose.model('Post', postSchema);

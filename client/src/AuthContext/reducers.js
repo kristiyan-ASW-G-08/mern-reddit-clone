@@ -4,7 +4,6 @@ export const USERUPDATE = 'USERUPDATE';
 
 const login =  authData => {
   try {
-    
       return authData
   } catch (err) {
   }

@@ -17,7 +17,7 @@ const PostsContainer = props => {
       {posts ? (
         <Suspense fallback={<Loader />}>
           {posts.map(post => {
-            return <Post key={post._id} post={post} />;
+            return <Post key={post._id} post={post}/>;
           })}
         </Suspense>
       ) : (

@@ -16,6 +16,7 @@ const ModTools = lazy(() => import('./ModTools/ModTools'));
 const Router = () => (
   <AuthContextConsumer>
     {consumerData => {
+      console.log('nani')
       const { authState } = consumerData;
       return (
         <BrowserRouter>
@@ -41,16 +42,15 @@ const Router = () => (
                   authState={authState}
                   Component={ModTools}
                   path="/mod-tools/:communityName"
-                />
-
-                <Route
+                /> 
+                 <Route
                   path="/community/:communityName"
                   render={props => (
                     <Suspense fallback={<Loader />}>
                       <Community {...props} />
                     </Suspense>
                   )}
-                />
+                /> 
                  <Route
                   path="/post/:postId"
                   render={props => (
@@ -98,3 +98,9 @@ const Router = () => (
 );
 
 export default Router;
+
+
+
+
+
+

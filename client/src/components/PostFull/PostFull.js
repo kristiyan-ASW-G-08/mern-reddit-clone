@@ -7,6 +7,7 @@ const PostFull= props => {
     const [post, setPost] = useState(null)
     const {isAuth,userId,token}  = authState.authState
     const {postId} = props.match.params
+    console.log(props)
     useEffect(() => {
         getPost(postId)
         .then(data => {
@@ -30,7 +31,7 @@ const PostFull= props => {
       <p className="post-content">
       {post.content}
       </p>
-      <PostBar  comments={post.comments} authorId={post.authorId} userId={userId} token={token} postId={post._id} communityName={post.communityName} post={post}/>
+      <PostBar   userId={userId} token={token}  post={post} />
       </div>
       
       </>

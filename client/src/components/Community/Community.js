@@ -5,7 +5,6 @@ import Loader from '../Loader'
 import PostsContainer from '../PostsContainer/PostsContainer'
 const Community = props => {
     const [community, setComminity] = useState(false)
-    const [posts,setPosts] = useState(false)
     const {communityName} = props.match.params
     useEffect(  () => {
         getCommunityData(communityName)
@@ -16,13 +15,12 @@ const Community = props => {
         })
         
     },[])
-    console.log(community)
     return (
         <div className="community">
            {community ? 
                <>
-               <CommunityDetails name={community.name} icon={community.icon} subscribers={community.subscribers} id={community._id} creator={community.creator} community={community}/> 
-               <PostsContainer communityId={community._id} author={community._id} />
+               <CommunityDetails  community={community}/> 
+               <PostsContainer communityId={community._id} author={community._id}  />
                </>
            : <Loader />}
         </div>
@@ -31,4 +29,4 @@ const Community = props => {
 
     
 }
-export default Community 
+export default Community

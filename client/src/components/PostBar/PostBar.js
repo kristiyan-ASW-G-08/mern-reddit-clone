@@ -5,18 +5,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import deletePost from './deletePost';
 import { AuthContextData } from '../../AuthContext/AuthContext';
 import {
-  faShare,faCommentAlt, faBookmark,faTrashAlt,faPen
+  faShare,faCommentAlt, faBookmark,faTrashAlt,faPen,
 } from '@fortawesome/free-solid-svg-icons';
-library.add(faShare,faCommentAlt,faBookmark,faTrashAlt,faPen);
+library.add(faShare,faCommentAlt,faBookmark,faTrashAlt,faPen,);
 
 const PostBar= props => {
-    const {comments,authorId,userId,token,communityName,postId,post} = props
+    const {userId,token,post} = props
+    const {comments,authorId,communityName,postId} = post
     const deleteHandler = () => {
-        console.log('handler')
-        console.log(postId)
+   
         deletePost(postId,token)
         .then(data => {
-            console.log(data)
             if(data.msg === 'Post Deleted'){
                 props.history.push(`/community/${communityName}`)
             }
@@ -27,10 +26,8 @@ const PostBar= props => {
     }
     let autorizedContent = ''
     if(authorId === userId){
-        console.log('authorized')
         autorizedContent = 
         <>
-        
          <button onClick={deleteHandler} className="button post-info-button">
         <FontAwesomeIcon icon="trash-alt" /><span>Delete</span>
         </button>

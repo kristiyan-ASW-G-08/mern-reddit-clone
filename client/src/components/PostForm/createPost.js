@@ -11,10 +11,12 @@ const createPost = async (communityId,title,content,token) => {
     });
 
     const responseData = await response.json();
+    console.log(responseData)
+    console.log(response)
     if (responseData.message === 'Validation failed.') {
       return false
-    } else if (response.status  === 201) {
-      return responseData.userData
+    } else if (response.status  === 200) {
+      return responseData
     }
   };
 export default createPost

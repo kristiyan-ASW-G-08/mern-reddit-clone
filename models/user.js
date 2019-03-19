@@ -72,4 +72,24 @@ userSchema.methods.checkSubscriptions = function(communityId){
   })
   return subscribeCheck
 }
+userSchema.methods.addUpvoted = function(postId) {
+  const updatedUpvoted = [...this.upvoted,postId]
+  this.upvoted = updatedUpvoted
+  this.save()
+};
+userSchema.methods.removeUpvoted = function(postId) {
+  const updatedUpvoted = this.upvoted.filter(upvotedPostId => upvotedPostId !== postId)
+  this.upvoted = updatedUpvoted
+  this.save()
+};
+userSchema.methods.addDownvoted = function(postId) {
+  const updatedDownvoted = [...this.upvoted,postId]
+  this.downvoted = updatedDownvoted
+  this.save()
+};
+userSchema.methods.removeDownvoted = function(postId) {
+  const updatedDownvoted = this.downvoted.filter(upvotedPostId => upvotedPostId !== postId)
+  this.upvoted = updatedDownvoted
+  this.save()
+};
 module.exports = mongoose.model('User', userSchema);

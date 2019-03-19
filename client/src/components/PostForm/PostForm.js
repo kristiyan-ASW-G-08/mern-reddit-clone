@@ -16,12 +16,18 @@ const PostForm = props => {
   const submitHandler = e => {
     e.preventDefault()
     const {token} = authState.authState
+    let postId
     if(props.match.params.postId){
-      const {postId} = props.match.params
+      postId = props.match.params.postId
       editPost(postId,title,content,token)
+      props.history.push(`/post/${postId}`)
     }else {
-      
       createPost(communityId,title,content,token)
+      .then(data => {
+        console.log(data)
+        postId = data.postId
+         props.history.push(`/post/${postId}`)
+      })
     }
    
   }
@@ -38,7 +44,7 @@ const PostForm = props => {
   },[])
   return (
     <form className="form" onSubmit={e => submitHandler(e)}>
-          <ValidationErrorsList validationErrorMessages={validationErrorMessages} />
+       <ValidationErrorsList validationErrorMessages={validationErrorMessages} />
       <Input
         setHook={setTitle}
         value={title}
