@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
+const  Post  = require('./post')
 const userSchema = new Schema({
   email: {
     type: String,
@@ -22,13 +22,13 @@ const userSchema = new Schema({
     type: Number,
     default: 0
   },
-  communities:[
+  communities: [
     {
-    type: Schema.Types.ObjectId,
-    ref: 'Post'
+      type: Schema.Types.ObjectId,
+      ref: 'Post'
     }
   ],
-  
+
   saved: [
     {
       type: Schema.Types.ObjectId,
@@ -46,7 +46,7 @@ const userSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'Post'
     }
-  ],
+  ]
 });
 
 userSchema.methods.subscribe = function(communityId) {
@@ -60,63 +60,56 @@ userSchema.methods.unsubscribe = function(communityId) {
   const updatedCommunities = this.communities.filter(
     community => !community.equals(id)
   );
-  console.log(updatedCommunities)
+  console.log(updatedCommunities);
   this.communities = updatedCommunities;
   this.save();
 };
 
-userSchema.methods.checkSubscriptions = function(communityId){
+userSchema.methods.checkSubscriptions = function(communityId) {
   const id = mongoose.Types.ObjectId(communityId);
   const subscribeCheck = this.communities.find(community => {
-    return community.equals(id)
-  })
-  return subscribeCheck
-}
-userSchema.methods.addUpvoted = function(postId) {
-  const updatedUpvoted = [...this.upvoted,postId]
-  this.upvoted = updatedUpvoted
-  this.save()
-};
-userSchema.methods.removeUpvoted = function(postId) {
-  const id = mongoose.Types.ObjectId(postId);
-  const updatedUpvoted = this.downvoted.filter(upvotedPostId => !upvotedPostId.equals(id))
-  this.upvoted = updatedUpvoted
-  this.save()
-};
-userSchema.methods.addDownvoted = function(postId) {
-  const updatedDownvoted = [...this.upvoted,postId]
-  this.downvoted = updatedDownvoted
-  this.save()
-};
-userSchema.methods.removeDownvoted = function(postId) {
-  const id = mongoose.Types.ObjectId(postId);
-  const updatedDownvoted = this.downvoted.filter(downvotedPostId => !downvotedPostId.equals(id))
-  this.downvoted = updatedDownvoted
-  this.save()
+    return community.equals(id);
+  });
+  return subscribeCheck;
 };
 
-userSchema.methods.checkUpvoted = function(postId){
+const includesCheck = (arr, id) => {
+  const check = arr.find(itemId => {
+    return itemId.equals(id);
+  });
+  return check;
+};
+userSchema.methods.voteHandler = async function(postId, type) {
+  const post = await  Post.findById(postId)
   const id = mongoose.Types.ObjectId(postId);
-  const upvotedCheck = this.upvoted.find(post => {
-    return post.equals(id)
-  })
-  return upvotedCheck
-}
-userSchema.methods.checkDownvoted = function(postId){
-  const id = mongoose.Types.ObjectId(postId);
-  const downvotedCheck = this.downvoted.find(post => {
-    return post.equals(id)
-  })
-  return downvotedCheck
-}
-
-userSchema.methods.equalizeUpdvotesAndDownvotes = function(postId){
-  const id = mongoose.Types.ObjectId(postId);
-  const updatedDownvoted = this.downvoted.filter(downvotedPostId => !downvotedPostId.equals(id))
-  const updatedUpvoted = this.downvoted.filter(upvotedPostId => !upvotedPostId.equals(id))
-  this.downvoted = updatedDownvoted;
-  this.upvoted = updatedUpvoted;
+  if (type === 'upvote') {
+    if (includesCheck(this.upvoted, id)) {
+      this.upvoted = this.upvoted.filter(upvotedId => !upvotedId.equals(id))
+      post.upvotes--
+    } else if (includesCheck(this.downvoted, id)) {
+      this.downvoted = this.downvoted.filter(downvotedId => !downvotedId.equals(id));
+      this.upvoted = [...this.upvoted, id];
+      post.downvotes--
+      post.upvotes++
+    } else {
+      this.upvoted = [...this.upvoted, id];
+      post.upvotes++
+    }
+  } else if (type === 'downvote') {
+    if (includesCheck(this.downvoted, id)) {
+      this.downvoted = this.downvoted.filter(downvotedId => !downvotedId.equals(id));
+      post.downvotes--
+    } else if (includesCheck(this.upvoted, id)) {
+      this.upvoted = this.upvoted.filter(upvotedId => !upvotedId.equals(id));
+      this.downvoted = [...this.downvoted, id];
+      post.downvotes++
+      post.upvotes--
+    } else {
+      this.downvoted = [...this.downvoted, id];
+      post.downvotes++
+    }
+  }
+  post.saveVoteChanges()
   this.save()
-
-}
+};
 module.exports = mongoose.model('User', userSchema);

@@ -6,6 +6,8 @@ exports.subscribe = async (req, res, next) => {
     const {communityId}  =  req.params
     const user = await User.findById(req.userId).select("-password")
     const community = await Community.findById(communityId)
+    let upvoted;
+    let downvoted;
     if(user.checkSubscriptions(communityId)){
       const error = new Error('User is already subscribed');
       error.statusCode = 500 ;
@@ -18,7 +20,6 @@ exports.subscribe = async (req, res, next) => {
     
   } 
   catch (err) {
-      console.log(err)
     if (!err.statusCode) {
       err.statusCode = 500;
     }

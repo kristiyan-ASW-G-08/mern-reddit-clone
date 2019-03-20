@@ -53,35 +53,9 @@ const postSchema = new Schema({
 },
 
 });
-postSchema.methods.incrementUpvotes = function() {
-  this.upvotes++
-  this.save();
-};
-
-postSchema.methods.incrementDownvotes = function() {
-  this.downvotes++
-  this.save();
-};
-
-postSchema.methods.decrementUpvotes = function() {
-  if(this.upvotes > 0){
-    this.upvotes--
-  this.save();
-  }
-  
-};
-
-postSchema.methods.decrementDownvotes = function() {
-  if(this.downvotes > 0){
-    this.downvotes--
-  this.save();
-  }
-};
-postSchema.methods.equalizeDownvotesAndUpvotes = function() {
-  this.downvotes--
-  this.upvotes--
-  this.save();
-};
 
 
+postSchema.methods.saveVoteChanges = function(){
+  this.save()
+}
 module.exports = mongoose.model('Post', postSchema);

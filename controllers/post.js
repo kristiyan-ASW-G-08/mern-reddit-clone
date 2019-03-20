@@ -72,30 +72,23 @@ exports.editPost = async (req, res, next) => {
     errorFunc(err, next);
   }
 };
-
+const includesCheck = (arr, id) => {
+  const check = arr.find(itemId => {
+    return itemId.equals(id);
+  });
+  console.log(check,'check')
+  return check;
+};
 exports.upvote = async (req, res, next) => {
   try {
     const { postId } = req.params;
     console.log(postId)
     const post  = await Post.findById(postId)
-    const user = await User.findById(req.userId);
-    console.log(user.checkUpvoted(postId))
-    if (user.checkUpvoted(postId)) {
-      console.log('first upvote')
-      user.removeUpvoted(postId);
-      post.decrementUpvotes()
-    } else {
-      if (user.checkDownvoted(postId)) {
-             console.log('second upvote')
-       user.removeDownvoted(postId);
-        post.decrementDownvotes()
-      }else {
-      console.log('third upvote')
-      user.addUpvoted(postId);
-      post.incrementUpvotes();
-      }
-    }
-    res.status(200).json({ postUpvotes: post.upvotes,postDownvotes:post.downvotes });
+    const user = await User.findById(req.userId).select("-password")
+    console.log(post.saveVoteChanges)
+   await user.voteHandler(postId,'upvote')
+    
+    // res.status(200).json({ postUpvotes: post.upvotes,postDownvotes:post.downvotes,userData:user });
   } catch (err) {
     console.log(err);
     // errorFunc(err, next);
@@ -106,21 +99,11 @@ exports.downvote = async (req, res, next) => {
   try {
     const { postId } = req.params;
     console.log(postId)
-    const user = await User.findById(req.userId);
+    const user = await User.findById(req.userId).select("-password")
     const post  = await Post.findById(postId)
-    console.log(user.checkDownvoted(postId))
-    if (user.checkDownvoted(postId)) {
-      user.removeDownvoted(postId);
-      post.decrementDownvotes();
-    } else {
-      if (user.checkUpvoted(postId)) {
-        user.removeUpvoted(postId);
-        post.decrementUpvotes()
-      }else {
-        user.addDownvoted(postId);
-      post.incrementDownvotes();
-      }
-    }
+
+    await user.voteHandler(postId,'downvote')
+    // res.status(200).json({ postUpvotes: post.upvotes,postDownvotes:post.downvotes,userData:user });
   } catch (err) {
     console.log(err);
     // errorFunc(err, next);

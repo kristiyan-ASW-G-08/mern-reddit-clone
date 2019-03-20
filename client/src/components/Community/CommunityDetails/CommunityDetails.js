@@ -17,6 +17,7 @@ const CommunityDetails = props => {
     const {isAuth,token,userId} = authState
     const {community} = props
     const {name,icon,subscribers,_id,creator} = community
+    
     return (
         <>
         <div className="community-details">

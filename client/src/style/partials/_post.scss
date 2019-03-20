@@ -6,6 +6,12 @@
     @include large-screen{
         height: 8rem;
     }
+    .upvoted{
+        color:$upvote
+    }
+    .downvoted{
+        color:$downvote
+    }
     &-votes-container{
         grid-area: votes;
         display: grid;
