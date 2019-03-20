@@ -2,6 +2,7 @@ import React ,{useContext,useEffect,useState,Fragment} from 'react'
 import {AuthContextData} from '../../AuthContext/AuthContext'
 import getPost from './getPost';
 import PostBar from '../PostBar/PostBar'
+import VotesContainer from '../VotesContainer/VotesContainer'
 const PostFull= props => {
     const authState = useContext(AuthContextData)
     const [post, setPost] = useState(null)
@@ -20,6 +21,8 @@ const PostFull= props => {
     let content = 'No posts';
     if (post) {
       content = <>
+      <VotesContainer post={post}/>
+      <div className="post-body">
       <div className="post-description">
       <div className="post-source-wrapper">
       <h2 className="post-community">c/{post.communityName}</h2>
@@ -33,7 +36,7 @@ const PostFull= props => {
       </p>
       <PostBar   userId={userId} token={token}  post={post} />
       </div>
-      
+      </div>
       </>
     }
     return (

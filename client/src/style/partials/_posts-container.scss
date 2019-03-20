@@ -3,4 +3,8 @@
     grid-gap: 0.7rem;
     display: grid;
     justify-items: center;
+    .load-more-button{
+        background: $primary;
+        color: $white;
+    }
 }

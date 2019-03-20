@@ -20,13 +20,13 @@ const PostForm = props => {
     if(props.match.params.postId){
       postId = props.match.params.postId
       editPost(postId,title,content,token)
-      props.history.push(`/post/${postId}`)
+      props.history.replace(`/post/${postId}`)
     }else {
       createPost(communityId,title,content,token)
       .then(data => {
         console.log(data)
         postId = data.postId
-         props.history.push(`/post/${postId}`)
+         props.history.replace(`/post/${postId}`)
       })
     }
    

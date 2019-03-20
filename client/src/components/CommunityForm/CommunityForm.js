@@ -41,7 +41,7 @@ const CommunityForm = props => {
       toggleValidationErrors(errors);
     } else if (response.status  === 201) {
       const { communityName } = responseData;
-      props.history.push(`/community/${communityName}`);
+      props.history.replace(`/community/${communityName}`);
     }
   };
 

@@ -82,13 +82,9 @@ const includesCheck = (arr, id) => {
 exports.upvote = async (req, res, next) => {
   try {
     const { postId } = req.params;
-    console.log(postId)
-    const post  = await Post.findById(postId)
     const user = await User.findById(req.userId).select("-password")
-    console.log(post.saveVoteChanges)
-   await user.voteHandler(postId,'upvote')
-    
-    // res.status(200).json({ postUpvotes: post.upvotes,postDownvotes:post.downvotes,userData:user });
+    const {upvotes,downvotes} =  await user.voteHandler(postId,'upvote')
+    res.status(200).json({ postUpvotes: upvotes,postDownvotes:downvotes,userData:user });
   } catch (err) {
     console.log(err);
     // errorFunc(err, next);
@@ -100,10 +96,8 @@ exports.downvote = async (req, res, next) => {
     const { postId } = req.params;
     console.log(postId)
     const user = await User.findById(req.userId).select("-password")
-    const post  = await Post.findById(postId)
-
-    await user.voteHandler(postId,'downvote')
-    // res.status(200).json({ postUpvotes: post.upvotes,postDownvotes:post.downvotes,userData:user });
+   const {upvotes,downvotes} =  await user.voteHandler(postId,'downvote')
+    res.status(200).json({ postUpvotes: upvotes,postDownvotes:downvotes,userData:user });
   } catch (err) {
     console.log(err);
     // errorFunc(err, next);

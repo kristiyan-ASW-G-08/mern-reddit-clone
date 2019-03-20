@@ -13,16 +13,13 @@
 @import 'partials/posts-container';
 @import 'partials/post';
 @import 'partials/post-full';
-
+@import 'partials/votes-container';
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-:root {
-  --theme-bg: #ffffff;
-  --theme-text: #3b3b3b;
-}
+
 html,
 body {
   width: 100%;

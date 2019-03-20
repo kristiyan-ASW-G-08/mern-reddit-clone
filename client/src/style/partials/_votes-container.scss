@@ -1,0 +1,15 @@
+.votes-container{
+    grid-area: votes;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    background:#F8F9FA;
+    &-number{
+        text-align: center;
+        font-size: 1rem;
+    }
+    button{
+        cursor: pointer;
+        font-size: 1.2rem;
+    }
+}

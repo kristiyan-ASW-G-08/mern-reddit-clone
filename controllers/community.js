@@ -49,8 +49,13 @@ exports.getCommunity = async (req, res, next) => {
 exports.getPosts = async (req,res,next) => {
   try{
     const {communityId} = req.params;
-    const posts = await Post.find({community:communityId})
+    const {page} = req.query
+    console.log(page)
+    const currentPage = page || 1
+    const postPerPage = 5
+    const posts = await Post.find({community:communityId}).countDocuments().find().skip((currentPage -1) * postPerPage).limit(postPerPage)
     res.status(200).json({posts}); 
+    
   }
   catch(err){
     console.log(err)

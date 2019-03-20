@@ -34,7 +34,7 @@ const SignupForm = props => {
     } else if (signupProcessData.authErrors) {
       toggleValidationErrors(signupProcessData.authErrors);
     } else {
-      props.history.push(`/login`);
+      props.history.replace(`/login`);
     }
   };
 

@@ -33,7 +33,7 @@ const LoginForm = props => {
       toggleValidationErrors(loginProcessData.data);
     } else {
       loginReducer(loginProcessData);
-      props.history.push(`/`)
+      props.history.replace(`/`)
     
     }
   };

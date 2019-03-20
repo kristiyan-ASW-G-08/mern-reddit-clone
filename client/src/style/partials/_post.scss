@@ -1,9 +1,10 @@
 .post{
     @include border;
-    width: 100%;
+    width: 100vw;
     display: grid;
     grid:'votes body'/1fr 9fr;
     @include large-screen{
+        width: 50vw;
         height: 8rem;
     }
     .upvoted{
@@ -12,21 +13,7 @@
     .downvoted{
         color:$downvote
     }
-    &-votes-container{
-        grid-area: votes;
-        display: grid;
-        justify-content: center;
-        align-items: center;
-        background:#F8F9FA;
-        &-number{
-            text-align: center;
-            font-size: 1rem;
-        }
-        button{
-            cursor: pointer;
-            font-size: 1.2rem;
-        }
-    }
+    
      &-body{
          grid-area: body;
         display: grid;

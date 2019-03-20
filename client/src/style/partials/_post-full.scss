@@ -1,22 +1,22 @@
 .post-full {
   display: grid;
-  justify-items: center;
-  align-content: center;
-  grid: '. description .' / 1fr 31fr 1fr;
-  width: 100%;
-  .post-description {
-    grid-area: description;
-    width: 100%;
+    grid:'votes body'/1fr 9fr;
+    @include large-screen{
+      grid:'votes body'/1fr 20fr;
+    }
     @include border;
+  width: 95%;
+
+  .post-body{
+  grid-area: body;
+  padding: 0.3rem;
+}
+  .post-description {
+    width: 100%;
     display: grid;
     justify-items: left;
     align-content: center;
-    // grid:
-    //   '. community author . '
-    //   'title title title title'
-    //   'content content content content'/1fr 3fr 1fr 4fr;
     grid-gap: 0.7rem;
-    padding: 0.5rem;
   }
   .post-source-wrapper{
       display: flex;

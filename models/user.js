@@ -109,7 +109,8 @@ userSchema.methods.voteHandler = async function(postId, type) {
       post.downvotes++
     }
   }
-  post.saveVoteChanges()
-  this.save()
+  await post.saveVoteChanges()
+  await this.save()
+  return {upvotes:post.upvotes,downvotes:post.downvotes}
 };
 module.exports = mongoose.model('User', userSchema);
