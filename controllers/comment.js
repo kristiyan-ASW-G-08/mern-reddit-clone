@@ -48,6 +48,17 @@ exports.getComments = async (req,res,next) => {
     }
   }
   
+
+
+  exports.deleteComment = async(req,res,next) => {
+    try{
+      const { commentId } = req.params;
+      await Comment.findByIdAndDelete(commentId);
+      res.status(200).json({ msg: 'Comment Deleted' });
+    }catch(err){
+      console.log(err)
+    }
+  }
 // exports.getPost = async (req, res, next) => {
 //   try {
 //     const { postId } = req.params;

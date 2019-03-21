@@ -18,7 +18,7 @@ router.post(
 );
 router.get('/comments/:postId',commentController.getComments)
 
-
+router.get('/delete-comment/:commentId',commentController.deleteComment)
 
 module.exports = router;
 

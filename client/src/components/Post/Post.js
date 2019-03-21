@@ -7,7 +7,7 @@ import VotesContainer from '../VotesContainer/VotesContainer'
 const Post = props => {
   const authState = useContext(AuthContextData)
   const {isAuth,userId,token}  = authState.authState
-  const { post,community } = props;
+  const { post,community,deletePostElement } = props;
   const {title,author,comments} = post
   return (
     <div  className="post">
@@ -17,7 +17,7 @@ const Post = props => {
     <h4 className="post-author">Posted by u/{author}</h4>
     <h3 className="post-title">{title}</h3>
     </Link>
-    <PostBar post={post} token={token} userId={userId}/>
+    <PostBar post={post} token={token} userId={userId} deletePostElement={deletePostElement}/>
     </div>
     </div>
   );

@@ -22,13 +22,17 @@ const PostsContainer = props => {
       setPosts(posts.concat(data.posts));
     });
   } 
+  const deletePostElement = (postId) => {
+   const editedPosts =  posts.filter(post => post._id !== postId)
+    setPosts(editedPosts)
+  }
   return (
     <>
       {posts ? (
         <Suspense fallback={<Loader />}>
         <div  className="posts-container" >
       {posts.map(post => {
-            return <Post key={post._id} post={post}/>;
+            return <Post key={post._id} post={post} deletePostElement={deletePostElement}/>;
           })}
           <button onClick={getNextPage} className="button load-more-button">Load More</button>
           </div>

@@ -45,6 +45,7 @@ exports.getPost = async (req, res, next) => {
 exports.deletePost = async (req, res, next) => {
   try {
     const { postId } = req.params;
+    console.log(postId)
     await Post.findByIdAndDelete(postId);
     res.status(200).json({ msg: 'Post Deleted' });
   } catch (err) {
