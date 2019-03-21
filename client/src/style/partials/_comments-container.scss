@@ -1,0 +1,9 @@
+.comments-container{
+    width: 100%;
+    display: grid;
+    justify-items: center;
+    @include large-screen{
+      width: 95%;
+      justify-items: left;
+    }
+}

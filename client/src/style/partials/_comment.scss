@@ -1,0 +1,27 @@
+.comment{
+    @include border;
+    width: 90%;
+    display: grid;
+    padding: 0.7rem;
+    grid-gap: 0.3rem;
+    @include large-screen{
+        width: 70%;
+    }
+    &-details{
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+    &-author{
+        padding-right: 0.3rem;
+        font-size: 0.8rem;
+        color: $primary;
+    }
+    &-date{
+        font-size: 0.6rem;
+    }
+    &-content{
+        font-size: 0.9rem;
+        font-weight: 400;
+    }
+}

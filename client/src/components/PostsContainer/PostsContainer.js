@@ -22,9 +22,6 @@ const PostsContainer = props => {
       setPosts(posts.concat(data.posts));
     });
   } 
-  
- 
- 
   return (
     <>
       {posts ? (
