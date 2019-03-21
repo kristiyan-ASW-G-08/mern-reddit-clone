@@ -53,12 +53,36 @@ exports.getComments = async (req,res,next) => {
   exports.deleteComment = async(req,res,next) => {
     try{
       const { commentId } = req.params;
+      console.log(commentId)
       await Comment.findByIdAndDelete(commentId);
       res.status(200).json({ msg: 'Comment Deleted' });
     }catch(err){
       console.log(err)
     }
   }
+
+
+  exports.editComment = async (req, res, next) => {
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        const errorMsg = errors.array()[0].msg;
+        res.json({ error: errorMsg });
+      } else {
+        const {  content } = req.body;
+      const { commentId } = req.params;
+      const editComment = {
+        content
+      };
+      await Comment.findOneAndUpdate({ _id: commentId }, editComment);
+      const comment = await Comment.findById(commentId)
+      res.status(200).json({ msg: 'updated',comment})
+      }
+    } catch (err) {
+      console.log(error)
+      // errorFunc(err, next);
+    }
+  };
 // exports.getPost = async (req, res, next) => {
 //   try {
 //     const { postId } = req.params;

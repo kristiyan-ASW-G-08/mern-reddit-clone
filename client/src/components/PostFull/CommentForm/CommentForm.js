@@ -1,51 +1,41 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Input from '../../Input/Input';
 import { withRouter } from 'react-router-dom';
 import ValidationErrorsList from '../../ValidationErrorsList/ValidationErrorsList';
-import createComment from './createComment'
+import createComment from './createComment';
+import editCommentFunc from './editComment';
 import useValidationErrors from '../../../hooks/useValidationErrors';
 import { AuthContextData } from '../../../AuthContext/AuthContext';
 const CommentForm = props => {
   const { authState } = useContext(AuthContextData);
-  const {isAuth,token} = authState
-  const {postId} = props
+  const { isAuth, token } = authState;
+  const { postId, setNewComment, toggle, editComment,setEditComment,setEditCommentElement } = props;
   const [content, setContent] = useState('');
   const [
     validationErrorMessages,
     validationErrorParams,
     toggleValidationErrors
   ] = useValidationErrors();
-  const submitHandler = async e => {
-      console.log('click')
-      console.log(postId)
-    e.preventDefault();
-    if(isAuth){
-        console.log()
-        const commentData = await createComment(postId,content,token)
-        if(commentData.comment){
-            
-        }
-        console.log(commentData)
+  useEffect(() => {
+    if (isAuth && editComment) {
+      setContent(editComment.content);
     }
-    // const loginProcess = await login({
-    //   email,
-    //   password
-    // });
-    // const loginProcessData = await loginProcess;
-    // if (loginProcessData === undefined) {
-    //   toggleValidationErrors([
-    //     {
-    //       param: 'server-error',
-    //       msg: `Server isn't availdable.Please try again later!`
-    //     }
-    //   ]);
-    // } else if (loginProcessData.data) {
-    //   toggleValidationErrors(loginProcessData.data);
-    // } else {
-    //   loginReducer(loginProcessData);
-    //   props.history.replace(`/`)
-    
-    // }
+  }, []);
+
+  const submitHandler = async e => {
+    e.preventDefault();
+    if (isAuth && !editComment) {
+      const commentData = await createComment(postId, content, token);
+      if (commentData.comment) {
+        setNewComment(commentData.comment);
+        toggle();
+      }
+    } else if (isAuth && editComment) {
+      const data = await editCommentFunc(editComment._id, content, token);
+      const {comment} = data
+      setEditComment(false)
+      setEditCommentElement(comment)
+    }
   };
   return (
     <form className="form comment-form" onSubmit={e => submitHandler(e)}>

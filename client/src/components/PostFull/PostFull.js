@@ -9,8 +9,6 @@ import React, {
 import { AuthContextData } from '../../AuthContext/AuthContext';
 import getPost from './getPost';
 import PostContainer from './PostContainer/PostContainer';
-import Toggle from '../Toggle/Toggle';
-import CommentForm from './CommentForm/CommentForm';
 import Loader from '../Loader';
 import CommentsContainer from './CommentsContainer/CommentsContainer'
 const PostFull = props => {
@@ -34,16 +32,7 @@ const PostFull = props => {
           <>
             <div className="post-full">
               <PostContainer post={post} userId={userId} token={token} />
-              <Toggle>
-                {({ on, toggle }) => (
-                  <div>
-                    {on ? <CommentForm postId={post._id} /> : ''}
-                    <button className="button button-toggle" onClick={toggle}>
-                      {on ? 'Close' : 'Comment'}
-                    </button>
-                  </div>
-                )}
-              </Toggle>
+              
               <CommentsContainer postId={post._id}/>
             </div>
           </>

@@ -16,9 +16,20 @@ router.post(
   isAuth,
   commentController.createComment
 );
+router.post(
+  '/edit-comment/:commentId',
+  [
+     body('content', 'Content should be atleast 1 character long')
+    .isLength({ min: 1 })
+    .isString()
+    .trim()
+  ],
+  isAuth,
+  commentController.editComment
+);
 router.get('/comments/:postId',commentController.getComments)
 
-router.get('/delete-comment/:commentId',commentController.deleteComment)
+router.delete('/delete-comment/:commentId',isAuth,commentController.deleteComment)
 
 module.exports = router;
 

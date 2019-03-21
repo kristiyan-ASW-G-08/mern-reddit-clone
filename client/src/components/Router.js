@@ -78,6 +78,13 @@ const Router = () => (
                   Component={CommunityForm}
                   path="/create-community"
                 />
+                {/* <ProtectedRoute
+                exact
+                authState={authState}
+                Component={CommunityForm}
+                path="/edit-comment/:commentId"
+              /> */}
+  
 
                 <Route
                   exact

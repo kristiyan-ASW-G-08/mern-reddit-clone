@@ -1,4 +1,5 @@
 const deletePost = async (commentId,token) => {
+    console.log(commentId,token)
     const response  =  await fetch(`http://localhost:8080/delete-comment/${commentId}`, {
         method: 'DELETE',
         headers: {
