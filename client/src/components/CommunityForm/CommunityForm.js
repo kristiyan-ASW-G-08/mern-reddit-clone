@@ -9,7 +9,6 @@ import postData from '../../util/postData';
 const CommunityForm = props => {
   const { authState } = useContext(AuthContextData);
   const { token } = authState;
-
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [
@@ -25,7 +24,6 @@ const CommunityForm = props => {
       description
     };
     const responseData = await postData(apiUrl, community, token);
-    console.log(responseData);
     if (responseData.validationErrors) {
       toggleValidationErrors(responseData.validationErrors);
     } else {

@@ -2,14 +2,20 @@ import React, { useState, useContext, useEffect } from 'react';
 import Input from '../../Input/Input';
 import { withRouter } from 'react-router-dom';
 import ValidationErrorsList from '../../ValidationErrorsList/ValidationErrorsList';
-import createComment from './createComment';
-import editCommentFunc from './editComment';
+import postData from '../../../util/postData';
 import useValidationErrors from '../../../hooks/useValidationErrors';
 import { AuthContextData } from '../../../AuthContext/AuthContext';
 const CommentForm = props => {
   const { authState } = useContext(AuthContextData);
   const { isAuth, token } = authState;
-  const { postId, setNewComment, toggle, editComment,setEditComment,setEditCommentElement } = props;
+  const {
+    postId,
+    setNewComment,
+    toggle,
+    editComment,
+    setEditComment,
+    setEditCommentElement
+  } = props;
   const [content, setContent] = useState('');
   const [
     validationErrorMessages,
@@ -21,22 +27,28 @@ const CommentForm = props => {
       setContent(editComment.content);
     }
   }, []);
-
   const submitHandler = async e => {
     e.preventDefault();
-    if (isAuth && !editComment) {
-      const commentData = await createComment(postId, content, token);
-      if (commentData.comment) {
-        setNewComment(commentData.comment);
+    if (isAuth) {
+      let apiUrl = editComment
+        ? `http://localhost:8080/edit-comment/${editComment._id}`
+        : `http://localhost:8080/create-comment/${postId}`;
+      const responseData = await postData(apiUrl, { content }, token);
+      if (responseData.validationErrors) {
+        toggleValidationErrors(responseData.validationErrors);
+      } else {
+        const { comment } = responseData;
+        if (editComment) {
+          setEditComment(false);
+          setEditCommentElement(comment);
+        } else {
+          setNewComment(comment);
+        }
         toggle();
       }
-    } else if (isAuth && editComment) {
-      const data = await editCommentFunc(editComment._id, content, token);
-      const {comment} = data
-      setEditComment(false)
-      setEditCommentElement(comment)
     }
   };
+
   return (
     <form className="form comment-form" onSubmit={e => submitHandler(e)}>
       <ValidationErrorsList validationErrorMessages={validationErrorMessages} />

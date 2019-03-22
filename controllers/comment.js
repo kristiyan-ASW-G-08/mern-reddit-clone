@@ -14,8 +14,10 @@ exports.createComment = async (req, res, next) => {
     const post = await Post.findById(postId);;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      const errorMsg = errors.array()[0].msg;
-      res.json({ error: errorMsg });
+      const error = new Error('Validation failed.');
+      error.statusCode = 422;
+      error.data = errors.array()
+      throw error;
     } else {
       const comment = new Comment({
         content,
@@ -30,6 +32,7 @@ exports.createComment = async (req, res, next) => {
     }
   } catch (err) {
     console.log(err);
+    next(err)
     // errorFunc(err, next);
   }
 };
@@ -66,8 +69,10 @@ exports.getComments = async (req,res,next) => {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        const errorMsg = errors.array()[0].msg;
-        res.json({ error: errorMsg });
+        const error = new Error('Validation failed.');
+        error.statusCode = 422;
+        error.data = errors.array()
+        throw error;
       } else {
         const {  content } = req.body;
       const { commentId } = req.params;
@@ -79,7 +84,8 @@ exports.getComments = async (req,res,next) => {
       res.status(201).json({ msg: 'updated',comment})
       }
     } catch (err) {
-      console.log(error)
+      console.log(err)
+      next(err)
       // errorFunc(err, next);
     }
   };

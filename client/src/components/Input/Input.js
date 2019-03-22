@@ -30,7 +30,7 @@ const Input = props => {
       type={type}
       placeholder={placeholder}
       name={name}
-      required
+      // required
     />
   );
   if (textArea) {
@@ -43,7 +43,7 @@ const Input = props => {
         name={name}
         rows={7}
         value={value}
-        required
+        // required
       />
     );
   }
