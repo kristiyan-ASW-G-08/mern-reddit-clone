@@ -6,14 +6,17 @@ const { validationResult } = require('express-validator/check');
 
 exports.createPost = async (req, res, next) => {
   try {
-    const { title, content, communityId } = req.body;
+    const {communityId} = req.params
+    const { title, content,} = req.body;
     const user = await User.findById(req.userId);
     const community = await Community.findById(communityId);
     const errors = validationResult(req);
     console.log(user);
     if (!errors.isEmpty()) {
-      const errorMsg = errors.array()[0].msg;
-      res.json({ error: errorMsg });
+      const error = new Error('Validation failed.');
+      error.statusCode = 422;
+      error.data = errors.array()
+      throw error;
     } else {
       const post = new Post({
         title,
@@ -24,10 +27,11 @@ exports.createPost = async (req, res, next) => {
         communityName: community.name
       });
       await post.save();
-      res.status(200).json({ msg: 'Post succesfully added', postId: post._id });
+      res.status(201).json({ msg: 'Post succesfully added', postId: post._id });
     }
   } catch (err) {
     console.log(err);
+    next(err);
     // errorFunc(err, next);
   }
 };
@@ -57,8 +61,10 @@ exports.editPost = async (req, res, next) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      const errorMsg = errors.array()[0].msg;
-      res.json({ error: errorMsg });
+      const error = new Error('Validation failed.');
+      error.statusCode = 422;
+      error.data = errors.array()
+      throw error;
     } else {
       const { title, content } = req.body;
       const { postId } = req.params;
@@ -67,10 +73,11 @@ exports.editPost = async (req, res, next) => {
         content
       };
       await Post.findOneAndUpdate({ _id: postId }, post);
-      res.status(200).json({ msg: 'updated' });
+      res.status(201).json({ msg: 'updated' });
     }
   } catch (err) {
-    errorFunc(err, next);
+    next(err);
+    console.log(err)
   }
 };
 const includesCheck = (arr, id) => {

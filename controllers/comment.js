@@ -26,7 +26,7 @@ exports.createComment = async (req, res, next) => {
         communityId:post.community
       });
       await comment.save();
-      res.status(200).json({comment});
+      res.status(201).json({comment});
     }
   } catch (err) {
     console.log(err);
@@ -76,7 +76,7 @@ exports.getComments = async (req,res,next) => {
       };
       await Comment.findOneAndUpdate({ _id: commentId }, editComment);
       const comment = await Comment.findById(commentId)
-      res.status(200).json({ msg: 'updated',comment})
+      res.status(201).json({ msg: 'updated',comment})
       }
     } catch (err) {
       console.log(error)

@@ -6,14 +6,14 @@ const postController = require('../controllers/post');
 const isAuth = require('../middleware/is-auth');
 const router = express.Router();
 router.post(
-  '/create-post',
+  '/create-post/:communityId',
   [
       body('title', 'Title should be atleast 1 character long')
-    .isLength({ min: 1 })
+    .isLength({ min: 4 })
     .isString()
     .trim(),
      body('content', 'Content should be atleast 1 character long')
-    .isLength({ min: 1 })
+    .isLength({ min: 10 })
     .isString()
     .trim()
   ],
@@ -25,11 +25,11 @@ router.post(
     '/edit-post/:postId',
      [
       body('title', 'Title should be atleast 1 character long')
-    .isLength({ min: 1 })
+    .isLength({ min: 4 })
     .isString()
     .trim(),
      body('content', 'Content should be atleast 1 character long')
-    .isLength({ min: 1 })
+    .isLength({ min: 10 })
     .isString()
     .trim()
   ],

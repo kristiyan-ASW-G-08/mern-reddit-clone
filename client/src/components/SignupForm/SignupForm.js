@@ -24,6 +24,7 @@ const SignupForm = props => {
       username
     });
     const signupProcessData = await signupProcess;
+    console.log(signupProcessData)
     if (signupProcessData === undefined) {
       toggleValidationErrors([
         {

@@ -15,7 +15,7 @@ const createComment = async (postId,content,token) => {
     console.log(response)
     if (responseData.message === 'Validation failed.') {
       return false
-    } else if (response.status  === 200) {
+    } else if (response.status  === 201) {
       return responseData
     }
   };
