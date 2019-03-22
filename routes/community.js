@@ -10,7 +10,7 @@ router.post(
   '/create-community',
   isAuth,
   [
-    body('name')
+    body('name','The name of your community must be minimum 3 and maximum 21 characters long!')
       .trim()
       .isLength({ min: 3,max:21 })
       .escape()
@@ -21,7 +21,7 @@ router.post(
           }
         });
       }),
-    body('description')
+    body('description','The description of your community must be minimum 10 and maximum 100 characters long!')
       .trim()
       .isLength({ min: 3 })
       .escape()
