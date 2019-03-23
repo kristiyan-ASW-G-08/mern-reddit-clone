@@ -1,9 +1,7 @@
 import React, { Fragment, useContext, memo } from 'react';
 import { AuthContextData } from '../../AuthContext/AuthContext';
 import {  Redirect } from 'react-router-dom';
-
-import subscribe from './subscribe';
-import unsubscribe from './unsubscribe';
+import postData from '../../util/postData'
 const SubscribeButtop = props => {
   const { authState, updateUserDataReducer } = useContext(AuthContextData);
   const { id } = props;
@@ -17,32 +15,28 @@ const SubscribeButtop = props => {
       message = 'Unsubscribe';
     }
   }
-  const subscribeHandler = () => {
-    console.log(id)
-    if (isAuth && !subscribed) {
-      subscribe(id, token).then(data => {
-        if (data) {
-          updateUserDataReducer({ authState, newUserData: data });
+  
+const subscribeHandler = async () => {
+  if(isAuth){
+    const apiUrl = subscribed ? `http://localhost:8080/unsubscribe/${id}` : `http://localhost:8080/subscribe/${id}`
+        const responseData = await postData(apiUrl,{},token)
+        if(responseData.userData){
+          updateUserDataReducer({ authState, newUserData: responseData.userData });
         }
-      });
-    } else if (isAuth && subscribed) {
-      unsubscribe(id, token).then(data => {
-        updateUserDataReducer({ authState, newUserData: data });
-      });
-    } else {
-      redirect = (
-        <Redirect
-          to={{
-            pathname: '/login',
-            state: {
-              from: props.location,
-              error: 'Please log in to subscribe.'
-            }
-          }}
-        />
-      );
-    }
-  };
+  } else {
+    redirect = (
+      <Redirect
+        to={{
+          pathname: '/login',
+          state: {
+            from: props.location,
+            error: 'Please log in to subscribe.'
+          }
+        }}
+      />
+    );
+  }
+};
   return (
     <>
       {redirect}
