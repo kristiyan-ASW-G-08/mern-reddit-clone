@@ -1,9 +1,9 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
-import Loader from '../../Loader';
-import Toggle from '../../Toggle/Toggle';
-import CommentForm from '../CommentForm/CommentForm';
-import getData from '../../../util/getData';
-const Comment = lazy(() => import('./Comment/Comment'));
+import Loader from '../Loader';
+import Toggle from '../Toggle/Toggle';
+import CommentForm from './CommentForm';
+import getData from '../../util/getData';
+const Comment = lazy(() => import('./Comment'));
 const CommentsContainer = props => {
   const [comments, setComments] = useState(false);
   const [page, setPage] = useState(1);

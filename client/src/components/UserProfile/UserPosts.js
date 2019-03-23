@@ -15,7 +15,6 @@ const UserPosts= props => {
            .then(data => {
                if(data.posts){
                    setPosts(data.posts)
-                   console.log(data.posts)
                }
            })
         }

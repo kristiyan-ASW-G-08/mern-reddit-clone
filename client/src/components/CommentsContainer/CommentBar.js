@@ -2,7 +2,7 @@ import React,{useState,useContext} from 'react'
 import deleteComment from './deleteComment'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { AuthContextData } from '../../../../AuthContext/AuthContext';
+import { AuthContextData } from '../../AuthContext/AuthContext';
 import {
   faShare,faCommentAlt, faBookmark,faTrashAlt,faPen,
 } from '@fortawesome/free-solid-svg-icons';

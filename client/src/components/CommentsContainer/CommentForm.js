@@ -1,10 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
-import Input from '../../Input/Input';
+import Input from '../Input/Input';
 import { withRouter } from 'react-router-dom';
-import ValidationErrorsList from '../../ValidationErrorsList/ValidationErrorsList';
-import postData from '../../../util/postData';
-import useValidationErrors from '../../../hooks/useValidationErrors';
-import { AuthContextData } from '../../../AuthContext/AuthContext';
+import ValidationErrorsList from '../ValidationErrorsList/ValidationErrorsList';
+import postData from '../../util/postData';
+import useValidationErrors from '../../hooks/useValidationErrors';
+import { AuthContextData } from '../../AuthContext/AuthContext';
 const CommentForm = props => {
   const { authState } = useContext(AuthContextData);
   const { isAuth, token } = authState;

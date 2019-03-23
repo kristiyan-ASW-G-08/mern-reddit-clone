@@ -10,7 +10,7 @@ import { AuthContextData } from '../../AuthContext/AuthContext';
 import getData from '../../util/getData'
 import PostContainer from './PostContainer/PostContainer';
 import Loader from '../Loader';
-import CommentsContainer from './CommentsContainer/CommentsContainer'
+import PostComments from './PostComments'
 const PostFull = props => {
   const authState = useContext(AuthContextData);
   const [post, setPost] = useState(null);
@@ -33,7 +33,7 @@ const PostFull = props => {
             <div className="post-full">
               <PostContainer post={post} userId={userId} token={token} />
               
-              <CommentsContainer postId={post._id}/>
+              <PostComments postId={post._id}/>
             </div>
           </>
         </Suspense>
