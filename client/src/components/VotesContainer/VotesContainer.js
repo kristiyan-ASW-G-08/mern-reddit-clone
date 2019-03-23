@@ -3,6 +3,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AuthContextData } from '../../AuthContext/AuthContext';
 import {withRouter} from 'react-router-dom'
+import postData from '../../util/postData'
 import upvote from './upvote';
 import downvote from './downvote';
 import {
@@ -36,62 +37,34 @@ const VotesContainer = props => {
         
     },[])
 
-    const upvoteHandler = () => {
-        console.log('upvote')
-        console.log(isAuth)
+    const voteHandler = async type => {
         if(isAuth){
-            console.log('auth')
-            upvote(post._id,token)
-            .then(data => {
-                console.log(data)
-                setTotalVotes(data.postUpvotes - data.postDownvotes)
-                updateUserDataReducer({ authState, newUserData: data.userData });
-                if(data.userData.upvoted.includes(post._id)){
+            const postId = post._id
+          const apiUrl = type === 'upvote' ? `http://localhost:8080/upvote/${postId}` : `http://localhost:8080/downvote/${postId}`
+            const responseData = await postData(apiUrl,{},token)
+                setTotalVotes(responseData.postUpvotes - responseData.postDownvotes)
+                updateUserDataReducer({ authState, newUserData: responseData.userData });
+                if(responseData.userData.upvoted.includes(post._id)){
                     setUpvoted(true)
                     setDownvoted(false)
                 }
-                if(data.userData.downvoted.includes(post._id)){
+                if(responseData.userData.downvoted.includes(post._id)){
                     setDownvoted(true)
                     setUpvoted(false)
                 }
-            })
         }else{
             props.history.push(`/login`)
         }
       
-    }
-    const downvoteHandler = () => {
-        console.log('downvote')
-        console.log(isAuth)
-        if(isAuth){
-            console.log('auth')
-            downvote(post._id,token)
-            .then(data => {
-                console.log(data)
+      }
 
-                setTotalVotes(data.postUpvotes - data.postDownvotes)
-                updateUserDataReducer({ authState, newUserData: data.userData });
-                if(data.userData.upvoted.includes(post._id)){
-                    setUpvoted(true)
-                    setDownvoted(false)
-                }
-                if(data.userData.downvoted.includes(post._id)){
-                    setDownvoted(true)
-                    setUpvoted(false)
-                }
-            })
-        }
-        else {
-            props.history.push(`/login`)
-        }
-    }
     return (
         <div className="votes-container">
-         <button onClick={upvoteHandler} className={`button ${upvoted ? 'upvoted' : ''}`}>
+         <button onClick={(() => voteHandler('upvote'))} className={`button ${upvoted ? 'upvoted' : ''}`}>
         <FontAwesomeIcon icon="caret-up" />
         </button>
         <span className={`votes-container-number ${upvoted ? 'upvoted' : ''} ${downvoted ? 'downvoted' : ''}`}>{totalVotes}</span>
-        <button onClick={downvoteHandler} className={`button ${downvoted ? 'downvoted' : ''}`}>
+        <button onClick={(() => voteHandler('downvote'))} className={`button ${downvoted ? 'downvoted' : ''}`}>
         <FontAwesomeIcon icon="caret-down" />
         </button>
         </div>
