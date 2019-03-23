@@ -9,12 +9,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
  faShieldAlt
 } from '@fortawesome/free-solid-svg-icons';
-import Community from '../Community';
 library.add(faShieldAlt);
-
 const CommunityDetails = props => {
     const {authState} = useContext(AuthContextData)
-    const {isAuth,token,userId} = authState
+    const {userId} = authState
     const {community} = props
     const {name,icon,subscribers,_id,creator} = community
     

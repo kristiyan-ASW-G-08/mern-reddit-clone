@@ -8,14 +8,10 @@ const SubscribeButtop = props => {
   const { isAuth, token, userData } = authState;
   let redirect = '';
   let subscribed = false;
-  let message = 'Subscribe';
   if (isAuth) {
     subscribed = userData.communities.includes(id);
-    if (subscribed) {
-      message = 'Unsubscribe';
-    }
   }
-  
+  const  message = subscribed ? 'Unsubscribe' : 'Subscribe';
 const subscribeHandler = async () => {
   if(isAuth){
     const apiUrl = subscribed ? `http://localhost:8080/unsubscribe/${id}` : `http://localhost:8080/subscribe/${id}`

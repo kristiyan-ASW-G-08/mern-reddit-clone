@@ -48,7 +48,6 @@ const CommentForm = props => {
       }
     }
   };
-
   return (
     <form className="form comment-form" onSubmit={e => submitHandler(e)}>
       <ValidationErrorsList validationErrorMessages={validationErrorMessages} />

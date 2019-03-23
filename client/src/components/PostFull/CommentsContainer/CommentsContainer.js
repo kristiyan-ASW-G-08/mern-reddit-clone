@@ -1,25 +1,29 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import Loader from '../../Loader';
-import getComments from './getComments';
 import Toggle from '../../Toggle/Toggle';
 import CommentForm from '../CommentForm/CommentForm';
+import getData from '../../../util/getData';
 const Comment = lazy(() => import('./Comment/Comment'));
 const CommentsContainer = props => {
   const [comments, setComments] = useState(false);
   const [page, setPage] = useState(1);
   const [editComment, setEditComment] = useState(false);
   const { postId } = props;
+  const apiUrl = `http://localhost:8080/comments/${postId}?page=${page}`;
   useEffect(() => {
-    getComments(postId, page).then(data => {
-      setComments(data.comments);
+    getData(apiUrl).then(data => {
+      if (data.comments) {
+        setComments(data.comments);
+      }
     });
   }, []);
 
-  const getNextPage = () => {
+  const getNextPage = async () => {
     setPage(page + 1);
-    getComments(postId, page + 1).then(data => {
-      setComments(comments.concat(data.comments));
-    });
+    const responseData = await getData(apiUrl);
+    if (responseData.comments) {
+      setComments(comments.concat(responseData.comments));
+    }
   };
   const setNewComment = comment => {
     const editedComments = [...comments, comment];
@@ -31,13 +35,13 @@ const CommentsContainer = props => {
     );
     setComments(editedComments);
   };
-  const setEditCommentElement = (editedComment) => {
+  const setEditCommentElement = editedComment => {
     const editedComments = comments.filter(
       comment => comment._id !== editedComment._id
     );
-    
-    setComments([...editedComments,editedComment]);
-  }
+
+    setComments([...editedComments, editedComment]);
+  };
   return (
     <>
       {comments ? (
@@ -58,7 +62,13 @@ const CommentsContainer = props => {
                   ) : (
                     ''
                   )}
-                  <button className="button button-toggle" onClick={() => {setEditComment(false);toggle()}}>
+                  <button
+                    className="button button-toggle"
+                    onClick={() => {
+                      setEditComment(false);
+                      toggle();
+                    }}
+                  >
                     {on ? 'Close' : 'Comment'}
                   </button>
                 </div>
