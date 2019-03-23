@@ -4,6 +4,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import deletePost from './deletePost';
 import { AuthContextData } from '../../AuthContext/AuthContext';
+import deleteData from '../../util/deleteData'
 import {
   faShare,faCommentAlt, faBookmark,faTrashAlt,faPen,
 } from '@fortawesome/free-solid-svg-icons';
@@ -13,18 +14,18 @@ const PostBar= props => {
     const {userId,token,post,deletePostElement} = props
     const {comments,authorId,communityName,_id} = post
     const postId = _id
-    const deleteHandler = () => {
-        deletePost(postId,token)
-        .then(data => {
-            if(data.msg === 'Post Deleted'){
-                if(deletePostElement){
-                    deletePostElement(postId)
-                }else {
-                    props.history.push(`/community/${communityName}`)
-                }
-                
-            }
-        })
+    
+    const deleteHandler = async () => {
+        const apiUrl = `http://localhost:8080/delete-post/${postId}`
+    const responseData = await deleteData(apiUrl,token)
+    if(responseData.msg === 'Post Deleted'){
+        if(deletePostElement){
+            deletePostElement(postId)
+        }else {
+            props.history.push(`/community/${communityName}`)
+        }
+        
+    }
     }
 
     let autorizedContent = ''

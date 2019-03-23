@@ -7,7 +7,7 @@ import React, {
   Suspense
 } from 'react';
 import { AuthContextData } from '../../AuthContext/AuthContext';
-import getPost from './getPost';
+import getData from '../../util/getData'
 import PostContainer from './PostContainer/PostContainer';
 import Loader from '../Loader';
 import CommentsContainer from './CommentsContainer/CommentsContainer'
@@ -16,14 +16,14 @@ const PostFull = props => {
   const [post, setPost] = useState(null);
   const { isAuth, userId, token } = authState.authState;
   const { postId } = props.match.params;
-  console.log(props);
   useEffect(() => {
-    getPost(postId).then(data => {
+    const apiUrl = `http://localhost:8080/get-post/${postId}`
+    const responseData = getData(apiUrl)
+    .then(data => {
       if (data.post) {
-        console.log(data.post);
         setPost(data.post);
       }
-    });
+    })
   }, []);
   return (
     <>
