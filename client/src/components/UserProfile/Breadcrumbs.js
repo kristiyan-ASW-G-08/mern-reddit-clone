@@ -3,12 +3,12 @@ import BreadCrumb from './BreadCrumb'
 const BreadCrumbs= props => {
     return (
         <ul className="breadcrumbs">
-        <BreadCrumb path={'/user/posts'} />
-        <BreadCrumb path={'/user/comments'} />
-        <BreadCrumb path={'/user/communities'} />
-        <BreadCrumb path={'/user/upvoted'} />
-        <BreadCrumb path={'/user/downvoted'} />
-        <BreadCrumb path={'/user/saved'} />
+        <BreadCrumb path={'/user/posts'} content={'Posts'}/>
+        <BreadCrumb path={'/user/comments'}  content={'Comments'}/>
+        <BreadCrumb path={'/user/communities'} content={'Communities'}/>
+        <BreadCrumb path={'/user/upvoted'} content={'Upvoted'}/>
+        <BreadCrumb path={'/user/downvoted'} content={'Downvoted'}/>
+        <BreadCrumb path={'/user/saved'} content={'Saved'}/>
         </ul>
     )
 }

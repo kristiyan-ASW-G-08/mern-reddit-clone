@@ -37,7 +37,7 @@ const Dropdown = props => {
               </Link>
             </li>
             <li>
-              <Link data-testid="user-settings" to="/user-profile">
+              <Link data-testid="user-settings" to="/user/posts">
                 My Profile
               </Link>
             </li>

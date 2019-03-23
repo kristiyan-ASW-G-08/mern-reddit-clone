@@ -18,10 +18,12 @@ const PostForm = props => {
   const submitHandler = async e => {
     e.preventDefault();
     const { token } = authState.authState;
-    let postId = title,
-      content;
+    let postId 
     let apiUrl;
-    let post;
+    const post = {
+      title,
+      content
+    }
     if (props.match.params.postId) {
       postId = props.match.params.postId;
       apiUrl = `http://localhost:8080/edit-post/${postId}`;

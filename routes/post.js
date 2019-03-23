@@ -9,11 +9,11 @@ router.post(
   '/create-post/:communityId',
   [
       body('title', 'Title should be atleast 1 character long')
-    .isLength({ min: 4 })
+    .isLength({ min: 1 })
     .isString()
     .trim(),
      body('content', 'Content should be atleast 1 character long')
-    .isLength({ min: 10 })
+    .isLength({ min: 1 })
     .isString()
     .trim()
   ],

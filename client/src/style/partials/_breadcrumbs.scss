@@ -1,0 +1,38 @@
+.breadcrumbs{
+    width:100%;
+    display:flex;
+    justify-content:space-evenly;
+    flex-wrap:wrap;
+    list-style: none;
+    border-bottom: solid 0.5px lighten($lighter-dark, 50%);
+    padding: 0.4rem;
+    height: 4rem;
+    li{
+        padding: 0.3rem;
+        a{
+            color:$dark;
+            text-decoration: none;
+            font-size: 0.9rem;
+            &:hover{
+                color: $primary;
+            }
+            &::after {
+                content: '';
+                display: block;
+                width: 0;
+                height: 2px;
+                background:$primary;
+                transform: translateY(2px);
+                transition: width 300ms;
+              }
+              &.active{
+                  color: $primary;
+                &::after {
+                  width: 100%;
+                }
+    
+              }
+
+        }
+    }
+}

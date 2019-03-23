@@ -1,5 +1,4 @@
 const postData = async (url,data,token) => {
-  console.log('nani')
   const response = await fetch(url, {
     method: 'POST',
     headers: {

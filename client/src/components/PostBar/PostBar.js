@@ -18,9 +18,11 @@ const PostBar= props => {
     const {comments,authorId,communityName,_id} = post
     const postId = _id
     useEffect(() => {
-        const {userData} = authState
+        if(isAuth){
+            const {userData} = authState
         const savedCheck = userData.saved.find(savedPost => savedPost === post._id)
         setSaved(savedCheck)
+        }
      },[])
     const deleteHandler = async () => {
         const apiUrl = `http://localhost:8080/delete-post/${postId}`

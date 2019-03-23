@@ -8,6 +8,7 @@ exports.createPost = async (req, res, next) => {
   try {
     const {communityId} = req.params
     const { title, content,} = req.body;
+    console.log(title,content)
     const user = await User.findById(req.userId);
     const community = await Community.findById(communityId);
     const errors = validationResult(req);

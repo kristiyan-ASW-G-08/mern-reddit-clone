@@ -1,7 +1,7 @@
 import React,{useEffect,useState,Fragment} from 'react'
 import CommunityDetails from './CommunityDetails/CommunityDetails';
 import Loader from '../Loader'
-import PostsContainer from '../PostsContainer/PostsContainer'
+import CommunityPosts from './CommunityPosts'
 import getData from '../../util/getData'
 const Community = props => {
     const [community, setComminity] = useState(false)
@@ -20,7 +20,7 @@ const Community = props => {
            {community ? 
                <>
                <CommunityDetails  community={community}/> 
-               <PostsContainer communityId={community._id} author={community._id}  />
+               <CommunityPosts communityId={community._id} author={community._id}  />
                </>
            : <Loader />}
         </div>
