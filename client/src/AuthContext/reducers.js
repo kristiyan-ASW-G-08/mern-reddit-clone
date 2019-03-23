@@ -8,8 +8,6 @@ const login =  authData => {
   } catch (err) {
   }
 };
-
-
 const logout = () => {
   localStorage.removeItem('token');
   localStorage.removeItem('expiryDate');
@@ -27,7 +25,6 @@ const userUpdate = (authData) => {
       userId,
       userData:authData.newUserData
     }
-    console.log(authState)
     localStorage.setItem('userData', JSON.stringify(authData.newUserData));;
     return authState
    

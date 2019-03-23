@@ -113,4 +113,14 @@ userSchema.methods.voteHandler = async function(postId, type) {
   await this.save()
   return {upvotes:post.upvotes,downvotes:post.downvotes}
 };
+
+userSchema.methods.saveHandler = function(postId) {
+  const id = mongoose.Types.ObjectId(postId);
+  if(includesCheck(this.saved,id)){
+    this.saved = this.saved.filter(savedPostId => !savedPostId.equals(id));
+  }else {
+    this.saved = [...this.saved,id]
+  }
+  this.save()
+};
 module.exports = mongoose.model('User', userSchema);

@@ -1,20 +1,27 @@
-import React,{useState} from 'react'
+import React,{useState,useContext,useEffect} from 'react'
 import {withRouter,Link} from 'react-router-dom'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import deletePost from './deletePost';
-import { AuthContextData } from '../../AuthContext/AuthContext';
+import postData from '../../util/postData'
 import deleteData from '../../util/deleteData'
+import { AuthContextData } from '../../AuthContext/AuthContext';
 import {
   faShare,faCommentAlt, faBookmark,faTrashAlt,faPen,
 } from '@fortawesome/free-solid-svg-icons';
 library.add(faShare,faCommentAlt,faBookmark,faTrashAlt,faPen,);
 
 const PostBar= props => {
-    const {userId,token,post,deletePostElement} = props
+    const { authState, updateUserDataReducer } = useContext(AuthContextData);
+    const [saved,setSaved] = useState(false)
+    
+    const {isAuth,userId,token,post,deletePostElement} = props
     const {comments,authorId,communityName,_id} = post
     const postId = _id
-    
+    useEffect(() => {
+        const {userData} = authState
+        const savedCheck = userData.saved.find(savedPost => savedPost === post._id)
+        setSaved(savedCheck)
+     },[])
     const deleteHandler = async () => {
         const apiUrl = `http://localhost:8080/delete-post/${postId}`
     const responseData = await deleteData(apiUrl,token)
@@ -27,7 +34,6 @@ const PostBar= props => {
         
     }
     }
-
     let autorizedContent = ''
     if(authorId === userId){
         autorizedContent = 
@@ -35,7 +41,6 @@ const PostBar= props => {
          <button onClick={deleteHandler} className="button post-info-button">
         <FontAwesomeIcon icon="trash-alt" /><span>Delete</span>
         </button>
-        
         <Link to={{pathname:`/edit-post/${postId}`, post}}>
         <button className="button post-info-button">
         <FontAwesomeIcon icon="pen" /><span>Edit</span>
@@ -43,7 +48,21 @@ const PostBar= props => {
         </Link>
         </>
     }
-    
+    const saveHandler = async () => {
+        if(isAuth){
+            console.log(postId,userId)
+            const apiIrl = `http://localhost:8080/save/${postId}`
+            const responseData = await postData(apiIrl,{},token)
+            const {userData} = responseData
+            if(userData){
+                updateUserDataReducer({ authState, newUserData:userData });
+                const savedCheck = userData.saved.find(savedPost => savedPost === post._id)
+                setSaved(savedCheck)
+            }
+        }else {
+            props.history.push(`/community/login`)
+        }
+    }
     return (
         <div className="post-info">
         <button className="button post-info-button">
@@ -52,7 +71,7 @@ const PostBar= props => {
         <button className="button post-info-button">
         <FontAwesomeIcon icon="comment-alt" /><span>{comments}</span>
         </button>
-        <button className="button post-info-button">
+        <button onClick={saveHandler} className={`button post-info-button ${saved ? 'saved' : ''} `}>
         <FontAwesomeIcon icon="bookmark" /><span>Save</span>
         </button>
         {autorizedContent}

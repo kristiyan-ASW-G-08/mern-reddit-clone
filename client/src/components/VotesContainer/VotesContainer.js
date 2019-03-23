@@ -4,8 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AuthContextData } from '../../AuthContext/AuthContext';
 import {withRouter} from 'react-router-dom'
 import postData from '../../util/postData'
-import upvote from './upvote';
-import downvote from './downvote';
 import {
   faCaretUp,faCaretDown
 } from '@fortawesome/free-solid-svg-icons';

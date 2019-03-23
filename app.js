@@ -9,6 +9,7 @@ const authRoutes = require('./routes/auth');
 const subscribeRoutes = require('./routes/subscribe');
 const postRoutes = require('./routes/post');
 const commentRoutes = require('./routes/comment');
+const saveRoutes = require('./routes/save');
 const { mongoURI } = require('./config/keys');
 const app = express();
 
@@ -53,6 +54,7 @@ app.use(communityRoutes)
 app.use(subscribeRoutes)
 app.use(postRoutes)
 app.use(commentRoutes)
+app.use(saveRoutes)
 app.use((error, req, res, next) => {
   const status = error.statusCode || 500;
   const data = error.data;
