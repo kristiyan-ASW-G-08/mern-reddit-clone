@@ -2,6 +2,8 @@
     width: 100%;
     display: grid;
     justify-items: center;
+    grid-gap: 0.5rem;
+    margin-top: 1rem;
     @include large-screen{
       width: 95%;
       justify-items: left;

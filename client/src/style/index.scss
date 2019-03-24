@@ -18,7 +18,8 @@
 @import 'partials/comment';
 @import 'partials/user-page';
 @import 'partials/breadcrumbs';
-
+@import 'partials/community-preview';
+@import 'partials/communities-container';
 * {
   margin: 0;
   padding: 0;
@@ -39,4 +40,7 @@ body {
 
 .active{
   color:$danger;
+}
+a{
+  text-decoration: none;
 }

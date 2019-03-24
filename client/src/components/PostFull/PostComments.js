@@ -29,12 +29,6 @@ const PostComments = props => {
     const editedComments = [...comments, comment];
     setComments(editedComments);
   };
-  const deleteCommentElement = commentId => {
-    const editedComments = comments.filter(
-      comment => comment._id !== commentId
-    );
-    setComments(editedComments);
-  };
   const setEditCommentElement = editedComment => {
     const editedComments = comments.filter(
       comment => comment._id !== editedComment._id
@@ -73,8 +67,8 @@ const PostComments = props => {
                   </button>
                 </div>
                 <CommentsContainer
+                setComments={setComments}
                   comments={comments}
-                  deleteCommentElement={deleteCommentElement}
                   toggle={toggle}
                   setEditComment={setEditComment}
                   on={on}

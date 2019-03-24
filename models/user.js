@@ -25,7 +25,7 @@ const userSchema = new Schema({
   communities: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Post'
+      ref: 'Community'
     }
   ],
 
@@ -60,7 +60,6 @@ userSchema.methods.unsubscribe = function(communityId) {
   const updatedCommunities = this.communities.filter(
     community => !community.equals(id)
   );
-  console.log(updatedCommunities);
   this.communities = updatedCommunities;
   this.save();
 };

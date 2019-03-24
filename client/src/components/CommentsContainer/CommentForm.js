@@ -27,6 +27,10 @@ const CommentForm = props => {
       setContent(editComment.content);
     }
   }, []);
+  const cancelHandler = e => {
+    e.preventDefault()
+    toggle()
+  }
   const submitHandler = async e => {
     e.preventDefault();
     if (isAuth) {
@@ -61,6 +65,7 @@ const CommentForm = props => {
         textArea={true}
       />
       <button className="button">Comment</button>
+      <button className="button" onClick={cancelHandler}>Cancel</button>
     </form>
   );
 };

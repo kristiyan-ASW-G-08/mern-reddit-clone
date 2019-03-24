@@ -1,7 +1,13 @@
 import React,{Suspense,lazy} from 'react'
 import Loader from '../Loader'
 const Comments = lazy(() => import('./Comments'));
-const CommentsContainer= ({comments,toggle,on,setEditComment,deleteCommentElement,getNextPage}) => {
+const CommentsContainer= ({comments,toggle,on,setEditComment,setComments,getNextPage}) => {
+  const deleteCommentElement = commentId => {
+    const editedComments = comments.filter(
+      comment => comment._id !== commentId
+    );
+    setComments(editedComments);
+  };
     return (
         <>
         {comments ? (

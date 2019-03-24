@@ -1,0 +1,47 @@
+.community-preview{
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    @include border;
+    width: 10rem;
+    margin: 2rem;
+    &-container{
+    width: 100%;
+    height: 5rem;
+    background: $primary;
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    border-top-left-radius: 0.3rem;
+    border-top-right-radius: 0.3rem;
+    &-icon{
+    display: grid;
+    justify-items: center;
+    align-content: center;
+        background: $white;
+        border-radius: 100%;
+        height: 2.4rem;
+        width: 2.4rem;
+        img{
+            height: 2rem;
+            width: 2rem;
+        }
+    }    
+    }
+    &-body{
+        padding: 0.3rem;
+        text-align: center;
+        width: 100%;
+        height: 5rem;
+        &-name{
+            font-size: 0.9rem;
+            font-weight: 550;
+            color:$dark;
+        }
+        &-subscribers{
+            padding: 0.3rem;
+
+            color: $lighter-dark;
+        }
+    }
+}
