@@ -89,14 +89,3 @@ exports.getComments = async (req,res,next) => {
       // errorFunc(err, next);
     }
   };
-// exports.getPost = async (req, res, next) => {
-//   try {
-//     const { postId } = req.params;
-//     const post = await Post.findById(postId);
-//     mongoose.Types.ObjectId;
-//     res.status(200).json({ post });
-//   } catch (err) {
-//     console.log(err);
-//     // errorFunc(err, next);
-//   }
-// };

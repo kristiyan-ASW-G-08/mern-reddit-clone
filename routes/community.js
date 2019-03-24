@@ -3,9 +3,7 @@ const { body } = require('express-validator/check');
 const Community  = require('../models/community')
 const communityController = require('../controllers/community');
 const isAuth = require('../middleware/is-auth');
-
 const router = express.Router();
-
 router.post(
   '/create-community',
   isAuth,
@@ -34,4 +32,5 @@ router.get('/community/:communityName',communityController.getCommunity);
 
 router.get('/posts/:communityId',communityController.getPosts)
 
+router.post('/report-spam/:postId',communityController.reportSpam)
 module.exports = router;

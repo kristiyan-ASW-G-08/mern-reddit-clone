@@ -14,7 +14,12 @@ const CommunitySchema = new Schema({
     type: Number,
     default: 0
   },
-
+  spam:[
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Post'
+    }
+  ],
   description: {
     type: String,
     required: true
@@ -38,6 +43,12 @@ const CommunitySchema = new Schema({
   ]
 });
 
+const includesCheck = (arr, id) => {
+  const check = arr.find(itemId => {
+    return itemId.equals(id);
+  });
+  return check;
+};
 CommunitySchema.methods.incrementSubscribers = function() {
   this.subscribers++
   this.save();
@@ -48,6 +59,16 @@ CommunitySchema.methods.descrementSubscribers = function() {
     this.subscribers--
   }
   this.save();
+};
+CommunitySchema.methods.reportSpam = function(spamPostId) {
+  const id = mongoose.Types.ObjectId(spamPostId);
+  if(includesCheck(this.spam,id)){
+    return false
+  }else {
+    this.spam = [...this.spam,spamPostId]
+  this.save();
+  return true
+  }
 };
 
 module.exports = mongoose.model('Community', CommunitySchema);

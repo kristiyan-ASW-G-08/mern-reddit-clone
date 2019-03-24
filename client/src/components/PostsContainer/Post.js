@@ -21,7 +21,7 @@ const Post = props => {
     <h3 className="post-title">{title}</h3>
     </Link>
     </div>
-    <PostBar post={post} token={token} userId={userId} deletePostElement={deletePostElement} isAuth={isAuth}/>
+    <PostBar post={post} token={token} userId={userId} deletePostElement={deletePostElement} isAuth={isAuth} />
     </div>
     </div>
   );
