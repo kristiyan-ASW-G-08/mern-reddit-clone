@@ -24,9 +24,6 @@ const Community = props => {
                </>
            : <Loader />}
         </div>
-    )
-    
-
-    
+    ) 
 }
 export default Community

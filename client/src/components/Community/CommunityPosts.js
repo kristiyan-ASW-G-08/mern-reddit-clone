@@ -3,10 +3,9 @@ import Loader from '../Loader';
 import getData from '../../util/getData';
 import PostsContainer from '../PostsContainer/PostsContainer'
 const Posts = lazy(() => import('../PostsContainer/Posts'));
-const CommunityPosts = props => {
+const CommunityPosts = ({communityId}) => {
   const [posts, setPosts] = useState(false);
   const [page, setPage] = useState(1);
-  const { communityId } = props;
   const getNextPage = async () => {
     await setPage(page + 1);
      const apiUrl = `http://localhost:8080/posts/${communityId}?page=${page + 1}`;
@@ -26,7 +25,7 @@ const CommunityPosts = props => {
   }, []);
 
   return (
-    <PostsContainer posts={posts} getNextPage={getNextPage} setPosts={setPosts}/>
+    <PostsContainer posts={posts} getNextPage={getNextPage} setPosts={setPosts} />
   );
 };
 export default CommunityPosts;

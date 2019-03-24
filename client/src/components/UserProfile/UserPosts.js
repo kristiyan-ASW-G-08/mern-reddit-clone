@@ -35,7 +35,7 @@ const UserPosts= props => {
         <div className="user-page">
             <Breadcrumbs />
         </div>
-         <PostsContainer posts={posts} getNextPage={getNextPage} setPosts={setPosts}/>
+         <PostsContainer posts={posts} getNextPage={getNextPage} setPosts={setPosts} community={null}/>
         </>
     )
 }

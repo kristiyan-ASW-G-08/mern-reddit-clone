@@ -1,6 +1,6 @@
 const express = require('express');
 const { body } = require('express-validator/check');
-const Community  = require('../models/community')
+const Community = require('../models/community');
 const communityController = require('../controllers/community');
 const isAuth = require('../middleware/is-auth');
 const router = express.Router();
@@ -8,9 +8,12 @@ router.post(
   '/create-community',
   isAuth,
   [
-    body('name','The name of your community must be minimum 3 and maximum 21 characters long!')
+    body(
+      'name',
+      'The name of your community must be minimum 3 and maximum 21 characters long!'
+    )
       .trim()
-      .isLength({ min: 3,max:21 })
+      .isLength({ min: 3, max: 21 })
       .escape()
       .custom((name, { req }) => {
         return Community.findOne({ name }).then(CommunityDoc => {
@@ -19,7 +22,10 @@ router.post(
           }
         });
       }),
-    body('description','The description of your community must be minimum 10 and maximum 100 characters long!')
+    body(
+      'description',
+      'The description of your community must be minimum 10 and maximum 100 characters long!'
+    )
       .trim()
       .isLength({ min: 3 })
       .escape()
@@ -28,9 +34,11 @@ router.post(
   communityController.createCommunity
 );
 
-router.get('/community/:communityName',communityController.getCommunity);
+router.get('/community/:communityName', communityController.getCommunity);
 
-router.get('/posts/:communityId',communityController.getPosts)
+router.get('/posts/:communityId', communityController.getPosts);
 
-router.post('/report-spam/:postId',communityController.reportSpam)
+router.post('/report-spam/:postId', isAuth, communityController.reportSpam);
+
+router.get('/get-spam/:communityId', isAuth, communityController.getSpamPosts);
 module.exports = router;

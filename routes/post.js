@@ -58,6 +58,11 @@ router.post(
   isAuth,
   postController.downvote
 )
+
+router.get(
+  '/get-posts',
+  postController.getPosts
+)
 module.exports = router;
 
 

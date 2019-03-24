@@ -78,3 +78,14 @@ exports.reportSpam = async (req, res, next) => {
     console.log(err);
   }
 };
+exports.getSpamPosts = async (req, res, next) => {
+  try {
+    const { communityId } = req.params;
+    const community = await Community.findById(communityId);
+   const populatedCommunity =  await community.populate('spam').execPopulate()
+   const posts = populatedCommunity.spam
+   res.status(200).json({posts}); 
+  } catch (err) {
+    console.log(err);
+  }
+};

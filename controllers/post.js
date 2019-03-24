@@ -47,6 +47,22 @@ exports.getPost = async (req, res, next) => {
     // errorFunc(err, next);
   }
 };
+exports.getPosts = async (req, res, next) => {
+  try {
+    const { page } = req.query;
+    const currentPage = page || 1;
+    const postPerPage = 5;
+    const posts = await Post.find()
+      .countDocuments()
+      .find()
+      .skip((currentPage - 1) * postPerPage)
+      .limit(postPerPage);
+    res.status(200).json({ posts });
+  } catch (err) {
+    console.log(err);
+    // errorFunc(err, next);
+  }
+};
 exports.deletePost = async (req, res, next) => {
   try {
     const { postId } = req.params;

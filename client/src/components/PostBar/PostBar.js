@@ -3,6 +3,7 @@ import {withRouter,Link} from 'react-router-dom'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import postData from '../../util/postData'
+import getData from '../../util/getData'
 import deleteData from '../../util/deleteData'
 import { AuthContextData } from '../../AuthContext/AuthContext';
 import {
@@ -18,7 +19,7 @@ const PostBar= props => {
     const postId = _id
     useEffect(() => {
         if(isAuth){
-            const {userData} = authState
+        const {userData} = authState
         const savedCheck = userData.saved.find(savedPost => savedPost === post._id)
         setSaved(savedCheck)
         }
@@ -36,14 +37,11 @@ const PostBar= props => {
     }
     }
     const spamHandler = async () => {
-        console.log(props)
         const apiUrl = `http://localhost:8080/report-spam/${postId}`
         const requestBody = {
             communityId:post.community
         }
-        console.log(requestBody)
        const responseData =  await postData(apiUrl,requestBody,token)
-       console.log(responseData)
     }
     let autorizedContent = ''
     if(authorId === userId){
@@ -57,14 +55,16 @@ const PostBar= props => {
         <FontAwesomeIcon icon="pen" /><span>Edit</span>
         </button>
         </Link>
-        <button onClick={spamHandler} className="button post-info-button">
-        <FontAwesomeIcon icon="copy" /><span>Spam</span>
-        </button>
         </>
     }
+    let adminContent = ''
+    // if(community && userId === community.creator){
+    //     <button onClick={removeFromSpamHandler} className="button post-info-button">
+    //     <FontAwesomeIcon icon="copy" /><span>Remove From Spam</span>
+    //     </button>
+    // }
     const saveHandler = async () => {
         if(isAuth){
-            console.log(postId,userId)
             const apiIrl = `http://localhost:8080/save/${postId}`
             const responseData = await postData(apiIrl,{},token)
             const {userData} = responseData
@@ -87,6 +87,9 @@ const PostBar= props => {
         </button>
         <button onClick={saveHandler} className={`button post-info-button ${saved ? 'saved' : ''} `}>
         <FontAwesomeIcon icon="bookmark" /><span>Save</span>
+        </button>
+        <button onClick={spamHandler} className="button post-info-button">
+        <FontAwesomeIcon icon="copy" /><span>Spam</span>
         </button>
         {autorizedContent}
         </div>

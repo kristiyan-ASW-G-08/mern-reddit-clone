@@ -47,7 +47,7 @@ const Router = () => (
                   exact
                   authState={authState}
                   Component={ModTools}
-                  path="/mod-tools/:communityName"
+                  path="/mod-tools/:communityId"
                 /> 
                  <Route
                   path="/community/:communityName"
