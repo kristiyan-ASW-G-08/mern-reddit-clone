@@ -1,8 +1,6 @@
 .votes-container{
     grid-area: votes;
-    display: grid;
-    justify-content: center;
-    align-items: center;
+    @include center;
     background:#F8F9FA;
     &-number{
         text-align: center;

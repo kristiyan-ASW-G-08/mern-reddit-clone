@@ -29,9 +29,7 @@
         }
     width: 100%;
     height: 20rem;
-    display: grid;
-    justify-items: center;
-    align-content: center;
+    @include center;
     grid-gap: 0.7rem;
     @include large-screen{
         @include border;
@@ -43,9 +41,7 @@
     &-banner{
         width: 100%;
         height: 10rem;
-        display: grid;
-        justify-items: center;
-        align-content: center;
+        @include center;
         background: $primary;
         @include large-screen{
             background:$primary
@@ -57,9 +53,7 @@
         border-radius: 100%;
         background: $white;
         border:solid 1px $white;
-        display: grid;
-        justify-items: center;
-        align-content: center;
+        @include center;
         img{
             height: 3rem;
             width: 3rem;

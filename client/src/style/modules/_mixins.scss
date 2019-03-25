@@ -4,8 +4,10 @@
   align-items: center;
 }
 
-@mixin easeOut{
-  transition: all 500ms ease-out;
+@mixin center{
+  display: grid;
+  justify-items: center;
+  align-content: center;
 }
 @mixin border{
   border: solid 0.5px lighten($lighter-dark, 50%);
