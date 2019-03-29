@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import login from '../../authUtil/login';
 import ValidationErrorsList from '../ValidationErrorsList/ValidationErrorsList';
 import Logo from '../../assets/logo.svg';
-import useValidationErrors from '../../hooks/useValidationErrors';
+import useValidationErrors from '../../hooks/useValidationErrors/useValidationErrors';
 import { AuthContextData } from '../../AuthContext/AuthContext';
 const LoginForm = props => {
   const { loginReducer, logoutReducer } = useContext(AuthContextData);

@@ -3,6 +3,6 @@ import React,{useState} from 'react'
 const useToggle = initialState => {
     const [on, setOn] = useState(initialState)
     const toggle = () => setOn(!on)
-    return [on, toggle]
+    return {on, toggle}
   }
   export default useToggle

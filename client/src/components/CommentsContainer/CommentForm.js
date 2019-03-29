@@ -3,7 +3,7 @@ import Input from '../Input/Input';
 import { withRouter } from 'react-router-dom';
 import ValidationErrorsList from '../ValidationErrorsList/ValidationErrorsList';
 import postData from '../../util/postData';
-import useValidationErrors from '../../hooks/useValidationErrors';
+import useValidationErrors from '../../hooks/useValidationErrors/useValidationErrors';
 import { AuthContextData } from '../../AuthContext/AuthContext';
 const CommentForm = props => {
   const { authState } = useContext(AuthContextData);

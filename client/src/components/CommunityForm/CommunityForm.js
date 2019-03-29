@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import Input from '../Input/Input';
 import Logo from '../../assets/logo.svg';
 import ValidationErrorsList from '../ValidationErrorsList/ValidationErrorsList';
-import useValidationErrors from '../../hooks/useValidationErrors';
+import useValidationErrors from '../../hooks/useValidationErrors/useValidationErrors';
 import { AuthContextData } from '../../AuthContext/AuthContext';
 import postData from '../../util/postData';
 const CommunityForm = props => {

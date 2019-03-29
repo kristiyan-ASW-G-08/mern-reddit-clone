@@ -2,7 +2,7 @@ import React, { useState, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import signup from '../../authUtil/signup';
 import ValidationErrorsList from '../ValidationErrorsList/ValidationErrorsList';
-import useValidationErrors from '../../hooks/useValidationErrors';
+import useValidationErrors from '../../hooks/useValidationErrors/useValidationErrors';
 import Input from '../Input/Input';
 import Logo from '../../assets/logo.svg';
 const SignupForm = props => {
@@ -10,11 +10,11 @@ const SignupForm = props => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [matchPassword, setMatchPassword] = useState('');
-  const [
+  const {
     validationErrorMessages,
     validationErrorParams,
     toggleValidationErrors
-  ] = useValidationErrors();
+   } = useValidationErrors();
   const submitHandler = async e => {
     e.preventDefault();
     const signupProcess = await signup({
@@ -24,7 +24,6 @@ const SignupForm = props => {
       username
     });
     const signupProcessData = await signupProcess;
-    console.log(signupProcessData)
     if (signupProcessData === undefined) {
       toggleValidationErrors([
         {
@@ -33,6 +32,7 @@ const SignupForm = props => {
         }
       ]);
     } else if (signupProcessData.authErrors) {
+      console.log(signupProcessData.authErrors)
       toggleValidationErrors(signupProcessData.authErrors);
     } else {
       props.history.replace(`/login`);

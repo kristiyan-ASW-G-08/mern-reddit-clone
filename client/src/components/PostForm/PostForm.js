@@ -2,18 +2,18 @@ import React, { useState, useContext, useEffect } from 'react';
 import Input from '../Input/Input';
 import { withRouter } from 'react-router-dom';
 import ValidationErrorsList from '../ValidationErrorsList/ValidationErrorsList';
-import useValidationErrors from '../../hooks/useValidationErrors';
+import useValidationErrors from '../../hooks/useValidationErrors/useValidationErrors';
 import { AuthContextData } from '../../AuthContext/AuthContext';
 import postData from '../../util/postData';
 const PostForm = props => {
   const { communityId } = props.match.params;
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [
+  const {
     validationErrorMessages,
     validationErrorParams,
     toggleValidationErrors
-  ] = useValidationErrors();
+   } = useValidationErrors();
   const authState = useContext(AuthContextData);
   const submitHandler = async e => {
     e.preventDefault();

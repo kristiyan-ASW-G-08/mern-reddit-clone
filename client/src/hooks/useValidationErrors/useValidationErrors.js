@@ -6,6 +6,6 @@ const useValidationErrors = () => {
     setValidationErrorMessages(validationErrors.map(validationError => validationError.msg))
     setValidationErrorParams(validationErrors.map(validationError => validationError.param))
   }
-  return  [validationErrorMessages,validationErrorParams,toggleValidationErrors]
+  return  {validationErrorMessages,validationErrorParams,toggleValidationErrors}
   }
 export default useValidationErrors

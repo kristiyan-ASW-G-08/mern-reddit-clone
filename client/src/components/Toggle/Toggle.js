@@ -1,8 +1,8 @@
 import React from 'react'
-import useToggle from '../../hooks/useToggle'
+import useToggle from '../../hooks//useToggle/useToggle'
 
 const Toggle= props => {
-    const [on,toggle] = useToggle(false)
+    const {on,toggle} = useToggle(false)
     const {children} = props
     return children({
         on,
