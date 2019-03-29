@@ -8,7 +8,6 @@ const communityRoutes = require('./routes/community')
 const authRoutes = require('./routes/auth');
 const postRoutes = require('./routes/post');
 const commentRoutes = require('./routes/comment');
-const saveRoutes = require('./routes/save');
 const userRoutes = require('./routes/user');
 const { mongoURI } = require('./config/keys');
 const app = express();
@@ -51,10 +50,9 @@ app.use((req, res, next) => {
 
 app.use('/auth', authRoutes);
 app.use('/user',userRoutes)
-app.use(communityRoutes)
-app.use(postRoutes)
-app.use(commentRoutes)
-app.use(saveRoutes)
+app.use('/comment',commentRoutes)
+app.use('/post',postRoutes)
+app.use('/community',communityRoutes)
 app.use((error, req, res, next) => {
   const status = error.statusCode || 500;
   const data = error.data;

@@ -35,8 +35,8 @@ const CommentForm = props => {
     e.preventDefault();
     if (isAuth) {
       let apiUrl = editComment
-        ? `http://localhost:8080/edit-comment/${editComment._id}`
-        : `http://localhost:8080/create-comment/${postId}`;
+        ? `http://localhost:8080/comment/edit/${editComment._id}`
+        : `http://localhost:8080/comment/post/${postId}`;
       const responseData = await postData(apiUrl, { content }, token);
       if (responseData.validationErrors) {
         toggleValidationErrors(responseData.validationErrors);
@@ -50,6 +50,8 @@ const CommentForm = props => {
         }
         toggle();
       }
+    }else {
+      props.history.push(`/login`);
     }
   };
   return (

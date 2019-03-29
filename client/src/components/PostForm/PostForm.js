@@ -18,17 +18,17 @@ const PostForm = props => {
   const submitHandler = async e => {
     e.preventDefault();
     const { token } = authState.authState;
-    let postId 
+    let postId;
     let apiUrl;
     const post = {
       title,
       content
-    }
+    };
     if (props.match.params.postId) {
       postId = props.match.params.postId;
-      apiUrl = `http://localhost:8080/edit-post/${postId}`;
+      apiUrl = `http://localhost:8080/post/edit/${postId}`;
     } else {
-      apiUrl = `http://localhost:8080/create-post/${communityId}`;
+      apiUrl = `http://localhost:8080/post/post/${communityId}`;
     }
     const responseData = await postData(apiUrl, post, token);
     if (responseData.validationErrors) {

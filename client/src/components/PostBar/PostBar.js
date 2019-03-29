@@ -3,7 +3,6 @@ import {withRouter,Link} from 'react-router-dom'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import postData from '../../util/postData'
-import getData from '../../util/getData'
 import deleteData from '../../util/deleteData'
 import { AuthContextData } from '../../AuthContext/AuthContext';
 import {
@@ -25,7 +24,7 @@ const PostBar= props => {
         }
      },[])
     const deleteHandler = async () => {
-        const apiUrl = `http://localhost:8080/delete-post/${postId}`
+        const apiUrl = `http://localhost:8080/post/delete/${postId}`
     const responseData = await deleteData(apiUrl,token)
     if(responseData.msg === 'Post Deleted'){
         if(deletePostElement){
@@ -37,7 +36,7 @@ const PostBar= props => {
     }
     }
     const spamHandler = async () => {
-        const apiUrl = `http://localhost:8080/report-spam/${postId}`
+        const apiUrl = `http://localhost:8080/community/report/${postId}`
         const requestBody = {
             communityId:post.community
         }
@@ -57,15 +56,9 @@ const PostBar= props => {
         </Link>
         </>
     }
-    let adminContent = ''
-    // if(community && userId === community.creator){
-    //     <button onClick={removeFromSpamHandler} className="button post-info-button">
-    //     <FontAwesomeIcon icon="copy" /><span>Remove From Spam</span>
-    //     </button>
-    // }
     const saveHandler = async () => {
         if(isAuth){
-            const apiIrl = `http://localhost:8080/save/${postId}`
+            const apiIrl = `http://localhost:8080/user/save/${postId}`
             const responseData = await postData(apiIrl,{},token)
             const {userData} = responseData
             if(userData){

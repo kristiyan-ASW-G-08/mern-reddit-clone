@@ -8,14 +8,14 @@ const CommunityPosts = ({communityId}) => {
   const [page, setPage] = useState(1);
   const getNextPage = async () => {
     await setPage(page + 1);
-     const apiUrl = `http://localhost:8080/posts/${communityId}?page=${page + 1}`;
+     const apiUrl = `http://localhost:8080/community/posts/${communityId}?page=${page + 1}`;
     const responseData = await getData(apiUrl);
     if (responseData.posts) {
       setPosts(posts.concat(responseData.posts));
     }
   };
   useEffect(() => {
-    const apiUrl = `http://localhost:8080/posts/${communityId}?page=${page}`;
+    const apiUrl = `http://localhost:8080/community/posts/${communityId}?page=${page}`;
     getData(apiUrl).then(data => {
       if (data.posts) {
         setPosts(data.posts);

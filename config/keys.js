@@ -1,4 +1,4 @@
 module.exports = {
   mongoURI: ``,
-  secret:'JosephIsBestJojo',
+  secret:'',
 };

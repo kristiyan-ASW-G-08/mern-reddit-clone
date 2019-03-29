@@ -9,8 +9,8 @@ const PostComments = props => {
   const [page, setPage] = useState(1);
   const [editComment, setEditComment] = useState(false);
   const { postId } = props;
-  const apiUrl = `http://localhost:8080/comments/${postId}?page=${page}`;
   useEffect(() => {
+    const apiUrl = `http://localhost:8080/comment/comments/${postId}?page=${page}`;
     getData(apiUrl).then(data => {
       if (data.comments) {
         setComments(data.comments);
@@ -20,6 +20,7 @@ const PostComments = props => {
 
   const getNextPage = async () => {
     setPage(page + 1);
+    const apiUrl = `http://localhost:8080/comment/comments/${postId}?page=${page + 1}`;
     const responseData = await getData(apiUrl);
     if (responseData.comments) {
       setComments(comments.concat(responseData.comments));

@@ -38,7 +38,7 @@ const VotesContainer = props => {
     const voteHandler = async type => {
         if(isAuth){
             const postId = post._id
-          const apiUrl = type === 'upvote' ? `http://localhost:8080/upvote/${postId}` : `http://localhost:8080/downvote/${postId}`
+          const apiUrl = type === 'upvote' ? `http://localhost:8080/post/upvote/${postId}` : `http://localhost:8080/post/downvote/${postId}`
             const responseData = await postData(apiUrl,{},token)
                 setTotalVotes(responseData.postUpvotes - responseData.postDownvotes)
                 updateUserDataReducer({ authState, newUserData: responseData.userData });

@@ -18,7 +18,7 @@ const CommunityForm = props => {
   ] = useValidationErrors();
   const submitHandler = async e => {
     e.preventDefault();
-    const apiUrl = 'http://localhost:8080/create-community';
+    const apiUrl = 'http://localhost:8080/community/post';
     const community = {
       name,
       description

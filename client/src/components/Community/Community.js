@@ -7,7 +7,7 @@ const Community = props => {
     const [community, setComminity] = useState(false)
     const {communityName} = props.match.params
     useEffect(  () => {
-        const apiUrl = `http://localhost:8080/community/${communityName}`
+        const apiUrl = `http://localhost:8080/community/get/${communityName}`
         getData(apiUrl)
         .then(data => {
             if(data.message = 'Succsess'){

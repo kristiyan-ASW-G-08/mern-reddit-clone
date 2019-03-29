@@ -5,7 +5,7 @@ const communityController = require('../controllers/community');
 const isAuth = require('../middleware/is-auth');
 const router = express.Router();
 router.post(
-  '/create-community',
+  '/post',
   isAuth,
   [
     body(
@@ -34,11 +34,11 @@ router.post(
   communityController.createCommunity
 );
 
-router.get('/community/:communityName', communityController.getCommunity);
+router.get('/get/:communityName', communityController.getCommunity);
 
 router.get('/posts/:communityId', communityController.getPosts);
 
-router.post('/report-spam/:postId', isAuth, communityController.reportSpam);
+router.post('/report/:postId', isAuth, communityController.reportSpam);
 
-router.get('/get-spam/:communityId', isAuth, communityController.getSpamPosts);
+router.get('/spam/:communityId', isAuth, communityController.getSpamPosts);
 module.exports = router;

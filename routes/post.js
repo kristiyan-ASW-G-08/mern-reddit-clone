@@ -6,7 +6,7 @@ const postController = require('../controllers/post');
 const isAuth = require('../middleware/is-auth');
 const router = express.Router();
 router.post(
-  '/create-post/:communityId',
+  '/post/:communityId',
   [
       body('title', 'Title should be atleast 1 character long')
     .isLength({ min: 1 })
@@ -22,7 +22,7 @@ router.post(
 );
 
 router.post(
-    '/edit-post/:postId',
+    '/edit/:postId',
      [
       body('title', 'Title should be atleast 1 character long')
     .isLength({ min: 4 })
@@ -38,14 +38,14 @@ router.post(
   );
 
 router.delete(
-    '/delete-post/:postId',
+    '/delete/:postId',
     isAuth,
     postController.deletePost
   );
 
 
 router.get(
-    '/get-post/:postId',
+    '/get/:postId',
     postController.getPost
 )
 router.post(
@@ -60,7 +60,7 @@ router.post(
 )
 
 router.get(
-  '/get-posts',
+  '/posts',
   postController.getPosts
 )
 module.exports = router;

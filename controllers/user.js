@@ -142,6 +142,7 @@ exports.getUserComments = async (req, res, next) => {
   
   exports.subscribe = async (req, res, next) => {
     try {
+      console.log('sub')
       const {communityId}  =  req.params
       const user = await User.findById(req.userId).select("-password")
       const community = await Community.findById(communityId)
@@ -165,6 +166,7 @@ exports.getUserComments = async (req, res, next) => {
   
   exports.unsubscribe = async (req, res, next) => {
       try{
+        console.log('unsub')
       const {communityId}  = req.params
       const community = await Community.findById(communityId)
       const user = await User.findById(req.userId).select("-password")
@@ -178,5 +180,19 @@ exports.getUserComments = async (req, res, next) => {
       
   }
   
+  
+  exports.save = async (req, res, next) => {
+    try {
+      const {postId}  =  req.params
+      const user = await User.findById(req.userId).select("-password")
+      await user.saveHandler(postId)
+      res.status(200).json({userData:user});
+    } 
+    catch (err) {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+  };}
   
   

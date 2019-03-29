@@ -11,6 +11,11 @@ router.post(
   isAuth,
   userController.unsubscribe
 );
+router.post(
+    '/save/:postId',
+    isAuth,
+    userController.save
+  );
 router.get('/posts/:userId', userController.getUserPosts);
 router.get('/comments/:userId', userController.getUserComments);
 router.get('/saved:userId', userController.getUserSavedPosts);
