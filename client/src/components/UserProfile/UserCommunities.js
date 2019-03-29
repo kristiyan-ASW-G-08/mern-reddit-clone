@@ -9,7 +9,7 @@ const UserCommunities = props => {
     const {authState} = useContext(AuthContextData)
     const {isAuth,userId} = authState
     useEffect(() => {
-        const apiUrl = `http://localhost:8080/user-get-communities/${userId}`
+        const apiUrl = `http://localhost:8080/user/communities/${userId}`
         if(isAuth){
            getData(apiUrl)
            .then(data => {

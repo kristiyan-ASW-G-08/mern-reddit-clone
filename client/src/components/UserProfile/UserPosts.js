@@ -10,7 +10,7 @@ const UserPosts= props => {
     const {isAuth,userId} = authState
     useEffect(() => {
         if(isAuth){
-            const apiUrl = `http://localhost:8080/user-get-posts/${userId}`
+            const apiUrl = `http://localhost:8080/user/posts/${userId}`
            getData(apiUrl)
            .then(data => {
                if(data.posts){
@@ -23,7 +23,7 @@ const UserPosts= props => {
 
     const getNextPage =async () => {
         await setPage(page + 1);
-     const apiUrl = `http://localhost:8080/user-get-posts/${userId}?page=${page + 1}`;
+     const apiUrl = `http://localhost:8080/user/posts/${userId}?page=${page + 1}`;
     const responseData = await getData(apiUrl);
     if (responseData.posts) {
       setPosts(posts.concat(responseData.posts));

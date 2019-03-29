@@ -6,7 +6,6 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 const communityRoutes = require('./routes/community')
 const authRoutes = require('./routes/auth');
-const subscribeRoutes = require('./routes/subscribe');
 const postRoutes = require('./routes/post');
 const commentRoutes = require('./routes/comment');
 const saveRoutes = require('./routes/save');
@@ -51,12 +50,11 @@ app.use((req, res, next) => {
 });
 
 app.use('/auth', authRoutes);
+app.use('/user',userRoutes)
 app.use(communityRoutes)
-app.use(subscribeRoutes)
 app.use(postRoutes)
 app.use(commentRoutes)
 app.use(saveRoutes)
-app.use(userRoutes)
 app.use((error, req, res, next) => {
   const status = error.statusCode || 500;
   const data = error.data;

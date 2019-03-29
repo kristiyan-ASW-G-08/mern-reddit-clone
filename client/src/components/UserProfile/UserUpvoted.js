@@ -9,7 +9,7 @@ const UserUpvoted = props => {
     const {authState} = useContext(AuthContextData)
     const {isAuth,userId} = authState
     useEffect(() => {
-        const apiUrl = `http://localhost:8080/user-get-upvoted/${userId}`
+        const apiUrl = `http://localhost:8080/user/upvoted/${userId}`
         if(isAuth){
            getData(apiUrl)
            .then(data => {

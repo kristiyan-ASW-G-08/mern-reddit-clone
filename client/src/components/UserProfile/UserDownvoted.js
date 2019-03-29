@@ -9,7 +9,7 @@ const UserDownvoted = props => {
     const {authState} = useContext(AuthContextData)
     const {isAuth,userId} = authState
     useEffect(() => {
-        const apiUrl = `http://localhost:8080/user-get-downvoted/${userId}`
+        const apiUrl = `http://localhost:8080/user/downvoted/${userId}`
         if(isAuth){
            getData(apiUrl)
            .then(data => {

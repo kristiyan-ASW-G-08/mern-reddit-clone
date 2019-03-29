@@ -9,7 +9,7 @@ const UserSaved = props => {
     const {authState} = useContext(AuthContextData)
     const {isAuth,userId} = authState
     useEffect(() => {
-        const apiUrl = `http://localhost:8080/user-get-saved/${userId}`
+        const apiUrl = `http://localhost:8080/user/saved/${userId}`
         if(isAuth){
            getData(apiUrl)
            .then(data => {

@@ -14,7 +14,7 @@ const SubscribeButtop = props => {
   const  message = subscribed ? 'Unsubscribe' : 'Subscribe';
 const subscribeHandler = async () => {
   if(isAuth){
-    const apiUrl = subscribed ? `http://localhost:8080/unsubscribe/${id}` : `http://localhost:8080/subscribe/${id}`
+    const apiUrl = subscribed ? `http://localhost:8080/user/unsubscribe/${id}` : `http://localhost:8080/user/subscribe/${id}`
         const responseData = await postData(apiUrl,{},token)
         if(responseData.userData){
           updateUserDataReducer({ authState, newUserData: responseData.userData });

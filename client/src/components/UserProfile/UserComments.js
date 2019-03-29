@@ -14,7 +14,7 @@ const UserComments = props => {
   const {isAuth,userId} = authState
   const { postId } = props;
   useEffect(() => {
-    const apiUrl = `http://localhost:8080/user-get-comments/${userId}`;
+    const apiUrl = `http://localhost:8080/user/comments/${userId}`;
     getData(apiUrl).then(data => {
       if (data.comments) {
         setComments(data.comments);
@@ -24,7 +24,7 @@ const UserComments = props => {
 
   const getNextPage = async () => {
     await setPage(page + 1);
-    const apiUrl = `http://localhost:8080/user-get-comments/${userId}?page=${page + 1}`;
+    const apiUrl = `http://localhost:8080/user/comments/${userId}?page=${page + 1}`;
     const responseData = await getData(apiUrl);
     if (responseData.comments) {
       setComments(comments.concat(responseData.comments));
