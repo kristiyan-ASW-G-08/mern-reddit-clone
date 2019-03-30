@@ -18,7 +18,6 @@ const logout = () => {
 const userUpdate = (authData) => {
   try {
      const {isAuth,token,userId} = authData.authState
-    
     const authState = {
       isAuth,
       token,

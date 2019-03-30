@@ -1,8 +1,7 @@
 import React  from 'react'
 import PostBar from '../../PostBar/PostBar'
 import VotesContainer from '../../VotesContainer/VotesContainer'
-const PostFull= props => {
-    const {post,userId,token} = props
+const PostFull= ({post}) => {
     return (
         <div className="post-container">
         <VotesContainer post={post}/>
@@ -18,7 +17,7 @@ const PostFull= props => {
       <p className="post-content">
       {post.content}
       </p>
-      <PostBar   userId={userId} token={token}  post={post} />
+      <PostBar   post={post} />
       </div>
       </div>
         </div>

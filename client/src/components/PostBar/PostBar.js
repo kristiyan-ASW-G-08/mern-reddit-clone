@@ -10,10 +10,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 library.add(faShare,faCommentAlt,faBookmark,faTrashAlt,faPen,faCopy);
 
-const PostBar= props => {
+const PostBar= ({post,deletePostElement,history}) => {
     const { isAuth,userId,token,userData, updateUserDataReducer } = useAuthContext()
     const [saved,setSaved] = useState(false)
-    const {post,deletePostElement} = props
     const {comments,authorId,communityName,_id} = post
     const postId = _id
     useEffect(() => {
@@ -29,7 +28,7 @@ const PostBar= props => {
         if(deletePostElement){
             deletePostElement(postId)
         }else {
-            props.history.push(`/community/${communityName}`)
+            history.push(`/community/${communityName}`)
         }
         
     }
@@ -72,7 +71,7 @@ const PostBar= props => {
                 setSaved(savedCheck)
             }
         }else {
-            props.history.push(`/community/login`)
+            history.push(`/community/login`)
         }
     }
     return (

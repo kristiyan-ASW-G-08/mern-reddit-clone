@@ -12,7 +12,6 @@ const CommentBar= props => {
     const {userId,token} = authState
     const {authorId,comments,deleteCommentElement,commentId,toggle,setEditComment,comment,on} = props
     const deleteHandler = async () => {
-        console.log(authState)
         const apiUrl = `http://localhost:8080/comment/delete/${comment._id}`
         const data = await deleteData(apiUrl,token)
         if(data.msg === 'Comment Deleted'){
