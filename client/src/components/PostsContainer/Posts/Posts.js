@@ -1,8 +1,9 @@
 import React, { Fragment,lazy } from 'react';
-const Post = lazy(() => import('./Post/Post'))
+import Post from '../Post/Post'
 const Posts = ({ posts,deletePostElement }) => {
   return (
     <>
+    <div data-testid="posts" >
       {posts.map(post => {
         return (
           <Post
@@ -12,6 +13,7 @@ const Posts = ({ posts,deletePostElement }) => {
           />
         );
       })}
+      </div>
     </>
   );
 };

@@ -1,6 +1,6 @@
 import React,{Suspense,lazy} from 'react'
 import Loader from '../Loader'
-const Posts = lazy(() => import('./Posts'));
+const Posts = lazy(() => import('./Posts/Posts'));
 const PostsContainer= ({posts,getNextPage,setPosts}) => {
     const deletePostElement = postId => {
         const editedPosts = posts.filter(post => post._id !== postId);
@@ -10,7 +10,7 @@ const PostsContainer= ({posts,getNextPage,setPosts}) => {
         <>
         {posts ? (
           <Suspense fallback={<Loader />}>
-            <div className="posts-container" >
+            <div className="posts-container" data-testid="posts-container">
             <Posts posts={posts} deletePostElement={deletePostElement}/>
               <button onClick={getNextPage} className="button load-more-button">
                 Load More

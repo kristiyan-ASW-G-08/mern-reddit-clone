@@ -4,21 +4,20 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import postData from '../../util/postData'
 import deleteData from '../../util/deleteData'
-import { AuthContextData } from '../../AuthContext/AuthContext';
+import useAuthContext from '../../hooks/useAuthContext/useAuthContext'
 import {
   faShare,faCommentAlt, faBookmark,faTrashAlt,faPen,faCopy
 } from '@fortawesome/free-solid-svg-icons';
 library.add(faShare,faCommentAlt,faBookmark,faTrashAlt,faPen,faCopy);
 
 const PostBar= props => {
-    const { authState, updateUserDataReducer } = useContext(AuthContextData);
+    const { isAuth,userId,token,userData, updateUserDataReducer } = useAuthContext()
     const [saved,setSaved] = useState(false)
-    const {isAuth,userId,token,post,deletePostElement} = props
+    const {post,deletePostElement} = props
     const {comments,authorId,communityName,_id} = post
     const postId = _id
     useEffect(() => {
         if(isAuth){
-        const {userData} = authState
         const savedCheck = userData.saved.find(savedPost => savedPost === post._id)
         setSaved(savedCheck)
         }
@@ -62,6 +61,12 @@ const PostBar= props => {
             const responseData = await postData(apiIrl,{},token)
             const {userData} = responseData
             if(userData){
+                const authState = {
+                    isAuth,
+                    token,
+                    userId,
+                    userData
+                }
                 updateUserDataReducer({ authState, newUserData:userData });
                 const savedCheck = userData.saved.find(savedPost => savedPost === post._id)
                 setSaved(savedCheck)
