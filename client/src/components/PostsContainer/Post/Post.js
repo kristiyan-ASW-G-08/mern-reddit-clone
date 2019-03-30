@@ -1,15 +1,13 @@
 import React,{useContext} from 'react';
 import {Link} from 'react-router-dom'
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { AuthContextData } from '../../AuthContext/AuthContext';
-import PostBar from '../PostBar/PostBar'
-import VotesContainer from '../VotesContainer/VotesContainer'
+import PostBar from '../../PostBar/PostBar'
+import VotesContainer from '../../VotesContainer/VotesContainer'
+import useAuthContext from '../../../hooks/useAuthContext/useAuthContext'
 const Post = props => {
-  const authState = useContext(AuthContextData)
-  const {isAuth,userId,token}  = authState.authState
+  const {isAuth,userId,token}  = useAuthContext()
   const { post,community,deletePostElement } = props;
   const {title,author,comments,communityName} = post
-  console.log(post)
+  console.log(isAuth,userId,token)
   return (
     <div  className="post">
     <VotesContainer post={post} />

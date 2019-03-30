@@ -1,5 +1,5 @@
 import React, { Fragment,lazy } from 'react';
-const Post = lazy(() => import('./Post'))
+const Post = lazy(() => import('./Post/Post'))
 const Posts = ({ posts,deletePostElement }) => {
   return (
     <>
