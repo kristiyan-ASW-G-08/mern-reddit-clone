@@ -1,7 +1,6 @@
 import React from 'react'
-import CommentBar from './CommentBar'
-const Comment= props => {
-    const {comment,deleteCommentElement,toggle,setEditComment,on} = props
+import CommentBar from '../CommentBar'
+const Comment= ({comment,deleteCommentElement,toggle,setEditComment,on}) => {
     const {content,author,upvotes,downvotes,creationDate,comments} = comment
     const dateObject = new Date(Date.parse(creationDate));
     const dateReadable = dateObject.toDateString();

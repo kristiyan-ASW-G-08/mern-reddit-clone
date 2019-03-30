@@ -1,5 +1,5 @@
 import React, { Fragment,lazy } from 'react';
-const Comment = lazy(() => import('./Comment'))
+import Comment from './Comment/Comment'
 const Comments = ({ comments,deleteCommentElement,toggle,setEditComment,on}) => {
   return (
     <>

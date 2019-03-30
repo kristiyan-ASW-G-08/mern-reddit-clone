@@ -3,6 +3,7 @@ import {BrowserRouter} from 'react-router-dom'
 import { render, fireEvent, waitForElement } from 'react-testing-library';
 import Posts from './Posts';
 import {AuthContextData} from '../../../AuthContext/AuthContext'
+import AuthContextTestWrapper from '../../../AuthContext/AuthContextTestWrapper'
 const updateUserDataReducer = jest.fn()
 const authState =  {isAuth:false,token:null,userId:null,userData:null,updateUserDataReducer}
 describe('<Posts/>',() => {
@@ -23,11 +24,7 @@ describe('<Posts/>',() => {
     }]
     const deletePostElement  = jest.fn()
     const { container, rerender,getByTestId} = render (<Posts posts={posts} deletePostElement={deletePostElement} />,{wrapper: ({ children }) => (
-        <AuthContextData.Provider value={{authState}}>
-        <BrowserRouter>
-          {children}
-          </BrowserRouter>
-        </AuthContextData.Provider>
+        <AuthContextTestWrapper authState={authState} children={children} />
       )})
     it('should have 2 children',() => {
         const element =  getByTestId('posts')

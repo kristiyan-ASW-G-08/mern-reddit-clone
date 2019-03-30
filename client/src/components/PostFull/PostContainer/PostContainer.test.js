@@ -1,11 +1,9 @@
 import React from 'react';
-import {BrowserRouter} from 'react-router-dom'
 import { render, fireEvent, waitForElement } from 'react-testing-library';
 import PostContainer from './PostContainer';
-
-import {AuthContextData} from '../../../AuthContext/AuthContext'
 const updateUserDataReducer = jest.fn()
 const authState =  {isAuth:false,token:null,userId:null,userData:null,updateUserDataReducer}
+import AuthContextTestWrapper from '../../../AuthContext/AuthContextTestWrapper'
 describe('<PostContainer/>',() => {
     const post = {
         title:'post',
@@ -17,11 +15,9 @@ describe('<PostContainer/>',() => {
     }
 
     const { getByText } = render (<PostContainer post={post}  />,{wrapper: ({ children }) => (
-        <AuthContextData.Provider value={{authState}}>
-        <BrowserRouter>
-          {children}
-          </BrowserRouter>
-        </AuthContextData.Provider>
+        <AuthContextTestWrapper authState={authState} children={children} />
+        
+          
       )})
 
     it('should have element with c/post.communityName text', async () => {

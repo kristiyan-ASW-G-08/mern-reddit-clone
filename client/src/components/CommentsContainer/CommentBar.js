@@ -1,15 +1,14 @@
 import React,{useState,useContext} from 'react'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { AuthContextData } from '../../AuthContext/AuthContext';
+import useAuthContext from '../../hooks/useAuthContext/useAuthContext'
 import {
   faShare,faCommentAlt, faBookmark,faTrashAlt,faPen,
 } from '@fortawesome/free-solid-svg-icons';
 import deleteData from '../../util/deleteData'
 library.add(faShare,faCommentAlt,faBookmark,faTrashAlt,faPen,);
 const CommentBar= props => {
-    const {authState} = useContext(AuthContextData)
-    const {userId,token} = authState
+    const {userId,token} = useAuthContext
     const {authorId,comments,deleteCommentElement,commentId,toggle,setEditComment,comment,on} = props
     const deleteHandler = async () => {
         const apiUrl = `http://localhost:8080/comment/delete/${comment._id}`

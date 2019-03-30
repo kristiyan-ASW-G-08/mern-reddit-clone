@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter} from 'react-router-dom'
 import { render, fireEvent, waitForElement, cleanup } from 'react-testing-library';
 import PostsContainer from './PostsContainer';
-import {AuthContextData} from '../../AuthContext/AuthContext'
+import AuthContextTestWrapper from '../../AuthContext/AuthContextTestWrapper'
 const updateUserDataReducer = jest.fn()
 const authState =  {isAuth:false,token:null,userId:null,userData:null,updateUserDataReducer}
 describe('<PostsContainer/>',() => {
@@ -24,11 +24,7 @@ describe('<PostsContainer/>',() => {
         const getNextPage  = jest.fn()
         const setPosts = jest.fn()
         const {rerender,getByTestId,getByText} = render (<PostsContainer posts={posts} getNextPage={getNextPage} setPosts={setPosts} />,{wrapper: ({ children }) => (
-            <AuthContextData.Provider value={{authState}}>
-            <BrowserRouter>
-              {children}
-              </BrowserRouter>
-            </AuthContextData.Provider>
+            <AuthContextTestWrapper authState={authState} children={children} />
           )})
         it('should have 2 children',async () => {
             const element = await waitForElement(() => getByTestId('posts-container'))
