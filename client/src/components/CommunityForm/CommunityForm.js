@@ -1,21 +1,19 @@
 import React, { useState, Fragment, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import Input from '../Input/Input';
-import Logo from '../../assets/logo.svg';
 import ValidationErrorsList from '../ValidationErrorsList/ValidationErrorsList';
-import useValidationErrors from '../../hooks/useValidationErrors/useValidationErrors';
-import { AuthContextData } from '../../AuthContext/AuthContext';
+import useValidationErrors from '../../hooks/useValidationErrors/useValidationErrors'
 import postData from '../../util/postData';
+import useAuthContext from '../../hooks/useAuthContext/useAuthContext'
 const CommunityForm = props => {
-  const { authState } = useContext(AuthContextData);
-  const { token } = authState;
+  const { token } = useAuthContext()
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [
+  const {
     validationErrorMessages,
     validationErrorParams,
     toggleValidationErrors
-  ] = useValidationErrors();
+   } = useValidationErrors();
   const submitHandler = async e => {
     e.preventDefault();
     const apiUrl = 'http://localhost:8080/community/post';

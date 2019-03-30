@@ -21,6 +21,9 @@ describe('<Post/>',() => {
     const { container, rerender,queryByPlaceholderText,queryByValue ,getByPlaceholderText,getByText } = render (<Post post={post} community={community} deletePostElement={deletePostElement} />,{wrapper: ({ children }) => (
       <AuthContextTestWrapper authState={authState} children={children} />
       )})
+      it('snapshot',() => {
+        expect(container).toMatchSnapshot()
+    })
     it('should have element with c/post.communityName text', async () => {
         const element =  getByText(`c/${post.communityName}`)
         expect(element.className).toMatch('post-community')

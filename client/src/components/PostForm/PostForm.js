@@ -5,19 +5,19 @@ import ValidationErrorsList from '../ValidationErrorsList/ValidationErrorsList';
 import useValidationErrors from '../../hooks/useValidationErrors/useValidationErrors';
 import { AuthContextData } from '../../AuthContext/AuthContext';
 import postData from '../../util/postData';
+import useAuthContext from '../../hooks/useAuthContext/useAuthContext'
 const PostForm = props => {
   const { communityId } = props.match.params;
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const {token}  = useAuthContext()
   const {
     validationErrorMessages,
     validationErrorParams,
     toggleValidationErrors
    } = useValidationErrors();
-  const authState = useContext(AuthContextData);
   const submitHandler = async e => {
     e.preventDefault();
-    const { token } = authState.authState;
     let postId;
     let apiUrl;
     const post = {

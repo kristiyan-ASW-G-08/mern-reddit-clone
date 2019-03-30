@@ -1,0 +1,373 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PostsContainer/> snapshot 1`] = `
+<div>
+  <div
+    class="posts-container"
+    data-testid="posts-container"
+    style=""
+  >
+    <div
+      data-testid="posts"
+    >
+      <div
+        class="post"
+      >
+        <div
+          class="votes-container"
+        >
+          <button
+            class="button "
+          >
+            <svg
+              aria-hidden="true"
+              class="svg-inline--fa fa-caret-up fa-w-10 "
+              data-icon="caret-up"
+              data-prefix="fas"
+              focusable="false"
+              role="img"
+              viewBox="0 0 320 512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M288.662 352H31.338c-17.818 0-26.741-21.543-14.142-34.142l128.662-128.662c7.81-7.81 20.474-7.81 28.284 0l128.662 128.662c12.6 12.599 3.676 34.142-14.142 34.142z"
+                fill="currentColor"
+              />
+            </svg>
+          </button>
+          <span
+            class="votes-container-number  "
+          >
+            0
+          </span>
+          <button
+            class="button "
+          >
+            <svg
+              aria-hidden="true"
+              class="svg-inline--fa fa-caret-down fa-w-10 "
+              data-icon="caret-down"
+              data-prefix="fas"
+              focusable="false"
+              role="img"
+              viewBox="0 0 320 512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
+                fill="currentColor"
+              />
+            </svg>
+          </button>
+        </div>
+        <div
+          class="post-body"
+        >
+          <div
+            class="post-links"
+          >
+            <a
+              class="post-community"
+              href="/community/react"
+            >
+              c/
+              react
+            </a>
+            <a
+              class="post-author"
+              href="/community/react"
+            >
+              u/
+              NewUser
+            </a>
+            <a
+              class="post-content"
+              href="/post/0"
+            >
+              <h3
+                class="post-title"
+              >
+                post
+              </h3>
+            </a>
+          </div>
+          <div
+            class="post-info"
+          >
+            <button
+              class="button post-info-button"
+            >
+              <svg
+                aria-hidden="true"
+                class="svg-inline--fa fa-share fa-w-16 "
+                data-icon="share"
+                data-prefix="fas"
+                focusable="false"
+                role="img"
+                viewBox="0 0 512 512"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M503.691 189.836L327.687 37.851C312.281 24.546 288 35.347 288 56.015v80.053C127.371 137.907 0 170.1 0 322.326c0 61.441 39.581 122.309 83.333 154.132 13.653 9.931 33.111-2.533 28.077-18.631C66.066 312.814 132.917 274.316 288 272.085V360c0 20.7 24.3 31.453 39.687 18.164l176.004-152c11.071-9.562 11.086-26.753 0-36.328z"
+                  fill="currentColor"
+                />
+              </svg>
+              <span>
+                Share
+              </span>
+            </button>
+            <button
+              class="button post-info-button"
+            >
+              <svg
+                aria-hidden="true"
+                class="svg-inline--fa fa-comment-alt fa-w-16 "
+                data-icon="comment-alt"
+                data-prefix="fas"
+                focusable="false"
+                role="img"
+                viewBox="0 0 512 512"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M448 0H64C28.7 0 0 28.7 0 64v288c0 35.3 28.7 64 64 64h96v84c0 9.8 11.2 15.5 19.1 9.7L304 416h144c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64z"
+                  fill="currentColor"
+                />
+              </svg>
+              <span>
+                0
+              </span>
+            </button>
+            <button
+              class="button post-info-button  "
+            >
+              <svg
+                aria-hidden="true"
+                class="svg-inline--fa fa-bookmark fa-w-12 "
+                data-icon="bookmark"
+                data-prefix="fas"
+                focusable="false"
+                role="img"
+                viewBox="0 0 384 512"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M0 512V48C0 21.49 21.49 0 48 0h288c26.51 0 48 21.49 48 48v464L192 400 0 512z"
+                  fill="currentColor"
+                />
+              </svg>
+              <span>
+                Save
+              </span>
+            </button>
+            <button
+              class="button post-info-button"
+            >
+              <svg
+                aria-hidden="true"
+                class="svg-inline--fa fa-copy fa-w-14 "
+                data-icon="copy"
+                data-prefix="fas"
+                focusable="false"
+                role="img"
+                viewBox="0 0 448 512"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M320 448v40c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V120c0-13.255 10.745-24 24-24h72v296c0 30.879 25.121 56 56 56h168zm0-344V0H152c-13.255 0-24 10.745-24 24v368c0 13.255 10.745 24 24 24h272c13.255 0 24-10.745 24-24V128H344c-13.2 0-24-10.8-24-24zm120.971-31.029L375.029 7.029A24 24 0 0 0 358.059 0H352v96h96v-6.059a24 24 0 0 0-7.029-16.97z"
+                  fill="currentColor"
+                />
+              </svg>
+              <span>
+                Spam
+              </span>
+            </button>
+            
+          </div>
+        </div>
+      </div>
+      <div
+        class="post"
+      >
+        <div
+          class="votes-container"
+        >
+          <button
+            class="button "
+          >
+            <svg
+              aria-hidden="true"
+              class="svg-inline--fa fa-caret-up fa-w-10 "
+              data-icon="caret-up"
+              data-prefix="fas"
+              focusable="false"
+              role="img"
+              viewBox="0 0 320 512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M288.662 352H31.338c-17.818 0-26.741-21.543-14.142-34.142l128.662-128.662c7.81-7.81 20.474-7.81 28.284 0l128.662 128.662c12.6 12.599 3.676 34.142-14.142 34.142z"
+                fill="currentColor"
+              />
+            </svg>
+          </button>
+          <span
+            class="votes-container-number  "
+          >
+            0
+          </span>
+          <button
+            class="button "
+          >
+            <svg
+              aria-hidden="true"
+              class="svg-inline--fa fa-caret-down fa-w-10 "
+              data-icon="caret-down"
+              data-prefix="fas"
+              focusable="false"
+              role="img"
+              viewBox="0 0 320 512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
+                fill="currentColor"
+              />
+            </svg>
+          </button>
+        </div>
+        <div
+          class="post-body"
+        >
+          <div
+            class="post-links"
+          >
+            <a
+              class="post-community"
+              href="/community/react"
+            >
+              c/
+              react
+            </a>
+            <a
+              class="post-author"
+              href="/community/react"
+            >
+              u/
+              NewUser
+            </a>
+            <a
+              class="post-content"
+              href="/post/1"
+            >
+              <h3
+                class="post-title"
+              >
+                post
+              </h3>
+            </a>
+          </div>
+          <div
+            class="post-info"
+          >
+            <button
+              class="button post-info-button"
+            >
+              <svg
+                aria-hidden="true"
+                class="svg-inline--fa fa-share fa-w-16 "
+                data-icon="share"
+                data-prefix="fas"
+                focusable="false"
+                role="img"
+                viewBox="0 0 512 512"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M503.691 189.836L327.687 37.851C312.281 24.546 288 35.347 288 56.015v80.053C127.371 137.907 0 170.1 0 322.326c0 61.441 39.581 122.309 83.333 154.132 13.653 9.931 33.111-2.533 28.077-18.631C66.066 312.814 132.917 274.316 288 272.085V360c0 20.7 24.3 31.453 39.687 18.164l176.004-152c11.071-9.562 11.086-26.753 0-36.328z"
+                  fill="currentColor"
+                />
+              </svg>
+              <span>
+                Share
+              </span>
+            </button>
+            <button
+              class="button post-info-button"
+            >
+              <svg
+                aria-hidden="true"
+                class="svg-inline--fa fa-comment-alt fa-w-16 "
+                data-icon="comment-alt"
+                data-prefix="fas"
+                focusable="false"
+                role="img"
+                viewBox="0 0 512 512"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M448 0H64C28.7 0 0 28.7 0 64v288c0 35.3 28.7 64 64 64h96v84c0 9.8 11.2 15.5 19.1 9.7L304 416h144c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64z"
+                  fill="currentColor"
+                />
+              </svg>
+              <span>
+                0
+              </span>
+            </button>
+            <button
+              class="button post-info-button  "
+            >
+              <svg
+                aria-hidden="true"
+                class="svg-inline--fa fa-bookmark fa-w-12 "
+                data-icon="bookmark"
+                data-prefix="fas"
+                focusable="false"
+                role="img"
+                viewBox="0 0 384 512"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M0 512V48C0 21.49 21.49 0 48 0h288c26.51 0 48 21.49 48 48v464L192 400 0 512z"
+                  fill="currentColor"
+                />
+              </svg>
+              <span>
+                Save
+              </span>
+            </button>
+            <button
+              class="button post-info-button"
+            >
+              <svg
+                aria-hidden="true"
+                class="svg-inline--fa fa-copy fa-w-14 "
+                data-icon="copy"
+                data-prefix="fas"
+                focusable="false"
+                role="img"
+                viewBox="0 0 448 512"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M320 448v40c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V120c0-13.255 10.745-24 24-24h72v296c0 30.879 25.121 56 56 56h168zm0-344V0H152c-13.255 0-24 10.745-24 24v368c0 13.255 10.745 24 24 24h272c13.255 0 24-10.745 24-24V128H344c-13.2 0-24-10.8-24-24zm120.971-31.029L375.029 7.029A24 24 0 0 0 358.059 0H352v96h96v-6.059a24 24 0 0 0-7.029-16.97z"
+                  fill="currentColor"
+                />
+              </svg>
+              <span>
+                Spam
+              </span>
+            </button>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <button
+      class="button load-more-button"
+    >
+      Load More
+    </button>
+  </div>
+</div>
+`;

@@ -1,12 +1,10 @@
-import React, { Fragment, useContext, memo } from 'react';
-import { AuthContextData } from '../../AuthContext/AuthContext';
+import React from 'react';
 import { withRouter } from 'react-router-dom';
 import postData from '../../util/postData';
-const SubscribeButtop = props => {
-  const { authState, updateUserDataReducer } = useContext(AuthContextData);
-  const { id } = props;
-  const { isAuth, token, userData } = authState;
-  let redirect = '';
+import useAuthContext from '../../hooks/useAuthContext/useAuthContext'
+const SubscribeButtop = ({history,id}) => {
+  const { isAuth, token,userId, userData,updateUserDataReducer } = useAuthContext();
+
   let subscribed = false;
   if (isAuth) {
     subscribed = userData.communities.includes(id);
@@ -19,12 +17,13 @@ const SubscribeButtop = props => {
         : `http://localhost:8080/user/subscribe/${id}`;
       const responseData = await postData(apiUrl, {}, token);
       if (responseData.userData) {
+        const authState = {isAuth,token,userId}
         updateUserDataReducer({
           authState,
           newUserData: responseData.userData
         });
       }
-    } else props.history.push('/login');
+    } else history.push('/login');
   };
   return (
     <>

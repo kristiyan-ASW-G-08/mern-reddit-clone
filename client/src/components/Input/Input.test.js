@@ -12,8 +12,11 @@ describe('<Input />',() => {
     const placeholder= 'Test Placeholder'
     const name= 'test'
     let errorArr = []
-    const { container, rerender,queryByPlaceholderText,queryByValue ,getByPlaceholderText } = render (<Input setHook={setHook} value={value} type={type} placeholder={placeholder} errorArr={errorArr} name={name} />)
+    const { container,getByPlaceholderText } = render (<Input setHook={setHook} value={value} type={type} placeholder={placeholder} errorArr={errorArr} name={name} />)
 
+    it('snapshot',() => {
+      expect(container).toMatchSnapshot()
+  })
     it('should render with the correct name,placeholder,value,className and type', async () => {
         const inputElement =  getByPlaceholderText(placeholder)
         expect(inputElement).toBeTruthy;

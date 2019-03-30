@@ -4,10 +4,9 @@ import { withRouter } from 'react-router-dom';
 import ValidationErrorsList from '../ValidationErrorsList/ValidationErrorsList';
 import postData from '../../util/postData';
 import useValidationErrors from '../../hooks/useValidationErrors/useValidationErrors';
-import { AuthContextData } from '../../AuthContext/AuthContext';
+import useAuthContext from '../../hooks/useAuthContext/useAuthContext'
 const CommentForm = props => {
-  const { authState } = useContext(AuthContextData);
-  const { isAuth, token } = authState;
+  const { isAuth, token } = useAuthContext();
   const {
     postId,
     setNewComment,
@@ -17,11 +16,11 @@ const CommentForm = props => {
     setEditCommentElement
   } = props;
   const [content, setContent] = useState('');
-  const [
+  const {
     validationErrorMessages,
     validationErrorParams,
     toggleValidationErrors
-  ] = useValidationErrors();
+   } = useValidationErrors();
   useEffect(() => {
     if (isAuth && editComment) {
       setContent(editComment.content);

@@ -1,6 +1,7 @@
 const Post  = require('../models/post')
 const User  = require('../models/user')
 const Comment =   require('../models/comment')
+const Community =   require('../models/community')
 const mongoose = require('mongoose')
 exports.getUserPosts = async (req, res, next) => {
   try {
@@ -158,6 +159,7 @@ exports.getUserComments = async (req, res, next) => {
       
     } 
     catch (err) {
+      console.log(err)
       if (!err.statusCode) {
         err.statusCode = 500;
       }

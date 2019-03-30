@@ -23,9 +23,12 @@ describe('<PostsContainer/>',() => {
         }]
         const getNextPage  = jest.fn()
         const setPosts = jest.fn()
-        const {rerender,getByTestId,getByText} = render (<PostsContainer posts={posts} getNextPage={getNextPage} setPosts={setPosts} />,{wrapper: ({ children }) => (
+        const {container,getByTestId,getByText} = render (<PostsContainer posts={posts} getNextPage={getNextPage} setPosts={setPosts} />,{wrapper: ({ children }) => (
             <AuthContextTestWrapper authState={authState} children={children} />
           )})
+          it('snapshot',() => {
+            expect(container).toMatchSnapshot()
+        })
         it('should have 2 children',async () => {
             const element = await waitForElement(() => getByTestId('posts-container'))
             expect(element.children.length).toBe(2)

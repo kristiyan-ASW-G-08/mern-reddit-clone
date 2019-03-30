@@ -1,9 +1,9 @@
 import {AuthContextData} from './AuthContext'
 import {BrowserRouter} from 'react-router-dom'
 import React from 'react'
-const AuthContextTestWrapper = ({authState,children}) => {
+const AuthContextTestWrapper = ({authState,children,updateUserDataReducer}) => {
     return (
-       <AuthContextData.Provider value={{authState}}>
+       <AuthContextData.Provider value={{authState,updateUserDataReducer}}>
         <BrowserRouter>
           {children}
           </BrowserRouter>
