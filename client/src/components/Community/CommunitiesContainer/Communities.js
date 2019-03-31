@@ -1,5 +1,7 @@
 import React, { Fragment,lazy } from 'react';
-const CommunityPreview = lazy(() => import('./CommunityPreview'))
+import PropTypes from 'prop-types';
+import CommunityPreview from './CommunityPreview'
+import communitiesArrType from '../../PropTypes/communitiesArrType'
 const Communities = ({ communities }) => {
   return (
     <>
@@ -13,5 +15,8 @@ const Communities = ({ communities }) => {
       })}
     </>
   );
+};
+Communities.propTypes = {
+  communities: communitiesArrType.isRequired,
 };
 export default Communities;

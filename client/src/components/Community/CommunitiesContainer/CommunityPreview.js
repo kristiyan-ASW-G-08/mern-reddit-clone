@@ -1,5 +1,7 @@
 import React,{useContext} from 'react';
 import {Link} from 'react-router-dom'
+import PropTypes from 'prop-types';
+import communityType from '../../PropTypes/communityType'
 const CommunityPreview = ({community}) => {
     const {icon,name,subscribers} = community
     return (
@@ -17,5 +19,8 @@ const CommunityPreview = ({community}) => {
     </div>
     </Link>
   );
+};
+CommunityPreview.propTypes = {
+  community: communityType.isRequired,
 };
 export default CommunityPreview;

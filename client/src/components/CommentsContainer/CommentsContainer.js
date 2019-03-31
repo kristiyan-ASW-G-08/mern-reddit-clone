@@ -1,5 +1,7 @@
 import React,{Suspense,lazy} from 'react'
 import Loader from '../Loader'
+import PropTypes ,{func,bool} from 'prop-types';
+import commentsArrType from '../PropTypes/commentsArrType' 
 const Comments = lazy(() => import('./Comments'));
 const CommentsContainer= ({comments,toggle,on,setEditComment,setComments,getNextPage}) => {
   const deleteCommentElement = commentId => {
@@ -30,4 +32,13 @@ const CommentsContainer= ({comments,toggle,on,setEditComment,setComments,getNext
         </>
     )
 }
+
+CommentsContainer.propTypes = {
+  comments: commentsArrType.isRequired,
+  getNextPage:func.isRequired,
+  setComments:func.isRequired,
+  toggle:func.isRequired,
+  setEditComment:func.isRequired,
+  on:bool.isRequired
+};
 export default CommentsContainer

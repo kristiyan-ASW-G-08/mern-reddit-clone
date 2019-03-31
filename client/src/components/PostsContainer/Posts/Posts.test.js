@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from 'react-testing-library';
 import Posts from './Posts';
 import AuthContextTestWrapper from '../../../AuthContext/AuthContextTestWrapper'
+
 const updateUserDataReducer = jest.fn()
 const authState =  {isAuth:false,token:null,userId:null,userData:null,updateUserDataReducer}
 describe('<Posts/>',() => {

@@ -43,12 +43,10 @@ const commentSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  comments: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Comment'
-    }
-  ]
+  comments: {
+    type: Number,
+    default: 0
+  },
 });
 
 module.exports = mongoose.model('Comment', commentSchema);

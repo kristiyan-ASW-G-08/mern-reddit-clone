@@ -1,34 +1,26 @@
 import React,{useContext,useState,useEffect} from 'react'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { AuthContextData } from '../../AuthContext/AuthContext';
 import {withRouter} from 'react-router-dom'
 import postData from '../../util/postData'
+import useAuthContext from '../../hooks/useAuthContext/useAuthContext'
 import {
   faCaretUp,faCaretDown
 } from '@fortawesome/free-solid-svg-icons';
 library.add( faCaretUp,faCaretDown);
-const VotesContainer = props => {
-    const {authState,updateUserDataReducer} = useContext(AuthContextData)
-    let token
-    let isAuth;
-    if(authState.isAuth){
-         token = authState.token
-         isAuth  = authState.isAuth
-    }
-    const {post} = props
-    let {upvotes,downvotes} = post
+const VotesContainer = ({post,history}) => {
     const [totalVotes,setTotalVotes] = useState(0) 
     const [upvoted,setUpvoted] = useState(false)
     const [downvoted,setDownvoted] = useState(false)
-    
+    const {token,isAuth,userId,userData,updateUserDataReducer} = useAuthContext()
+    const {upvotes,downvotes} = post
     useEffect(() => {
         setTotalVotes(upvotes - downvotes)
-        if(authState.userData){
-            if(authState.userData.upvoted.includes(post._id)){
+        if(userData){
+            if(userData.upvoted.includes(post._id)){
                 setUpvoted(true)
             }
-            if(authState.userData.downvoted.includes(post._id)){
+            if(userData.downvoted.includes(post._id)){
                 setDownvoted(true)
             }
         }
@@ -40,6 +32,7 @@ const VotesContainer = props => {
             const postId = post._id
           const apiUrl = type === 'upvote' ? `http://localhost:8080/post/upvote/${postId}` : `http://localhost:8080/post/downvote/${postId}`
             const responseData = await postData(apiUrl,{},token)
+            const authState = {isAuth,userData,token,userId}
                 setTotalVotes(responseData.postUpvotes - responseData.postDownvotes)
                 updateUserDataReducer({ authState, newUserData: responseData.userData });
                 if(responseData.userData.upvoted.includes(post._id)){
@@ -51,7 +44,7 @@ const VotesContainer = props => {
                     setUpvoted(false)
                 }
         }else{
-            props.history.push(`/login`)
+            history.push(`/login`)
         }
       
       }

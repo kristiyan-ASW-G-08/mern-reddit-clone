@@ -3,11 +3,13 @@ import SubscribeButton from '../../SubscribeButton/SubscribeButton'
 import { Link} from "react-router-dom";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import useAuthContext from '../../../hooks/useAuthContext/useAuthContext'
+import PropTypes from 'prop-types';
+import communityType from '../../PropTypes/communityType'
 import {
  faShieldAlt
 } from '@fortawesome/free-solid-svg-icons';
 library.add(faShieldAlt);
-import useAuthContext from '../../../hooks/useAuthContext/useAuthContext'
 const CommunityDetails = ({community}) => {
     const {userId} = useAuthContext()
     const {name,icon,subscribers,_id,creator} = community
@@ -38,4 +40,8 @@ const CommunityDetails = ({community}) => {
         </>
     )
 }
+
+CommunityDetails.propTypes = {
+    community: communityType.isRequired,
+  };
 export default CommunityDetails 

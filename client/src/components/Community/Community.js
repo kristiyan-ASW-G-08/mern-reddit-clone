@@ -3,9 +3,10 @@ import CommunityDetails from './CommunityDetails/CommunityDetails';
 import Loader from '../Loader'
 import CommunityPosts from './CommunityPosts'
 import getData from '../../util/getData'
-const Community = props => {
+import PropTypes ,{ string,shape}from 'prop-types';
+const Community = ({match}) => {
     const [community, setComminity] = useState(false)
-    const {communityName} = props.match.params
+    const {communityName} = match.params
     useEffect(  () => {
         const apiUrl = `http://localhost:8080/community/get/${communityName}`
         getData(apiUrl)
@@ -20,10 +21,18 @@ const Community = props => {
            {community ? 
                <>
                <CommunityDetails  community={community}/> 
-               <CommunityPosts communityId={community._id} author={community._id}  />
+               <CommunityPosts communityId={community._id}   />
                </>
            : <Loader />}
         </div>
     ) 
 }
+
+Community.propTypes = {
+   match: shape({
+        params:shape({
+            params:string.isRequired
+          })
+      })
+  };
 export default Community

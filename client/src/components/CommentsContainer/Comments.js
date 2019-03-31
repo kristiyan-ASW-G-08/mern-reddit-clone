@@ -1,11 +1,19 @@
-import React, { Fragment,lazy } from 'react';
-import Comment from './Comment/Comment'
-const Comments = ({ comments,deleteCommentElement,toggle,setEditComment,on}) => {
+import React, { Fragment, lazy } from 'react';
+import Comment from './Comment/Comment';
+import PropTypes ,{func,bool} from 'prop-types';
+import commentsArrType from '../PropTypes/commentsArrType'
+const Comments = ({
+  comments,
+  deleteCommentElement,
+  toggle,
+  setEditComment,
+  on
+}) => {
   return (
     <>
       {comments.map(comment => {
         return (
-            <Comment
+          <Comment
             key={comment._id}
             comment={comment}
             deleteCommentElement={deleteCommentElement}
@@ -17,5 +25,13 @@ const Comments = ({ comments,deleteCommentElement,toggle,setEditComment,on}) => 
       })}
     </>
   );
+};
+
+Comments.propTypes = {
+  comments: commentsArrType.isRequired,
+  deleteCommentElement: func.isRequired,
+  toggle: func.isRequired,
+  setEditComment: func.isRequired,
+  on: bool.isRequired
 };
 export default Comments;
