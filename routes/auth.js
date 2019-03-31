@@ -7,7 +7,7 @@ const authController = require('../controllers/auth');
 router.get('/test',(req,res,next) => {
   res.status(200).json({ message: 'User created!', userId: user._id });
 })
-router.put('/signup',[
+router.post('/signup',[
   body('username', 'User Name should be atlest 4 characters long')
     .isLength({ min: 4 })
     .isString()

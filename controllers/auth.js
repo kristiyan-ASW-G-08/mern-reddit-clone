@@ -21,7 +21,7 @@ exports.signup = async (req, res, next) => {
       username
     });
     await user.save();
-    res.status(201).json({ message: 'User created!', userId: user._id });
+    res.status(200).json({ message: 'User created!', userId: user._id });
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;

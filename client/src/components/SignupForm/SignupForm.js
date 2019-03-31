@@ -5,6 +5,7 @@ import ValidationErrorsList from '../ValidationErrorsList/ValidationErrorsList';
 import useValidationErrors from '../../hooks/useValidationErrors/useValidationErrors';
 import Input from '../Input/Input';
 import Logo from '../../assets/logo.svg';
+import postData from '../../util/postData'
 const SignupForm = props => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -15,28 +16,40 @@ const SignupForm = props => {
     validationErrorParams,
     toggleValidationErrors
    } = useValidationErrors();
+
+   
   const submitHandler = async e => {
     e.preventDefault();
-    const signupProcess = await signup({
+    const apiUrl = 'http://localhost:8080/auth/signup'
+    const signupData = {
       email,
       password,
       matchPassword,
       username
-    });
-    const signupProcessData = await signupProcess;
-    if (signupProcessData === undefined) {
-      toggleValidationErrors([
-        {
-          param: 'server-error',
-          msg: `Server isn't availdable.Please try again later!`
-        }
-      ]);
-    } else if (signupProcessData.authErrors) {
-      console.log(signupProcessData.authErrors)
-      toggleValidationErrors(signupProcessData.authErrors);
-    } else {
-      props.history.replace(`/login`);
     }
+    
+    const responseData = await postData(apiUrl,signupData,'')
+    console.log(responseData)
+    // const signupProcess = await signup({
+    //   email,
+    //   password,
+    //   matchPassword,
+    //   username
+    // });
+    // const signupProcessData = await signupProcess;
+    // if (signupProcessData === undefined) {
+    //   toggleValidationErrors([
+    //     {
+    //       param: 'server-error',
+    //       msg: `Server isn't availdable.Please try again later!`
+    //     }
+    //   ]);
+    // } else if (signupProcessData.authErrors) {
+    //   console.log(signupProcessData.authErrors)
+    //   toggleValidationErrors(signupProcessData.authErrors);
+    // } else {
+    //   props.history.replace(`/login`);
+    // }
   };
 
   return (
