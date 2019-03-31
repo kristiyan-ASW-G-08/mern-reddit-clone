@@ -5,16 +5,14 @@ import AuthContextTestWrapper from '../../AuthContext/AuthContextTestWrapper'
 import SubscribeButton from './SubscribeButton';
 import postData from '../../util/postData';
 jest.mock('../../util/postData');
-const history = {
-    push: jest.fn()
-  };
+
   const id='1'
   const updateUserDataReducer = jest.fn()
    
 describe('<SubscribeButton />', () => {
     describe('testing subscribe button',() => {
         const authState =  {isAuth:true,token:'sometoken',userId:'someUserId',userData:{communities:[]}}
-        const { container, rerender,getByTestId,getByText} = render (<SubscribeButton id={id} history={history} />,{wrapper: ({ children }) => (
+        const { container, rerender,getByTestId,getByText} = render (<SubscribeButton id={id} />,{wrapper: ({ children }) => (
         <AuthContextTestWrapper authState={authState} updateUserDataReducer={updateUserDataReducer} children={children} />
       )})
 
@@ -38,7 +36,7 @@ describe('<SubscribeButton />', () => {
     })
   describe('user is subscribed',()=> {
     const newAuthState = {isAuth:true,token:'sometoken',userId:'someUserId',userData:{communities:['1']}}
-    const { container, rerender,getByTestId,getByText} = render(<SubscribeButton id={id} history={history} />,{wrapper: ({ children }) => (
+    const { container, rerender,getByTestId,getByText} = render(<SubscribeButton id={id} />,{wrapper: ({ children }) => (
        <AuthContextTestWrapper authState={newAuthState} updateUserDataReducer={updateUserDataReducer} children={children} />
      )})
     it('button with Unsubscribe test should exist', () => {

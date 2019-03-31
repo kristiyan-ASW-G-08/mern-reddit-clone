@@ -1,12 +1,11 @@
 import React, { useState, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
-import signup from '../../authUtil/signup';
 import ValidationErrorsList from '../ValidationErrorsList/ValidationErrorsList';
 import useValidationErrors from '../../hooks/useValidationErrors/useValidationErrors';
 import Input from '../Input/Input';
 import Logo from '../../assets/logo.svg';
 import postData from '../../util/postData'
-const SignupForm = props => {
+const SignupForm = ({history}) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,7 +15,6 @@ const SignupForm = props => {
     validationErrorParams,
     toggleValidationErrors
    } = useValidationErrors();
-
    
   const submitHandler = async e => {
     e.preventDefault();
@@ -27,29 +25,20 @@ const SignupForm = props => {
       matchPassword,
       username
     }
-    
     const responseData = await postData(apiUrl,signupData,'')
     console.log(responseData)
-    // const signupProcess = await signup({
-    //   email,
-    //   password,
-    //   matchPassword,
-    //   username
-    // });
-    // const signupProcessData = await signupProcess;
-    // if (signupProcessData === undefined) {
-    //   toggleValidationErrors([
-    //     {
-    //       param: 'server-error',
-    //       msg: `Server isn't availdable.Please try again later!`
-    //     }
-    //   ]);
-    // } else if (signupProcessData.authErrors) {
-    //   console.log(signupProcessData.authErrors)
-    //   toggleValidationErrors(signupProcessData.authErrors);
-    // } else {
-    //   props.history.replace(`/login`);
-    // }
+    if (responseData === undefined) {
+      toggleValidationErrors([
+        {
+          param: 'server-error',
+          msg: `Server isn't availdable.Please try again later!`
+        }
+      ]);
+    } else if (responseData.validationErrors) {
+      toggleValidationErrors(responseData.validationErrors);
+    } else {
+      history.replace(`/login`);
+    }
   };
 
   return (
