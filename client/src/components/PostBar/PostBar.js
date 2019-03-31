@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import postData from '../../util/postData'
 import deleteData from '../../util/deleteData'
 import useAuthContext from '../../hooks/useAuthContext/useAuthContext'
+import {string,func,shape} from 'prop-types'
+import postType from '../PropTypes/postType'
 import {
   faShare,faCommentAlt, faBookmark,faTrashAlt,faPen,faCopy
 } from '@fortawesome/free-solid-svg-icons';
@@ -92,4 +94,12 @@ const PostBar= ({post,deletePostElement,history}) => {
         </div>
     )
 }
+
+PostBar.propTypes = {
+    deletePostElement:func.isRequired,
+    post:postType.isRequired,
+    history: shape({
+     push:func.isRequired,
+   })
+    };
 export default withRouter(PostBar)

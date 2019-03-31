@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import postData from '../../util/postData';
 import useAuthContext from '../../hooks/useAuthContext/useAuthContext'
+import {string,func,shape} from 'prop-types'
 const SubscribeButtop = ({history,id}) => {
   const { isAuth, token,userId, userData,updateUserDataReducer } = useAuthContext();
 
@@ -33,4 +34,11 @@ const SubscribeButtop = ({history,id}) => {
     </>
   );
 };
+
+SubscribeButtop.propTypes = {
+  id:string.isRequired,
+  history: shape({
+   push:func.isRequired,
+ })
+  };
 export default withRouter(SubscribeButtop);

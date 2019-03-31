@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {withRouter} from 'react-router-dom'
 import postData from '../../util/postData'
 import useAuthContext from '../../hooks/useAuthContext/useAuthContext'
+import PropTypes ,{ string,shape,func}from 'prop-types';
+import postType from '../PropTypes/postType'
 import {
   faCaretUp,faCaretDown
 } from '@fortawesome/free-solid-svg-icons';
@@ -26,7 +28,6 @@ const VotesContainer = ({post,history}) => {
         }
         
     },[])
-
     const voteHandler = async type => {
         if(isAuth){
             const postId = post._id
@@ -61,4 +62,10 @@ const VotesContainer = ({post,history}) => {
         </div>
     )
 }
+VotesContainer.propTypes = {
+   post:postType.isRequired,
+   history: shape({
+    push:func.isRequired,
+  })
+   };
 export default withRouter(VotesContainer)

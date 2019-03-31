@@ -33,6 +33,6 @@ const CommunityPosts = ({ communityId }) => {
 };
 
 CommunityPosts.propTypes = {
-  community:string.isRequired
+  communityId:string.isRequired
  };
 export default CommunityPosts;

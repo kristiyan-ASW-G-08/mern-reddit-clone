@@ -19,7 +19,7 @@ const CommunitiesContainer = ({communities}) => {
         </>
     )
 }
-Communities.propTypes = {
+CommunitiesContainer.propTypes = {
   communities: communitiesArrType.isRequired,
 };
 export default CommunitiesContainer 

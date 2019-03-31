@@ -31,7 +31,7 @@ const Community = ({match}) => {
 Community.propTypes = {
    match: shape({
         params:shape({
-            params:string.isRequired
+            communityName:string.isRequired
           })
       })
   };
