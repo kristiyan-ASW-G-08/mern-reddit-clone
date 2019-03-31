@@ -2,14 +2,17 @@ import React from 'react'
 
 import {render,fireEvent, getByValue,waitForElement} from 'react-testing-library'
 import { BrowserRouter } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+jest.mock('../../util/postData');
 import SignupForm from './SignupForm'
-
 describe('<SignupForm />',() => {
+    const history = createBrowserHistory()
+    history.replace = jest.fn()
     const username = "testUser";
     const email = "testEmail@email.com";
     const password = 'testpass1012'
     const matchPassword = 'testpass1012'
-    const { container, getByPlaceholderText, getByValue,getByText } = render (<BrowserRouter><SignupForm/></BrowserRouter>)
+    const { container, getByPlaceholderText, getByValue,getByText } = render (<SignupForm />,{wrapper:BrowserRouter})
     beforeEach(() => {    
         const usernameInput = getByPlaceholderText('Username')
         fireEvent.change(usernameInput, {target : {value : username}})
@@ -22,8 +25,10 @@ describe('<SignupForm />',() => {
 
         const matchPasswordInput = getByPlaceholderText('Repeat your password')
         fireEvent.change(matchPasswordInput, {target : {value : matchPassword}})
+        const submitButton = getByText('SIGN UP')
+        fireEvent.click(submitButton)
     })
-    it("should change input value", async () => {
+    it("should update input values", async () => {
         const updatedUsernameInput = await waitForElement(() => getByValue(username))
         const updatedEmailInput = await waitForElement(() => getByValue(email))
         const updatedPasswordInput = await waitForElement(() => getByValue(password))
@@ -33,4 +38,12 @@ describe('<SignupForm />',() => {
         expect(updatedPasswordInput).toBeTruthy
         expect(updatedMatchPasswordInput).toBeTruthy
       });
+
+  
+    //   it('should call history.replace',() => {
+          
+    //     const replaceSpy = jest.spyOn(history, 'replace');
+    //     expect(replaceSpy).toBeCalled()
+    //     replaceSpy.mockRestore()
+    //   })
 })

@@ -1,21 +1,16 @@
 import React,{useContext,Fragment} from 'react'
-import {AuthContextData} from '../../../AuthContext/AuthContext'
-
 import SubscribeButton from '../../SubscribeButton/SubscribeButton'
-import { Route, Redirect,Link} from "react-router-dom";
-
+import { Link} from "react-router-dom";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
  faShieldAlt
 } from '@fortawesome/free-solid-svg-icons';
 library.add(faShieldAlt);
-const CommunityDetails = props => {
-    const {authState} = useContext(AuthContextData)
-    const {userId} = authState
-    const {community} = props
+import useAuthContext from '../../../hooks/useAuthContext/useAuthContext'
+const CommunityDetails = ({community}) => {
+    const {userId} = useAuthContext()
     const {name,icon,subscribers,_id,creator} = community
-    
     return (
         <>
         <div className="community-details">
@@ -26,7 +21,7 @@ const CommunityDetails = props => {
         </div>
         <div className="community-banner">
             <div className="community-logo">
-            <img src={`http://localhost:8080/images/${icon}`} alt={`${name}`}/>
+            <img src={`http://localhost:8080/images/${icon}`}  alt={`${name}`} data-testid="community-logo"/>
             </div>
             </div>
             <h1 className="community-name">{name}</h1>

@@ -26,7 +26,6 @@ const SignupForm = ({history}) => {
       username
     }
     const responseData = await postData(apiUrl,signupData,'')
-    console.log(responseData)
     if (responseData === undefined) {
       toggleValidationErrors([
         {
