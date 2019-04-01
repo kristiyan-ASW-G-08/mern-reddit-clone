@@ -1,5 +1,5 @@
 import React from 'react';
-import CommentBar from '../CommentBar';
+import CommentBar from '../CommentBar/CommentBar';
 import PropTypes from 'prop-types';
 import commentType from '../../PropTypes/commentType'
 const Comment = ({
@@ -9,7 +9,6 @@ const Comment = ({
   setEditComment,
   on
 }) => {
-  console.log(comment.comments)
   const {
     content,
     author,
@@ -23,29 +22,26 @@ const Comment = ({
   return (
     <div className="comment">
       <div className="comment-details">
-        <p className="comment-author">{author}</p>
+        <p className="comment-author">u/{author}</p>
         <p className="comment-date">{dateReadable}</p>
       </div>
       <h5 className="comment-content">{content}</h5>
-      {/* <CommentBar
-        authorId={comment.authorId}
-        comments={comments}
+      <CommentBar
         deleteCommentElement={deleteCommentElement}
-        commentId={comment._id}
         toggle={toggle}
         setEditComment={setEditComment}
         comment={comment}
         on={on}
-      /> */}
+      />
     </div>
   );
 };
-// Comment.propTypes = {
-//   // comment:commentType.isRequired,
-//   deleteCommentElement: PropTypes.func.isRequired,
-//   toggle: PropTypes.func.isRequired,
-//   setEditComment: PropTypes.func.isRequired,
-//   on: PropTypes.bool.isRequired
-// };
+Comment.propTypes = {
+  comment:commentType.isRequired,
+  deleteCommentElement: PropTypes.func.isRequired,
+  toggle: PropTypes.func.isRequired,
+  setEditComment: PropTypes.func.isRequired,
+  on: PropTypes.bool.isRequired
+};
 
 export default Comment;

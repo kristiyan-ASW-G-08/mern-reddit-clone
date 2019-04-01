@@ -96,7 +96,7 @@ const PostBar= ({post,deletePostElement,history}) => {
 }
 
 PostBar.propTypes = {
-    deletePostElement:func.isRequired,
+    deletePostElement:func,
     post:postType.isRequired,
     history: shape({
      push:func.isRequired,
