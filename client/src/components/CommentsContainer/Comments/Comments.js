@@ -1,7 +1,7 @@
 import React, { Fragment, lazy } from 'react';
-import Comment from './Comment/Comment';
+import Comment from '../Comment/Comment';
 import PropTypes ,{func,bool} from 'prop-types';
-import commentsArrType from '../PropTypes/commentsArrType'
+import commentsArrType from '../../PropTypes/commentsArrType'
 const Comments = ({
   comments,
   deleteCommentElement,
@@ -11,6 +11,7 @@ const Comments = ({
 }) => {
   return (
     <>
+      <div data-testid="comments">
       {comments.map(comment => {
         return (
           <Comment
@@ -23,6 +24,7 @@ const Comments = ({
           />
         );
       })}
+      </div>
     </>
   );
 };

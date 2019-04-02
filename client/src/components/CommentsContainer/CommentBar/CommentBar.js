@@ -6,6 +6,8 @@ import {
   faShare,faCommentAlt, faBookmark,faTrashAlt,faPen,
 } from '@fortawesome/free-solid-svg-icons';
 import deleteData from '../../../util/deleteData'
+import PropTypes from 'prop-types';
+import commentType from '../../PropTypes/commentType'
 library.add(faShare,faCommentAlt,faBookmark,faTrashAlt,faPen,);
 const CommentBar= ({deleteCommentElement,toggle,setEditComment,comment,on}) => {
     const {userId,token} = useAuthContext()
@@ -32,7 +34,7 @@ const CommentBar= ({deleteCommentElement,toggle,setEditComment,comment,on}) => {
          <button onClick={deleteHandler} className="button post-info-button" data-testid="delete-button">
         <FontAwesomeIcon icon="trash-alt" /><span>Delete</span>
         </button>
-        <button onClick={editHandler} className="button post-info-button" data-testid="edit-button">
+        <button onClick={editHandler} className="button post-info-button" data-testid={`edit-button-${_id}`}>
         <FontAwesomeIcon icon="pen" /><span>Edit</span>
         </button>
         </>
@@ -55,4 +57,12 @@ const CommentBar= ({deleteCommentElement,toggle,setEditComment,comment,on}) => {
         </div>
     )
 }
+
+CommentBar.propTypes = {
+    comment:commentType.isRequired,
+    deleteCommentElement: PropTypes.func.isRequired,
+    toggle: PropTypes.func.isRequired,
+    setEditComment: PropTypes.func.isRequired,
+    on: PropTypes.bool.isRequired
+  };
 export default CommentBar

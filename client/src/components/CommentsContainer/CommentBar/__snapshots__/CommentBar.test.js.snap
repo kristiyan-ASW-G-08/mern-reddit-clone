@@ -99,7 +99,7 @@ exports[`<CommentBar/> snapshot 1`] = `
       </button>
       <button
         class="button post-info-button"
-        data-testid="edit-button"
+        data-testid="edit-button-1"
       >
         <svg
           aria-hidden="true"

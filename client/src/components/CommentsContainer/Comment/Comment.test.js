@@ -4,6 +4,7 @@ import Comment from './Comment';
 import AuthContextTestWrapper from '../../../AuthContext/AuthContextTestWrapper'
 const updateUserDataReducer = jest.fn()
 const authState =  {isAuth:false,token:null,userId:null,userData:null,updateUserDataReducer}
+
 describe('<Comment/>',() => {
     const comment = {
         creationDate :'2019-04-01T13:51:12.885Z',

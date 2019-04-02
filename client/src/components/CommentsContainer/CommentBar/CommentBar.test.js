@@ -3,7 +3,6 @@ import { render, fireEvent, waitForElement,wait } from 'react-testing-library';
 import CommentBar from './CommentBar';
 import AuthContextTestWrapper from '../../../AuthContext/AuthContextTestWrapper'
 const updateUserDataReducer = jest.fn()
-import deleteData from '../../../util/deleteData'
 jest.mock('../../../util/deleteData')
 describe('<CommentBar/>',() => {
     const comment = {
@@ -16,7 +15,8 @@ describe('<CommentBar/>',() => {
         content :'Your next line is...',
         upvotes :10,
         downvotes :3,
-        comments:1
+        comments:1,
+        _id:1,
     }
     const toggle = jest.fn()
     const deleteCommentElement  = jest.fn()
@@ -31,7 +31,7 @@ describe('<CommentBar/>',() => {
     })
 
       it('should have edit button',  () => {
-        const element =  getByTestId(`edit-button`)
+        const element =  getByTestId(`edit-button-${comment._id}`)
         expect(element).toBeTruthy;
         fireEvent.click(element)
         expect(toggle).toHaveBeenCalled()

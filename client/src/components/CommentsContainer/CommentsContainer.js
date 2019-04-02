@@ -2,7 +2,7 @@ import React,{Suspense,lazy} from 'react'
 import Loader from '../Loader'
 import PropTypes ,{func,bool} from 'prop-types';
 import commentsArrType from '../PropTypes/commentsArrType' 
-const Comments = lazy(() => import('./Comments'));
+const Comments = lazy(() => import('./Comments/Comments'));
 const CommentsContainer= ({comments,toggle,on,setEditComment,setComments,getNextPage}) => {
   const deleteCommentElement = commentId => {
     const editedComments = comments.filter(
@@ -14,7 +14,7 @@ const CommentsContainer= ({comments,toggle,on,setEditComment,setComments,getNext
         <>
         {comments ? (
           <Suspense fallback={<Loader />}>
-            <div className="comments-container" >
+            <div className="comments-container" data-testid="comments-container">
             <Comments  
                     comments={comments}
                     deleteCommentElement={deleteCommentElement}
