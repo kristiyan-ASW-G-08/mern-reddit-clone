@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CommunityPreview/> snapshot 1`] = `
+<div>
+  <a
+    href="/community/test"
+  >
+    <div
+      class="community-preview"
+    >
+      <div
+        class="community-preview-container"
+      >
+        <div
+          class="community-preview-container-icon"
+        >
+          <img
+            alt="test"
+            data-testid="community-logo"
+            src="http://localhost:8080/images/default"
+          />
+        </div>
+      </div>
+      <div
+        class="community-preview-body"
+      >
+        <h3
+          class="community-preview-body-name"
+        >
+          c/
+          test
+        </h3>
+        <h4
+          class="community-preview-body-subscribers"
+        >
+          10
+           
+          subscribers
+        </h4>
+      </div>
+    </div>
+  </a>
+</div>
+`;

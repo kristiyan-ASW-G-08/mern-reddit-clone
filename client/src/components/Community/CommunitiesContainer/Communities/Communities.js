@@ -1,10 +1,11 @@
 import React, { Fragment,lazy } from 'react';
 import PropTypes from 'prop-types';
-import CommunityPreview from './CommunityPreview'
-import communitiesArrType from '../../PropTypes/communitiesArrType'
+import CommunityPreview from '../CommunityPreview/CommunityPreview'
+import communitiesArrType from '../../../PropTypes/communitiesArrType'
 const Communities = ({ communities }) => {
   return (
     <>
+     <div data-testid="communities" className="communities-container">
       {communities.map(community => {
         return (
           <CommunityPreview
@@ -13,6 +14,7 @@ const Communities = ({ communities }) => {
           />
         );
       })}
+      </div>
     </>
   );
 };
