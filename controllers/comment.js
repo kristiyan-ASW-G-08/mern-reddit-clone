@@ -3,22 +3,14 @@ const User = require('../models/user');
 const Comment = require('../models/comment');
 const mongoose = require('mongoose');
 const { validationResult } = require('express-validator/check');
-
+const errorsIsEmpty = require('../util/errorsIsEmpty')
 exports.createComment = async (req, res, next) => {
   try {
+    errorsIsEmpty(validationResult(req))
       const {postId} = req.params
      const {  content } = req.body;
-    console.log(content,postId)
     const user = await User.findById(req.userId);
-    console.log(postId)
     const post = await Post.findById(postId);;
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      const error = new Error('Validation failed.');
-      error.statusCode = 422;
-      error.data = errors.array()
-      throw error;
-    } else {
       const comment = new Comment({
         content,
         postId,
@@ -30,7 +22,7 @@ exports.createComment = async (req, res, next) => {
       await post.incrementComments()
       await comment.save();
       res.status(201).json({comment});
-    }
+    
   } catch (err) {
     console.log(err);
     next(err)
@@ -71,13 +63,7 @@ exports.getComments = async (req,res,next) => {
 
   exports.editComment = async (req, res, next) => {
     try {
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        const error = new Error('Validation failed.');
-        error.statusCode = 422;
-        error.data = errors.array()
-        throw error;
-      } else {
+      errorsIsEmpty(validationResult(req))
         const {  content } = req.body;
       const { commentId } = req.params;
       const editComment = {
@@ -86,7 +72,7 @@ exports.getComments = async (req,res,next) => {
       await Comment.findOneAndUpdate({ _id: commentId }, editComment);
       const comment = await Comment.findById(commentId)
       res.status(201).json({ msg: 'updated',comment})
-      }
+      
     } catch (err) {
       console.log(err)
       next(err)

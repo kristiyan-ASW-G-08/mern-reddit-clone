@@ -1,16 +1,10 @@
 const Community = require('../models/community');
 const Post = require('../models/post');
 const { validationResult } = require('express-validator/check');
+const errorsIsEmpty = require('../util/errorsIsEmpty')
 exports.createCommunity = async (req, res, next) => {
   try {
-    const errors = validationResult(req);
-    console.log(req.body);
-    if (!errors.isEmpty()) {
-      const error = new Error();
-      error.statusCode = 422;
-      error.data = errors.array();
-      throw error;
-    }
+    errorsIsEmpty(validationResult(req))
     const { name, description } = req.body;
     const community = new Community({
       name,

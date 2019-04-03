@@ -3,16 +3,10 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const {secret} =  require('../config/keys')
 const User = require('../models/user');
+const errorsIsEmpty = require('../util/errorsIsEmpty')
 exports.signup = async (req, res, next) => {
   try {
-    const errors = validationResult(req);
-    console.log(req.body)
-    if (!errors.isEmpty()) {
-      const error = new Error('Validation failed.');
-      error.statusCode = 422;
-      error.data = errors.array();
-      throw error;
-    }
+    errorsIsEmpty(validationResult(req))
     const { email, username, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 12);
     const user = new User({
@@ -91,43 +85,3 @@ exports.login = async (req, res, next) => {
     next(err);
   }
 };
-// exports.getUserStatus = (req, res, next) => {
-//   User.findById(req.userId)
-//     .then(user => {
-//       if (!user) {
-//         const error = new Error('User not found.');
-//         error.statusCode = 404;
-//         throw error;
-//       }
-//       res.status(200).json({ status: user.status });
-//     })
-//     .catch(err => {
-//       if (!err.statusCode) {
-//         err.statusCode = 500;
-//       }
-//       next(err);
-//     });
-// };
-
-// exports.updateUserStatus = (req, res, next) => {
-//   const newStatus = req.body.status;
-//   User.findById(req.userId)
-//     .then(user => {
-//       if (!user) {
-//         const error = new Error('User not found.');
-//         error.statusCode = 404;
-//         throw error;
-//       }
-//       user.status = newStatus;
-//       return user.save();
-//     })
-//     .then(result => {
-//       res.status(200).json({ message: 'User updated.' });
-//     })
-//     .catch(err => {
-//       if (!err.statusCode) {
-//         err.statusCode = 500;
-//       }
-//       next(err);
-//     });
-// };

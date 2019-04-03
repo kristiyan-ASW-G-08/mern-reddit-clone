@@ -3,22 +3,14 @@ const User = require('../models/user');
 const mongoose = require('mongoose');
 const Community = require('../models/community');
 const { validationResult } = require('express-validator/check');
-
+const errorsIsEmpty = require('../util/errorsIsEmpty')
 exports.createPost = async (req, res, next) => {
   try {
+    errorsIsEmpty(validationResult(req))
     const {communityId} = req.params
-    const { title, content,} = req.body;
-    console.log(title,content)
+    const { title, content,} = req.body
     const user = await User.findById(req.userId);
     const community = await Community.findById(communityId);
-    const errors = validationResult(req);
-    console.log(user);
-    if (!errors.isEmpty()) {
-      const error = new Error('Validation failed.');
-      error.statusCode = 422;
-      error.data = errors.array()
-      throw error;
-    } else {
       const post = new Post({
         title,
         content,
@@ -28,8 +20,8 @@ exports.createPost = async (req, res, next) => {
         communityName: community.name
       });
       await post.save();
-      res.status(201).json({ msg: 'Post succesfully added', postId: post._id });
-    }
+      res.status(201).json({ msg: 'Post successfully added', postId: post._id });
+    
   } catch (err) {
     console.log(err);
     next(err);
@@ -76,13 +68,7 @@ exports.deletePost = async (req, res, next) => {
 };
 exports.editPost = async (req, res, next) => {
   try {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      const error = new Error('Validation failed.');
-      error.statusCode = 422;
-      error.data = errors.array()
-      throw error;
-    } else {
+    errorsIsEmpty(validationResult(req))
       const { title, content } = req.body;
       const { postId } = req.params;
       const post = {
@@ -91,7 +77,7 @@ exports.editPost = async (req, res, next) => {
       };
       await Post.findOneAndUpdate({ _id: postId }, post);
       res.status(201).json({ msg: 'updated' });
-    }
+    
   } catch (err) {
     next(err);
     console.log(err)
