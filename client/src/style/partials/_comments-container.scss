@@ -12,5 +12,7 @@
     @include large-screen{
       width: 95%;
     }
-
+    .load-more-button{
+      color: $primary;
+  }
 }

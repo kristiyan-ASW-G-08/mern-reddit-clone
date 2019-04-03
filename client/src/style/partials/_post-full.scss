@@ -44,5 +44,12 @@
       line-height: 1.6;
       padding-right: 0.3rem;
   }
-
+  .comment-form-container{
+    @include center;
+    grid-gap: 0.3rem;
+  }
+  .comment-button{
+    color:$primary;
+    font-size: 0.7rem;
+  }
 }

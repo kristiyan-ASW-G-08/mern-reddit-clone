@@ -1,18 +1,18 @@
 import React, { useState, Fragment, useContext } from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { AuthContextData } from '../../AuthContext/AuthContext';
+import useAuthContext from '../../hooks/useAuthContext/useAuthContext'
 import { Link } from 'react-router-dom';
 import {
   faCog,
   faMoon,
   faCaretDown,
-  faUser
+  faUser,
+  faOm
 } from '@fortawesome/free-solid-svg-icons';
 library.add(faCaretDown, faCog, faMoon, faUser);
 const Dropdown = props => {
-  const { authState, logoutReducer } = useContext(AuthContextData);
-  const { isAuth } = authState;
+  const { isAuth, logoutReducer } = useAuthContext()
   const [active, setActive] = useState(false);
   let dropdownBody;
   const dropDownHandler = () => {
@@ -21,9 +21,7 @@ const Dropdown = props => {
   if (active) {
     dropdownBody = (
       <ul className="dropdown__body">
-        <li>Night Mode</li>
-
-        <li>Visit Reddit</li>
+  
         {isAuth ? (
           <>
             <li>

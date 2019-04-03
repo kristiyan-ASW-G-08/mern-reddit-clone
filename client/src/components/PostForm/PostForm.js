@@ -3,7 +3,7 @@ import Input from '../Input/Input';
 import { withRouter } from 'react-router-dom';
 import ValidationErrorsList from '../ValidationErrorsList/ValidationErrorsList';
 import useValidationErrors from '../../hooks/useValidationErrors/useValidationErrors';
-import { AuthContextData } from '../../AuthContext/AuthContext';
+import useDocumentTitle from '../../hooks/useDocumentTitle/useDocumentTitle'
 import postData from '../../util/postData';
 import useAuthContext from '../../hooks/useAuthContext/useAuthContext'
 const PostForm = props => {
@@ -11,6 +11,7 @@ const PostForm = props => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const {token}  = useAuthContext()
+  useDocumentTitle('Submit to Rereddit')
   const {
     validationErrorMessages,
     validationErrorParams,
@@ -67,7 +68,7 @@ const PostForm = props => {
         validationErrorParams={validationErrorParams}
         textArea={true}
       />
-      <button className="button">Post</button>
+      <button className="button">Submit</button>
     </form>
   );
 };

@@ -39,13 +39,9 @@ const CommentBar= ({deleteCommentElement,toggle,setEditComment,comment,on}) => {
         </button>
         </>
     }
-    
     return (
         <div>
-            <div className="postbar">
-        <button className="button postbar-button" data-testid="share-button">
-        <FontAwesomeIcon icon="share" /><span>Share</span>
-        </button>
+        <div className="postbar">
         <button className="button postbar-button">
         <FontAwesomeIcon icon="comment-alt" /><span>{comments}</span>
         </button>

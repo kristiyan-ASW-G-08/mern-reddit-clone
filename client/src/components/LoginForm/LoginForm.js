@@ -6,10 +6,12 @@ import ValidationErrorsList from '../ValidationErrorsList/ValidationErrorsList';
 import Logo from '../../assets/logo.svg';
 import useValidationErrors from '../../hooks/useValidationErrors/useValidationErrors';
 import useAuthContext from '../../hooks/useAuthContext/useAuthContext';
+import useDocumentTitle from '../../hooks/useDocumentTitle/useDocumentTitle'
 const LoginForm = props => {
   const { loginReducer } = useAuthContext();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  useDocumentTitle('Login')
   const {
     validationErrorMessages,
     validationErrorParams,

@@ -8,13 +8,14 @@ import useAuthContext from '../../hooks/useAuthContext/useAuthContext'
 import {string,func,shape} from 'prop-types'
 import postType from '../PropTypes/postType'
 import {
-  faShare,faCommentAlt, faBookmark,faTrashAlt,faPen,faCopy
+  faShare,faCommentAlt, faBookmark,faTrashAlt,faPen,faCopy,faLink
 } from '@fortawesome/free-solid-svg-icons';
-library.add(faShare,faCommentAlt,faBookmark,faTrashAlt,faPen,faCopy);
+library.add(faShare,faCommentAlt,faBookmark,faTrashAlt,faPen,faCopy,faLink);
 
 const PostBar= ({post,deletePostElement,history}) => {
     const { isAuth,userId,token,userData, updateUserDataReducer } = useAuthContext()
     const [saved,setSaved] = useState(false)
+    const [copyButtonActive,setCopyButtonActive] = useState(false)
     const {comments,authorId,communityName,_id} = post
     const postId = _id
     useEffect(() => {
@@ -36,11 +37,15 @@ const PostBar= ({post,deletePostElement,history}) => {
     }
     }
     const spamHandler = async () => {
-        const apiUrl = `http://localhost:8080/community/report/${postId}`
+        if(!isAuth)history.push(`/login`)
+        else {
+            const apiUrl = `http://localhost:8080/community/report/${postId}`
         const requestBody = {
             communityId:post.community
         }
-       const responseData =  await postData(apiUrl,requestBody,token)
+          const responseData =  await postData(apiUrl,requestBody,token)
+        }
+        
     }
     let autorizedContent = ''
     if(authorId === userId){
@@ -73,14 +78,27 @@ const PostBar= ({post,deletePostElement,history}) => {
                 setSaved(savedCheck)
             }
         }else {
-            history.push(`/community/login`)
+            history.push(`/login`)
         }
+    }
+
+    const copyUrlHandler = async () => {
+        const url = `${window.location.origin}/post/${_id}`
+        navigator.clipboard.writeText(url)
+        setCopyButtonActive(false)
+
     }
     return (
         <div className="postbar">
-        <button className="button postbar-button">
+        <ul className="postbar-button-with-options">
+        <button className="button postbar-button" onClick={() => setCopyButtonActive(!copyButtonActive)}>
         <FontAwesomeIcon icon="share" /><span>Share</span>
         </button>
+        <ul className={`postbar-button-options ${copyButtonActive ?  'active' : ''}`}>
+            <li><button className="button postbar-button" onClick={copyUrlHandler}><FontAwesomeIcon icon="link" />Copy Link</button></li>
+        </ul>
+        </ul>
+       
         <button className="button postbar-button">
         <FontAwesomeIcon icon="comment-alt" /><span>{comments}</span>
         </button>

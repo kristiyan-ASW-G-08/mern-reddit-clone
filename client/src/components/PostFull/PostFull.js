@@ -16,6 +16,7 @@ const PostFull = props => {
   const [post, setPost] = useState(null);
   const { isAuth, userId, token } = authState.authState;
   const { postId } = props.match.params;
+  
   useEffect(() => {
     const apiUrl = `http://localhost:8080/post/get/${postId}`;
     const responseData = getData(apiUrl).then(data => {

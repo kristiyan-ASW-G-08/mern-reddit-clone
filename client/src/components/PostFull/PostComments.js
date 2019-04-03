@@ -44,7 +44,7 @@ const PostComments = props => {
           <Toggle>
             {({ on, toggle }) => (
               <>
-                <div>
+                <div className="comment-form-container">
                   {on ? (
                     <CommentForm
                       postId={postId}
@@ -58,7 +58,7 @@ const PostComments = props => {
                     ''
                   )}
                   <button
-                    className="button button-toggle"
+                    className="button button-toggle comment-button"
                     onClick={() => {
                       setEditComment(false);
                       toggle();

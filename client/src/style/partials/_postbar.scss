@@ -12,4 +12,21 @@
     .saved{
         color: $primary;;
     }
+    &-button-with-options{
+        display: inline;
+    }
+    &-button-options{
+        display: none;
+        &.active{
+            display: block;
+            list-style: none;
+            position:absolute;
+            background: $white;
+            @include border;
+            padding: 0.4rem;
+            transform: translateY(0.2rem);
+            box-shadow: 1px 1px 1px 0 rgba(0,0,0,.25)
+        
+        }
+    }
 }

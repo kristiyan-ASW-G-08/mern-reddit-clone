@@ -13,3 +13,6 @@
   border: solid 0.5px lighten($lighter-dark, 50%);
   border-radius: 7px;
 }
+@mixin border-radius{
+  border-radius: 7px;
+}

@@ -2,6 +2,7 @@ import React, { useState, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import ValidationErrorsList from '../ValidationErrorsList/ValidationErrorsList';
 import useValidationErrors from '../../hooks/useValidationErrors/useValidationErrors';
+import useDocumentTitle from '../../hooks/useDocumentTitle/useDocumentTitle'
 import Input from '../Input/Input';
 import Logo from '../../assets/logo.svg';
 import postData from '../../util/postData'
@@ -10,6 +11,7 @@ const SignupForm = ({history}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [matchPassword, setMatchPassword] = useState('');
+  useDocumentTitle('Sign Up')
   const {
     validationErrorMessages,
     validationErrorParams,
@@ -30,7 +32,7 @@ const SignupForm = ({history}) => {
       toggleValidationErrors([
         {
           param: 'server-error',
-          msg: `Server isn't availdable.Please try again later!`
+          msg: `Server isn't available.Please try again later!`
         }
       ]);
     } else if (responseData.validationErrors) {

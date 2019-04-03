@@ -44,6 +44,10 @@ const VotesContainer = ({post,history}) => {
                     setDownvoted(true)
                     setUpvoted(false)
                 }
+                if(responseData.userData.upvoted.length === 0 && responseData.userData.downvoted.length === 0){
+                    setDownvoted(false)
+                    setUpvoted(false)
+                }
         }else{
             history.push(`/login`)
         }

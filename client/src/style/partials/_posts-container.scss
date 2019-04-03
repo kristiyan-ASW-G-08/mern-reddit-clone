@@ -13,5 +13,6 @@
     .load-more-button{
         background: $primary;
         color: $white;
+        @include border-radius;
     }
 }

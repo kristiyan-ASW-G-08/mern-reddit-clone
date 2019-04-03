@@ -1,7 +1,9 @@
 import React  from 'react'
 import PostBar from '../../PostBar/PostBar'
 import VotesContainer from '../../VotesContainer/VotesContainer'
+import useDocumentTitle from '../../../hooks/useDocumentTitle/useDocumentTitle'
 const PostFull= ({post}) => {
+  useDocumentTitle(post.title)
     return (
         <div className="post-container">
         <VotesContainer post={post}/>
