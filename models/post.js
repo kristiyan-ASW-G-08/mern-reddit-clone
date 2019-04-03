@@ -58,4 +58,13 @@ const postSchema = new Schema({
 postSchema.methods.saveVoteChanges = function(){
   this.save()
 }
+
+postSchema.methods.incrementComments = function(){
+  this.comments++
+  this.save()
+}
+postSchema.methods.decrementComments = function(){
+  this.comments--
+  this.save()
+}
 module.exports = mongoose.model('Post', postSchema);

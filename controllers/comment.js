@@ -27,6 +27,7 @@ exports.createComment = async (req, res, next) => {
         author: user.username,
         communityId:post.community
       });
+      await post.incrementComments()
       await comment.save();
       res.status(201).json({comment});
     }
@@ -55,10 +56,13 @@ exports.getComments = async (req,res,next) => {
 
   exports.deleteComment = async(req,res,next) => {
     try{
+      console.log('deleating comments')
       const { commentId } = req.params;
-      console.log(commentId)
-      await Comment.findByIdAndDelete(commentId);
-      res.status(200).json({ msg: 'Comment Deleted' });
+      const comment = await Comment.findById(commentId);;
+      await comment.remove()
+      const post = await Post.findById(comment.postId);;
+      await post.decrementComments()
+      res.status(200).json({ msg: 'deleated' });
     }catch(err){
       console.log(err)
     }
