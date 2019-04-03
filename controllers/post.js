@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const Community = require('../models/community');
 const { validationResult } = require('express-validator/check');
 const errorsIsEmpty = require('../util/errorsIsEmpty')
+const pagination  = require('../util/pagination')
 exports.createPost = async (req, res, next) => {
   try {
     errorsIsEmpty(validationResult(req))
@@ -14,7 +15,7 @@ exports.createPost = async (req, res, next) => {
       const post = new Post({
         title,
         content,
-        community: communityId,
+        communityId,
         authorId: req.userId,
         author: user.username,
         communityName: community.name
@@ -41,15 +42,9 @@ exports.getPost = async (req, res, next) => {
 };
 exports.getPosts = async (req, res, next) => {
   try {
-    const { page } = req.query;
-    const currentPage = page || 1;
-    const postPerPage = 5;
-    const posts = await Post.find()
-      .countDocuments()
-      .find()
-      .skip((currentPage - 1) * postPerPage)
-      .limit(postPerPage);
-    res.status(200).json({ posts });
+    const paginationData = await pagination(req,'general','')
+    const {posts,postsCount}  = paginationData
+    res.status(200).json({ posts ,postsCount});
   } catch (err) {
     console.log(err);
     // errorFunc(err, next);

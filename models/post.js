@@ -12,7 +12,7 @@ const postSchema = new Schema({
     ref: 'User',
     required: true
   },
-  community: {
+  communityId: {
     type: Schema.Types.ObjectId,
     ref: 'Community',
     required: true

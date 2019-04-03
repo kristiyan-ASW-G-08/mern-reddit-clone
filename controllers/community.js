@@ -2,6 +2,7 @@ const Community = require('../models/community');
 const Post = require('../models/post');
 const { validationResult } = require('express-validator/check');
 const errorsIsEmpty = require('../util/errorsIsEmpty')
+const pagination  = require('../util/pagination')
 exports.createCommunity = async (req, res, next) => {
   try {
     errorsIsEmpty(validationResult(req))
@@ -41,16 +42,9 @@ exports.getCommunity = async (req, res, next) => {
 exports.getPosts = async (req, res, next) => {
   try {
     const { communityId } = req.params;
-    const { page } = req.query;
-    console.log(page);
-    const currentPage = page || 1;
-    const postPerPage = 5;
-    const posts = await Post.find({ community: communityId })
-      .countDocuments()
-      .find()
-      .skip((currentPage - 1) * postPerPage)
-      .limit(postPerPage);
-    res.status(200).json({ posts });
+    const paginationData = await pagination(req,'community',communityId)
+    const {posts,postsCount}  = paginationData
+    res.status(200).json({ posts ,postsCount});
   } catch (err) {
     console.log(err);
   }
