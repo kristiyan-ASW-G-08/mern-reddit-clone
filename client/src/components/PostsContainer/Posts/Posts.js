@@ -5,7 +5,7 @@ import postsArrType from '../../PropTypes/postsArrType'
 const Posts = ({ posts, deletePostElement }) => {
   return (
     <>
-      <div data-testid="posts">
+      <div className="posts" data-testid="posts">
         {posts.map(post => {
           return (
             <Post

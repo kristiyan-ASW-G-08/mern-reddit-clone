@@ -10,4 +10,11 @@
         cursor: pointer;
         font-size: 1.2rem;
     }
+    .upvoted{
+        color:$upvote
+    }
+    .downvoted{
+        color:$downvote
+    }
+    
 }

@@ -15,7 +15,7 @@ const CommentBar= ({deleteCommentElement,toggle,setEditComment,comment,on}) => {
     const deleteHandler = async () => {
         const apiUrl = `http://localhost:8080/comment/delete/${_id}`
         const data = await deleteData(apiUrl,token)
-        if(data.msg === 'deleated'){
+        if(data.msg === 'deleted'){
             deleteCommentElement(_id)
         }
     }
@@ -27,14 +27,14 @@ const CommentBar= ({deleteCommentElement,toggle,setEditComment,comment,on}) => {
             setEditComment(comment)
         }
     }
-    let autorizedContent = ''
+    let authorizedContent = ''
      if(authorId === userId){
-        autorizedContent = 
+        authorizedContent = 
         <>
-         <button onClick={deleteHandler} className="button post-info-button" data-testid="delete-button">
+         <button onClick={deleteHandler} className="button postbar-button" data-testid="delete-button">
         <FontAwesomeIcon icon="trash-alt" /><span>Delete</span>
         </button>
-        <button onClick={editHandler} className="button post-info-button" data-testid={`edit-button-${_id}`}>
+        <button onClick={editHandler} className="button postbar-button" data-testid={`edit-button-${_id}`}>
         <FontAwesomeIcon icon="pen" /><span>Edit</span>
         </button>
         </>
@@ -42,17 +42,17 @@ const CommentBar= ({deleteCommentElement,toggle,setEditComment,comment,on}) => {
     
     return (
         <div>
-            <div className="post-info">
-        <button className="button post-info-button" data-testid="share-button">
+            <div className="postbar">
+        <button className="button postbar-button" data-testid="share-button">
         <FontAwesomeIcon icon="share" /><span>Share</span>
         </button>
-        <button className="button post-info-button">
+        <button className="button postbar-button">
         <FontAwesomeIcon icon="comment-alt" /><span>{comments}</span>
         </button>
-        <button className="button post-info-button" data-testid="save-button">
+        <button className="button postbar-button" data-testid="save-button">
         <FontAwesomeIcon icon="bookmark" /><span>Save</span>
         </button>
-        {autorizedContent}
+        {authorizedContent}
         </div>
         </div>
     )

@@ -56,13 +56,13 @@ exports.getComments = async (req,res,next) => {
 
   exports.deleteComment = async(req,res,next) => {
     try{
-      console.log('deleating comments')
+      console.log('deleting comments')
       const { commentId } = req.params;
       const comment = await Comment.findById(commentId);;
       await comment.remove()
       const post = await Post.findById(comment.postId);;
       await post.decrementComments()
-      res.status(200).json({ msg: 'deleated' });
+      res.status(200).json({ msg: 'deleted' });
     }catch(err){
       console.log(err)
     }

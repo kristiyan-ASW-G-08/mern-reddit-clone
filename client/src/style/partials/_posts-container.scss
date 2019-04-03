@@ -1,9 +1,15 @@
 .posts-container{
     width: 100%;
-    grid-gap: 0.7rem;
+    grid-gap:1rem;
     display: grid;
     justify-items: center;
     margin-top: 1rem;
+    .posts{
+        display: grid;
+        justify-items: center;
+        grid-gap: 0.7rem;
+        width: 100%
+    }
     .load-more-button{
         background: $primary;
         color: $white;

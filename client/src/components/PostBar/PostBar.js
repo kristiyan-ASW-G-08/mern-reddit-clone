@@ -46,11 +46,11 @@ const PostBar= ({post,deletePostElement,history}) => {
     if(authorId === userId){
         autorizedContent = 
         <>
-         <button onClick={deleteHandler} className="button post-info-button">
+         <button onClick={deleteHandler} className="button postbar-button">
         <FontAwesomeIcon icon="trash-alt" /><span>Delete</span>
         </button>
         <Link to={{pathname:`/edit-post/${postId}`, post}}>
-        <button className="button post-info-button">
+        <button className="button postbar-button">
         <FontAwesomeIcon icon="pen" /><span>Edit</span>
         </button>
         </Link>
@@ -77,17 +77,17 @@ const PostBar= ({post,deletePostElement,history}) => {
         }
     }
     return (
-        <div className="post-info">
-        <button className="button post-info-button">
+        <div className="postbar">
+        <button className="button postbar-button">
         <FontAwesomeIcon icon="share" /><span>Share</span>
         </button>
-        <button className="button post-info-button">
+        <button className="button postbar-button">
         <FontAwesomeIcon icon="comment-alt" /><span>{comments}</span>
         </button>
-        <button onClick={saveHandler} className={`button post-info-button ${saved ? 'saved' : ''} `}>
+        <button onClick={saveHandler} className={`button postbar-button ${saved ? 'saved' : ''} `}>
         <FontAwesomeIcon icon="bookmark" /><span>Save</span>
         </button>
-        <button onClick={spamHandler} className="button post-info-button">
+        <button onClick={spamHandler} className="button postbar-button">
         <FontAwesomeIcon icon="copy" /><span>Spam</span>
         </button>
         {autorizedContent}

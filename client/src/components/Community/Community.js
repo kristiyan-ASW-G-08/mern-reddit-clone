@@ -5,14 +5,14 @@ import CommunityPosts from './CommunityPosts/CommunityPosts'
 import getData from '../../util/getData'
 import PropTypes ,{ string,shape}from 'prop-types';
 const Community = ({match}) => {
-    const [community, setComminity] = useState(false)
+    const [community, setCommunity] = useState(false)
     const {communityName} = match.params
     useEffect(  () => {
         const apiUrl = `http://localhost:8080/community/get/${communityName}`
         getData(apiUrl)
         .then(data => {
-            if(data.message = 'Succsess'){
-                setComminity(data.community)       
+            if(data.community){
+                setCommunity(data.community)       
             }
         })
     },[])

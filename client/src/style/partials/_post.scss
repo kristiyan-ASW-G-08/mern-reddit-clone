@@ -7,13 +7,7 @@
         width: 50vw;
         height: 8rem;
     }
-    .upvoted{
-        color:$upvote
-    }
-    .downvoted{
-        color:$downvote
-    }
-    
+   
      &-body{
          grid-area: body;
         display: grid;
@@ -46,18 +40,5 @@
         font-size: 1.2rem;
         color: $dark;
     }
-    &-info{
-        &-button{
-            color: lighten($lighter-dark,5%);
-            padding: 0.3rem;
-            font-size:0.8rem;
-            cursor: pointer;
-            span{
-                padding: 0 0.3rem 0 0.3rem;
-            }
-        }
-        .saved{
-            color: $primary;;
-        }
-    }
+    
 }

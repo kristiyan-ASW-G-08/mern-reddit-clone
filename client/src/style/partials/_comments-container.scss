@@ -1,11 +1,16 @@
 .comments-container{
     width: 100%;
-    display: grid;
-    justify-items: center;
-    grid-gap: 0.5rem;
+    @include center;
+    grid-gap: 1rem;
     margin-top: 1rem;
+    .comments{
+      width: 100%;
+      display: grid;
+      justify-items: center;
+      grid-gap: 0.5rem;
+    }
     @include large-screen{
       width: 95%;
-      justify-items: left;
     }
+
 }

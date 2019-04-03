@@ -11,7 +11,7 @@ const Comments = ({
 }) => {
   return (
     <>
-      <div data-testid="comments">
+      <div className="comments" data-testid="comments">
       {comments.map(comment => {
         return (
           <Comment

@@ -1,0 +1,15 @@
+.postbar{
+
+    &-button{
+        color: lighten($lighter-dark,5%);
+        padding: 0.3rem;
+        font-size:0.8rem;
+        cursor: pointer;
+        span{
+            padding: 0 0.3rem 0 0.3rem;
+        }
+    }
+    .saved{
+        color: $primary;;
+    }
+}
