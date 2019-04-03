@@ -1,6 +1,6 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
-import getData from '../../util/getData';
-import PostsContainer from '../PostsContainer/PostsContainer';
+import getData from '../../../util/getData';
+import PostsContainer from '../../PostsContainer/PostsContainer';
 import PropTypes ,{ string,shape}from 'prop-types';
 const CommunityPosts = ({ communityId }) => {
   const [posts, setPosts] = useState(false);

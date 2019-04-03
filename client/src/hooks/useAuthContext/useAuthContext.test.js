@@ -21,23 +21,3 @@ describe('useAuthCountext',() => {
 
 
 
-
-// import React from 'react'
-// import {testHook, cleanup} from 'react-testing-library'
-// import useAuthContext from './useAuthContext'
-// import {AuthContextData} from '../../AuthContext/AuthContext'
-// describe('useAuthContext',() => {
-//   afterEach(cleanup)
-//   it('should create on with initial state false ',() => {
-//       let authState
-//     testHook(() => (authState = useAuthContext()), AuthContextData)
-//     expect(authState).toEqual({})
-//   })
-
-// })
-
-
-
-
-
-

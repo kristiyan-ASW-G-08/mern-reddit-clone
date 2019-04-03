@@ -1,7 +1,7 @@
 import React,{useEffect,useState,Fragment} from 'react'
 import CommunityDetails from './CommunityDetails/CommunityDetails';
 import Loader from '../Loader'
-import CommunityPosts from './CommunityPosts'
+import CommunityPosts from './CommunityPosts/CommunityPosts'
 import getData from '../../util/getData'
 import PropTypes ,{ string,shape}from 'prop-types';
 const Community = ({match}) => {
