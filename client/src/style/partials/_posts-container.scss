@@ -3,11 +3,11 @@
     grid-gap:1rem;
     display: grid;
     justify-items: center;
-    margin-top: 1rem;
+    margin:1rem 0 1rem 0;
     .posts{
         display: grid;
         justify-items: center;
-        grid-gap: 0.7rem;
+        grid-gap: 1rem;
         width: 100%
     }
     .load-more-button{

@@ -1,6 +1,6 @@
 # Mern stack reddit clone
 
-###Logo provided by [Acme Logos](http://acmelogos.com/)
+### Logo provided by [Acme Logos](http://acmelogos.com/)
 .Favicons generated with 
 ### Icons by [Font Awesome](https://fontawesome.com/)
 

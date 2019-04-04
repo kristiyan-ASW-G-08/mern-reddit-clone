@@ -1,5 +1,5 @@
 .postbar{
-
+    position: relative;
     &-button{
         color: lighten($lighter-dark,5%);
         padding: 0.3rem;
@@ -16,6 +16,7 @@
         display: inline;
     }
     &-button-options{
+
         display: none;
         &.active{
             display: block;
