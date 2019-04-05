@@ -1,5 +1,6 @@
 .postbar{
     position: relative;
+    padding: 0.5rem;
     &-button{
         color: lighten($lighter-dark,5%);
         padding: 0.3rem;

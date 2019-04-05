@@ -13,6 +13,11 @@
     @content;
   }
 }
+@mixin larger-screen() {
+  @media only screen and (min-width: 900px) {
+    @content;
+  }
+}
 @mixin carousel-animation {
   @media only screen and (max-width: 950px) {
     @content;

@@ -2,34 +2,49 @@
     @include border;
     width: 100vw;
     display: grid;
-    grid:'votes body'/1fr 9fr;
+    grid:'body'/1fr;
+    @include medium-screen{
+        width: 90vw;
+    }
     @include large-screen{
-        width: 50vw;
-        height: 15rem;
+        width: 60vw;
+    }
+    @include larger-screen{
+        width: 45vw;
     }
    
      &-body{
          grid-area: body;
         display: grid;
         align-content: center;
-        grid-gap: 0.3rem;
      }
     &-links{
-        display: block;
-        padding: 0.5rem;
+        width: 100%;
+        padding: 0.5rem 0 0 1rem;
         text-decoration: none;
+        display: grid;
+        grid: "community . ."
+              "author date ."/3fr 4fr 1fr;
+       @include large-screen{
+        grid: "community . ."
+        "author date ."/3fr 4fr 4fr;
+       }
     }
-    &-content{
-        display: block;
-        text-decoration: none;
-    }
+    
     &-community{
+        grid-area:community;
         padding: 0.3rem;
-        font-size: 0.8rem;
+        font-size: 1.1rem;
         color: $lighter-dark;
         text-decoration: none;
     }
     &-author{
+        grid-area:author;
+    }
+    &-date{
+        grid-area:date;
+    }
+    &-author,&-date{
         color: lighten($lighter-dark,25%);
         font-size: 0.8rem;
         padding: 0.3rem;
@@ -39,18 +54,23 @@
     &-title{
         font-size: 1.2rem;
         color: $dark;
-        padding: 1rem;
+        padding: 0.7rem;
         width: 100%;
     }
-    &-content-container{
-        height: 3rem;
-        &.has-image{
-        width: 100%;
-        height: 15rem;
-        }
+    &-full-link{
+        
+        width:100%;
+        display: block;
+        text-decoration: none;
     }
     &-image{
         width: 100%;
-        height: 80%;
+        height:15rem;
+        @include medium-screen{
+            height: 20rem;
+        }
+        @include large-screen{
+            height: 25rem;
+        }
     }
 }
