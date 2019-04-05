@@ -5,11 +5,20 @@ import ValidationErrorsList from '../ValidationErrorsList/ValidationErrorsList';
 import useValidationErrors from '../../hooks/useValidationErrors/useValidationErrors';
 import useDocumentTitle from '../../hooks/useDocumentTitle/useDocumentTitle'
 import postData from '../../util/postData';
+import postImage from '../../util/postImage';
 import useAuthContext from '../../hooks/useAuthContext/useAuthContext'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faFile,faImage,faLink
+} from '@fortawesome/free-solid-svg-icons';
+library.add(faFile,faImage,faLink);
 const PostForm = props => {
   const { communityId } = props.match.params;
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [type,setType] = useState('post')
+  const [image,setImage] = useState('null')
   const {token}  = useAuthContext()
   useDocumentTitle('Submit to Rereddit')
   const {
@@ -29,17 +38,32 @@ const PostForm = props => {
       postId = props.match.params.postId;
       apiUrl = `http://localhost:8080/post/edit/${postId}`;
     } else {
-      apiUrl = `http://localhost:8080/post/post/${communityId}`;
+      apiUrl = `http://localhost:8080/post/post/${communityId}?type=text`;
     }
-    const responseData = await postData(apiUrl, post, token);
-    if (responseData.validationErrors) {
-      toggleValidationErrors(responseData.validationErrors);
-    } else {
-      postId = postId ? postId : responseData.postId;
-      props.history.replace(`/post/${postId}`);
+    if(type === 'post'){
+      const responseData = await postData(apiUrl, post, token);
+      if (responseData.validationErrors) {
+        toggleValidationErrors(responseData.validationErrors);
+      } else {
+        postId = postId ? postId : responseData.postId;
+        props.history.replace(`/post/${postId}`);
+      }
+    }else if(type === 'image'){
+      apiUrl = `http://localhost:8080/post/post/${communityId}?type=image`
+      const formData = new FormData()
+      formData.append('title',title)
+      formData.append('image',image)
+      console.log(image)
+      console.log(formData.title)
+       const responseData = await postImage(apiUrl,formData,token)
+
     }
   };
-
+  const imagePickerHandler = e => {
+    const image = e.target.files[0]
+    setImage(image)
+    
+  }
   useEffect(() => {
     if (props.match.params.postId) {
       const { post } = props.history.location;
@@ -48,7 +72,30 @@ const PostForm = props => {
       setContent(content);
     }
   }, []);
+
+  let formContent 
+  if(type === 'post'){
+    formContent = <>
+      <Input
+        setHook={setContent}
+        value={content}
+        placeholder={'Text (optional)'}
+        type={'text'}
+        name={'content'}
+        validationErrorParams={validationErrorParams}
+        textArea={true}
+      />
+    </>
+  }else if(type === 'image'){
+    formContent = <input onChange={imagePickerHandler}type="file" className="input" required/>
+  }
   return (
+    <>
+    <div className="form-type">
+    <button onClick={() => setType('post')} className={`button button-icon ${type === 'post' ? "active" : ''}`}><FontAwesomeIcon icon="file" /> <span>Post</span></button>
+    <button onClick={() => setType('image')} className={`button button-icon ${type === 'image' ? "active" : ''}`}><FontAwesomeIcon icon="image" /><span>Image</span></button>
+    <button onClick={() => setType('link')} className={`button button-icon ${type === 'link' ? "active" : ''}`}><FontAwesomeIcon icon="link" /><span>Link</span></button>
+    </div>
     <form className="form" onSubmit={e => submitHandler(e)}>
       <ValidationErrorsList validationErrorMessages={validationErrorMessages} />
       <Input
@@ -59,17 +106,10 @@ const PostForm = props => {
         name={'title'}
         validationErrorParams={validationErrorParams}
       />
-      <Input
-        setHook={setContent}
-        value={content}
-        placeholder={'Text (optional)'}
-        type={'text'}
-        name={'content'}
-        validationErrorParams={validationErrorParams}
-        textArea={true}
-      />
+      {formContent}
       <button className="button">Submit</button>
     </form>
+    </>
   );
 };
 export default withRouter(PostForm);

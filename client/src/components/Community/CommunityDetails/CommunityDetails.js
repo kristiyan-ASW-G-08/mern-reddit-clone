@@ -18,7 +18,7 @@ const CommunityDetails = ({community}) => {
         <div className="community-details">
         <div className="community-details-header">
         <h3 className="community-details-title">Community Details </h3>
-        {creator === userId ? <Link to={`/mod-tools/${community._id}`}><button className="button post-info-button"><FontAwesomeIcon icon="shield-alt" /><span>Mod Tools</span>
+        {creator === userId ? <Link to={`/mod-tools/${community._id}`}><button className="button button-icon"><FontAwesomeIcon icon="shield-alt" /><span>Mod Tools</span>
         </button></Link> : <></> }
         </div>
         <div className="community-banner">

@@ -12,10 +12,6 @@ router.post(
     .isLength({ min: 1 })
     .isString()
     .trim(),
-     body('content', 'Content should be atleast 1 character long')
-    .isLength({ min: 1 })
-    .isString()
-    .trim()
   ],
   isAuth,
   postController.createPost

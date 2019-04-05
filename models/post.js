@@ -29,7 +29,7 @@ const postSchema = new Schema({
   content: {
     type: String
   },
-  image: {
+  imageUrl: {
     type: String
   },
   link: {

@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import postType from '../../PropTypes/postType'
 const Post = ({ post, deletePostElement }) => {
   const { title, author, comments, communityName } = post;
+  console.log(post)
   return (
     <div className="post">
       <VotesContainer post={post} />
@@ -21,7 +22,10 @@ const Post = ({ post, deletePostElement }) => {
             to={{ pathname: `/post/${post._id}` }}
             className="post-content"
           >
+          <div className={`post-content-container ${post.imageUrl ? 'has-image' : ''}`}>
             <h3 className="post-title">{title}</h3>
+            {post.imageUrl ? <img className="post-image" src={`http://localhost:8080/${post.imageUrl}`}/>: '' }
+            </div>
           </Link>
         </div>
         <PostBar post={post} deletePostElement={deletePostElement} />

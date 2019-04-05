@@ -1,8 +1,6 @@
 
 .form{
-    display: grid;
-    justify-items: center;
-    align-content: center;
+    @include center;
     grid-gap: 1.2rem;
     @include border;
     padding: 1rem;
@@ -42,3 +40,4 @@
         }
     }
 }
+
