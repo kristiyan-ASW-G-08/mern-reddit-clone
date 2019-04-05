@@ -6,7 +6,12 @@ const ModalContext = props => {
     on:false,
     message:null,
   });
-  const toggleModalReducer = newModalState => dispatch({type:TOGGLEMODAL,newModalState})
+  const toggleModalReducer = newModalState => {
+    dispatch({type:TOGGLEMODAL,newModalState})
+    setTimeout(() => {
+      dispatch({type:TOGGLEMODAL,newModalState:{on:false,message:null}})
+    },2000)
+  }
 
   return (
     <Context.Provider
