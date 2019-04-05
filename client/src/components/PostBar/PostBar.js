@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import postData from '../../util/postData'
 import deleteData from '../../util/deleteData'
 import useAuthContext from '../../hooks/useAuthContext/useAuthContext'
+import useModalContext from '../../hooks/useModalContext/useModalContext'
 import {string,func,shape} from 'prop-types'
 import postType from '../PropTypes/postType'
 import {
@@ -14,6 +15,7 @@ library.add(faShare,faCommentAlt,faBookmark,faTrashAlt,faPen,faCopy,faLink);
 
 const PostBar= ({post,deletePostElement,history}) => {
     const { isAuth,userId,token,userData, updateUserDataReducer } = useAuthContext()
+    const {toggleModalReducer} = useModalContext()
     const [saved,setSaved] = useState(false)
     const [copyButtonActive,setCopyButtonActive] = useState(false)
     const {comments,authorId,communityName,_id} = post
@@ -85,7 +87,10 @@ const PostBar= ({post,deletePostElement,history}) => {
     const copyUrlHandler = async () => {
         const url = `${window.location.origin}/post/${_id}`
         navigator.clipboard.writeText(url)
-        setCopyButtonActive(false)
+        .then(writeData => {
+            setCopyButtonActive(false)
+            toggleModalReducer({on:true,message:'CopiedLink!'})
+        })
 
     }
     return (

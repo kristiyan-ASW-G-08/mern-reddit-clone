@@ -1,34 +1,18 @@
 import React, { useState, useReducer, createContext,useEffect } from 'react';
+import {modalReducer,TOGGLEMODAL} from './reducers'
 const Context = createContext();
 const ModalContext = props => {
   const [modalState, dispatch] = useReducer(modalReducer, {
     on:false,
     message:null,
   });
+  const toggleModalReducer = newModalState => dispatch({type:TOGGLEMODAL,newModalState})
 
-  const modalReducer =   newModalState => {
-    console.log('modalReducer')
-    console.log(newModalState);
-    let on;
-    let message
-    if(newModalState.on){
-      on  = true
-      message = newModalState.message
-    }else {
-      on = false;
-      message = null
-    }
-    const updatedModalState =  {
-      on,
-      message
-    }
-    console.log(updatedModalState)
-    return updatedModalState
-  } 
   return (
     <Context.Provider
       value={{
-       modalState
+       modalState,
+       toggleModalReducer
       }}
     >
       {props.children}

@@ -18,7 +18,6 @@ const HomePage = ({communityId}) => {
   useEffect(() => {
     const apiUrl = `http://localhost:8080/post/posts?page=${page}`;
     getData(apiUrl).then(data => {
-        console.log(data)
       if (data.posts) {
         setPosts(data.posts);
         setPostsCount(data.postsCount)

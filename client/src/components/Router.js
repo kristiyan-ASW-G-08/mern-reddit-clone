@@ -6,6 +6,7 @@ import ProtectedRoute from './ProtectedRoute';
 import AntiLoggedInProtectedRoute from './AntiLoggedInProtectedRoute'
 import { AuthContextConsumer } from '../AuthContext/AuthContext';
 import { ModalContextConsumer } from '../ModalContext/ModalContext';
+import Modal from './Modal/Modal'
 const HomePage = lazy(() => import('./HomePage/HomePage'));
 const SignupForm = lazy(() => import('./SignupForm/SignupForm'));
 const LoginForm = lazy(() => import('./LoginForm/LoginForm'));
@@ -23,15 +24,16 @@ const ModTools = lazy(() => import('./ModTools/ModTools'));
 const Router = () => (
   <ModalContextConsumer>
     {modalData => {
+      console.log(modalData)
       return (
         <AuthContextConsumer>
         {consumerData => {
-          console.log('nani')
           const { authState } = consumerData;
           return (
             <BrowserRouter>
               <>
                 <Navbar />
+                <Modal/>
                 <div className="main--container">
                   <Switch>
                     
