@@ -1,0 +1,15 @@
+.home-page{
+    width: 100%;
+    
+    @include large-screen{
+    display: grid;
+    grid:'. posts-container home-banner .'/2fr 4fr 3fr 2fr;
+    grid-gap: 1rem;
+    .posts-container{
+        grid-area: posts-container;
+    }
+    .home-banner{
+        grid-area: home-banner
+    }
+    }
+}

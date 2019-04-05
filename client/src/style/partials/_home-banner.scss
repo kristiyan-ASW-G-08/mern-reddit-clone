@@ -1,0 +1,40 @@
+.home-banner{
+    display: none;
+    @include large-screen{
+        @include border;
+        width: 100%;
+         height: 13rem;
+       display: grid;
+       justify-items: center;
+       padding: 0.5rem;
+       &-title{
+           font-size: 0.9rem;
+       }
+        &-text{
+            width: 90%;
+            font-size: 0.8rem;
+        }
+        .buttons-container{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 0.5rem;
+            width: 90%;
+            @include large-screen{
+                grid-template-columns: 1fr ;
+            }
+            button{
+                @include border-radius;
+                background: $white;
+                border: $primary 1px solid;
+                font-size: 0.9rem;
+                padding: 0.3rem;
+                color: $primary;
+                &:hover{
+                    color: $white;
+                    background: $primary;
+                }
+            }
+        }
+    }
+    
+}
