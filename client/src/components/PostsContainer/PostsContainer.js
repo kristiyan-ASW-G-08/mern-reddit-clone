@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import postsArrType from '../PropTypes/postsArrType';
 const Posts = lazy(() => import('./Posts/Posts'));
 const PostsContainer = ({ posts, getNextPage, setPosts ,postsCount}) => {
+  console.log(posts,postsCount)
   const deletePostElement = postId => {
     const editedPosts = posts.filter(post => post._id !== postId);
     setPosts(editedPosts);

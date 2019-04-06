@@ -19,7 +19,7 @@ import Loader from './Loader'
           return (
             <Redirect
               to={{
-                pathname: "/",
+                pathname: "/login",
                 state: {
                   from: props.location,
                   error:'Please log in to view this resource.'

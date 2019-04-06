@@ -3,7 +3,8 @@ import getData from '../../../util/getData';
 import PostsContainer from '../../PostsContainer/PostsContainer';
 import PropTypes ,{ string,shape}from 'prop-types';
 const CommunityPosts = ({ communityName }) => {
-  const [posts, setPosts] = useState(false);
+  const [posts, setPosts] = useState([]);
+  const [postsCount, setPostsCount] = useState(0);
   const [page, setPage] = useState(1);
   const getNextPage = async () => {
     await setPage(page + 1);
@@ -18,6 +19,7 @@ const CommunityPosts = ({ communityName }) => {
     const apiUrl = `http://localhost:8080/community/posts/${communityName}?page=${page}`;
     getData(apiUrl).then(data => {
       if (data.posts) {
+        setPostsCount(data.postsCount)
         setPosts(data.posts);
       }
     });
@@ -25,6 +27,7 @@ const CommunityPosts = ({ communityName }) => {
 
   return (
     <PostsContainer
+      postsCount={postsCount}
       posts={posts}
       getNextPage={getNextPage}
       setPosts={setPosts}
