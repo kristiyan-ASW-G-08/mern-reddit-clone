@@ -49,7 +49,8 @@ const VotesContainer = ({post,history}) => {
                     setUpvoted(false)
                 }
         }else{
-            history.push(`/login`)
+            history.push({pathname: '/login',
+            state: { message:"Login to vote!" }})
         }
       
       }

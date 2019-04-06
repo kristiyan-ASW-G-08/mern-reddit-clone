@@ -16,22 +16,22 @@
              'votes body'
             'votes postbar'/1fr 14fr;
     }
-   
      &-body{
          grid-area: body;
         display: grid;
         align-content: center;
      }
     &-links{
+
         width: 100%;
         padding: 0.5rem 0 0 1rem;
         text-decoration: none;
         display: grid;
         grid: "community . ."
-              "author date ."/3fr 4fr 1fr;
+              "author date ."/4fr 4fr 2fr;
        @include large-screen{
         grid: "community . ."
-        "author date ."/3fr 4fr 4fr;
+        "author date ."/2fr 2fr 4fr;
        }
     }
     
@@ -44,8 +44,10 @@
     }
     &-author{
         grid-area:author;
+
     }
     &-date{
+
         grid-area:date;
     }
     &-author,&-date{
@@ -62,10 +64,14 @@
         width: 100%;
     }
     &-full-link{
-        
         width:100%;
         display: block;
         text-decoration: none;
+    }
+    &-content{
+        padding-left: 0.7rem;
+        color: $lighter-dark;
+        font-size: 1rem;
     }
     &-image{
         width: 100%;

@@ -30,11 +30,6 @@ const Dropdown = props => {
               </Link>
             </li>
             <li>
-              <Link data-testid="logout" to="/logout">
-                Logout
-              </Link>
-            </li>
-            <li>
               <Link data-testid="user-settings" to="/user/posts">
                 My Profile
               </Link>
@@ -42,7 +37,7 @@ const Dropdown = props => {
          
             <li>User Settings</li>
             <li>
-              <button onClick={logoutReducer}>Logout</button>
+              <button className="button" onClick={logoutReducer}>Logout</button>
             </li>
           </>
         ) : (

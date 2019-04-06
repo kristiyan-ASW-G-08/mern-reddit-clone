@@ -5,14 +5,14 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useAuthContext from '../../../hooks/useAuthContext/useAuthContext'
 import Loader from '../../Loader'
-import PropTypes,{string} from 'prop-types';
+import PropTypes,{string,bool} from 'prop-types';
 import getData from '../../../util/getData'
 import communityType from '../../PropTypes/communityType'
 import {
  faShieldAlt
 } from '@fortawesome/free-solid-svg-icons';
 library.add(faShieldAlt);
-const CommunityDetails = ({communityName}) => {
+const CommunityDetails = ({communityName,isPost}) => {
     const {userId} = useAuthContext()
     const [community,setCommunity] = useState(null) 
     useEffect(  () => {
@@ -42,11 +42,11 @@ const CommunityDetails = ({communityName}) => {
                 <h2 className="community-subscribers">Subscribers {community.subscribers}</h2>
                 <div className="buttons-container">
                 <SubscribeButton id={community._id}/>
-                <button className="button">
+                {isPost ?  '' : <button className="button">
                     <Link data-testid="create-post"  to={`/create-post/${community._id}`}>
                     Create Post
                     </Link>
-                </button>
+                </button>}
                 </div>
             </div>
             </>
@@ -57,6 +57,7 @@ const CommunityDetails = ({communityName}) => {
 }
 
 CommunityDetails.propTypes = {
+    isPost: bool.isRequired,
     communityName: string.isRequired,
   };
 export default CommunityDetails 

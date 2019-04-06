@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import Input from '../Input/Input';
 import { withRouter } from 'react-router-dom';
 import login from '../../authUtil/login';
@@ -7,16 +7,27 @@ import Logo from '../../assets/logo.svg';
 import useValidationErrors from '../../hooks/useValidationErrors/useValidationErrors';
 import useAuthContext from '../../hooks/useAuthContext/useAuthContext';
 import useDocumentTitle from '../../hooks/useDocumentTitle/useDocumentTitle'
-const LoginForm = props => {
-  const { loginReducer } = useAuthContext();
+import  useModalContext from '../../hooks/useModalContext/useModalContext'
+const LoginForm = ({history}) => {
+const { loginReducer } = useAuthContext();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const {toggleModalReducer} = useModalContext()
   useDocumentTitle('Login')
   const {
     validationErrorMessages,
     validationErrorParams,
     toggleValidationErrors
   } = useValidationErrors();
+
+
+  useEffect(() => {
+    if(history.location.state && history.location.state.message ){
+      const {message} = history.location.state
+      toggleModalReducer({on:true,message})
+    }
+  },[])
+  
   const submitHandler = async e => {
     e.preventDefault();
     const loginProcess = await login({
@@ -35,7 +46,7 @@ const LoginForm = props => {
       toggleValidationErrors(loginProcessData.data);
     } else {
       loginReducer(loginProcessData);
-      props.history.replace(`/`);
+      history.replace(`/`);
     }
   };
   return (

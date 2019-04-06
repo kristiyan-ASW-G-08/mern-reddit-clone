@@ -12,7 +12,7 @@ const Community = ({match}) => {
     return (
         <div className="community">
                <>
-               <CommunityDetails  communityName={communityName}/> 
+               <CommunityDetails isPost={false}  communityName={communityName}/> 
                <CommunityPosts communityName={communityName}   />
                </>
         </div>

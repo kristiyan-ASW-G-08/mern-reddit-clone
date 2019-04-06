@@ -3,38 +3,33 @@
   justify-items: center;
   width: 100vw;
   grid-gap: 2rem;
-  .post-body{
-  grid-area: body;
-  padding: 0.3rem;
-}
-  .post-description {
-    width: 100%;
+  .community-details{
+    display: none;
+    @include larger-screen{
+      display: grid;
+    }
+  }
+  @include larger-screen{
     display: grid;
-    justify-items: left;
-    align-content: center;
-    grid-gap: 0.7rem;
-  }
-  .post-source-wrapper{
-      display: flex;
-      align-items: center;
-  }
-  .post-author,.post-community{
-      padding: 0.3rem;
-  }
-  .post-author {
-    font-size: 0.7rem;
-    word-wrap: break-word;
-  }
-  .post-community {
-
-    font-size: 0.8rem;
+    grid:'.  post details .' min-content
+          '. comments . .'/2fr 4fr 3fr 2fr;
+    .community-details{
+      grid-area:details;
+    }
+    .post-comments{
+      grid-area:comments
+    }
+    .post-container{
+      grid-area:post;
+    }
   }
 
-  .post-content {
-      font-size: 0.8rem;
-      line-height: 1.6;
-      padding-right: 0.3rem;
-  }
+
+
+  .post-comments{
+  width: 100%;
+   }
+  
   .comment-form-container{
     @include center;
     grid-gap: 0.3rem;

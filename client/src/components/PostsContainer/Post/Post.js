@@ -8,10 +8,9 @@ import getHumanReadableDate from '../../../util/getHumanReadableDate'
 const Post = ({ post, deletePostElement ,isFull}) => {
   const { title, author, comments, communityName ,creationDate} = post;
   const date = getHumanReadableDate(creationDate)
-  console.log(post)
   return (
     <div className={`post ${isFull ? 'full' : ''}`}>
-      
+  
       <div className="post-body">
         <div className="post-links">
           <Link to={`/community/${communityName}`} className="post-community">
@@ -25,9 +24,10 @@ const Post = ({ post, deletePostElement ,isFull}) => {
         <Link
             to={{ pathname: `/post/${post._id}` }}
             className="post-full-link"
-          >
+          > 
             <h3 className="post-title">{title}</h3>
             {post.imageUrl ? <img className="post-image" src={`http://localhost:8080/${post.imageUrl}`}/>: '' }
+            {post.content && isFull ? <p className="post-content">{post.content}</p> : ''}
           </Link>
         
       </div>

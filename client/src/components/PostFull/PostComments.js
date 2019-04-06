@@ -40,7 +40,9 @@ const PostComments = props => {
   return (
     <>
       {comments ? (
+  
         <Suspense fallback={<Loader />}>
+        <div className="post-comments">
           <Toggle>
             {({ on, toggle }) => (
               <>
@@ -78,6 +80,7 @@ const PostComments = props => {
               </>
             )}
           </Toggle>
+          </div>
         </Suspense>
       ) : (
         <Loader />

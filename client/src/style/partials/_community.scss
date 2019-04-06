@@ -59,23 +59,5 @@
             width: 3rem;
         }
     }
-    .buttons-container{
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-gap: 0.5rem;
-        width: 90%;
-        @include large-screen{
-            grid-template-columns: 1fr ;
-        }
-        button{
-            @include border-radius;
-            background: $primary;
-            font-size: 0.9rem;
-            padding: 0.4rem;
-            color: $white;
-            &:hover{
-                background: darken($primary,10%);
-            }
-        }
-    }
+    
 }

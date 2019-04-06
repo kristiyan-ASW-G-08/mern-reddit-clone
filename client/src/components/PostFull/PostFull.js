@@ -11,6 +11,7 @@ import getData from '../../util/getData';
 import Loader from '../Loader';
 import PostComments from './PostComments';
 import Post from '../PostsContainer/Post/Post'
+import CommunityDetails from '../Community/CommunityDetails/CommunityDetails'
 const PostFull = props => {
   const authState = useContext(AuthContextData);
   const [post, setPost] = useState(null);
@@ -31,7 +32,10 @@ const PostFull = props => {
         <Suspense fallback={<Loader />}>
           <>
             <div className="post-full">
+            <CommunityDetails communityName={post.communityName} isPost={true}/>
+            <div className="post-container">
               <Post post={post} isFull={true}/>
+              </div>
               <PostComments postId={post._id} />
             </div>
           </>
