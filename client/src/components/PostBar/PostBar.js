@@ -39,7 +39,10 @@ const PostBar= ({post,deletePostElement,history}) => {
     }
     }
     const spamHandler = async () => {
-        if(!isAuth)history.push(`/login`)
+        if(!isAuth) {  
+        history.push({pathname: '/login',
+        state: { message:"Login to report!" }})
+        }
         else {
             const apiUrl = `http://localhost:8080/community/report/${postId}`
         const requestBody = {
@@ -77,10 +80,12 @@ const PostBar= ({post,deletePostElement,history}) => {
                 }
                 updateUserDataReducer({ authState, newUserData:userData });
                 const savedCheck = userData.saved.find(savedPost => savedPost === post._id)
+                toggleModalReducer({on:true,message:`Post ${savedCheck ? 'saved' : 'unsaved'} !`})
                 setSaved(savedCheck)
             }
         }else {
-            history.push(`/login`)
+            history.push({pathname: '/login',
+            state: { message:"Login to save!" }})
         }
     }
 

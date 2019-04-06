@@ -24,7 +24,7 @@ const SubscribeButtop = ({history,id}) => {
           newUserData: responseData.userData
         });
       }
-    } else history.push('/login');
+    } else history.push({pathname: '/login',state: { message:"Login to suscribe!" }})
   };
   return (
     <>
