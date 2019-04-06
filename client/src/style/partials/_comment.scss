@@ -5,7 +5,10 @@
     padding: 0.7rem;
     grid-gap: 0.3rem;
     @include large-screen{
-        width: 70%;
+        width: 60%;
+    }
+    @include larger-screen{
+        width: 45vw;
     }
     &-details{
         width: 100%;

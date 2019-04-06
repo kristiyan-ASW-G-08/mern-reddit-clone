@@ -8,9 +8,9 @@ import React, {
 } from 'react';
 import { AuthContextData } from '../../AuthContext/AuthContext';
 import getData from '../../util/getData';
-import PostContainer from './PostContainer/PostContainer';
 import Loader from '../Loader';
 import PostComments from './PostComments';
+import Post from '../PostsContainer/Post/Post'
 const PostFull = props => {
   const authState = useContext(AuthContextData);
   const [post, setPost] = useState(null);
@@ -31,7 +31,7 @@ const PostFull = props => {
         <Suspense fallback={<Loader />}>
           <>
             <div className="post-full">
-              <PostContainer post={post} userId={userId} token={token} />
+              <Post post={post} isFull={true}/>
               <PostComments postId={post._id} />
             </div>
           </>

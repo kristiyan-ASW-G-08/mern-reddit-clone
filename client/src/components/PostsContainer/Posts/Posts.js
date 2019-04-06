@@ -11,6 +11,7 @@ const Posts = ({ posts, deletePostElement }) => {
             <Post
               key={post._id}
               post={post}
+              isFull={false}
               deletePostElement={deletePostElement}
             />
           );

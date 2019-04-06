@@ -17,7 +17,7 @@ exports.createComment = async (req, res, next) => {
         postTitle:post.title,
         authorId: req.userId,
         author: user.username,
-        communityId:post.community
+        communityId:post.communityId
       });
       await post.incrementComments()
       await comment.save();

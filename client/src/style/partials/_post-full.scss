@@ -3,15 +3,6 @@
   justify-items: center;
   width: 100vw;
   grid-gap: 2rem;
-  .post-container{
-    display: grid;
-    grid:'votes body'/1fr 9fr;
-    @include large-screen{
-      grid:'votes body'/1fr 20fr;
-    }
-    @include border;
-  width: 95%;
-  }
   .post-body{
   grid-area: body;
   padding: 0.3rem;

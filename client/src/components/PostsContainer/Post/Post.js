@@ -5,12 +5,12 @@ import VotesContainer from '../../VotesContainer/VotesContainer';
 import PropTypes from 'prop-types';
 import postType from '../../PropTypes/postType'
 import getHumanReadableDate from '../../../util/getHumanReadableDate'
-const Post = ({ post, deletePostElement }) => {
+const Post = ({ post, deletePostElement ,isFull}) => {
   const { title, author, comments, communityName ,creationDate} = post;
   const date = getHumanReadableDate(creationDate)
   console.log(post)
   return (
-    <div className="post">
+    <div className={`post ${isFull ? 'full' : ''}`}>
       
       <div className="post-body">
         <div className="post-links">
@@ -39,7 +39,8 @@ const Post = ({ post, deletePostElement }) => {
 
 Post.propTypes = {
   post:postType.isRequired,
-  deletePostElement: PropTypes.func.isRequired
+  isFull:PropTypes.bool.isRequired,
+  deletePostElement: PropTypes.func
 };
 
 export default Post;
