@@ -23,7 +23,7 @@ const Community = ({match}) => {
            {community ? 
                <>
                <CommunityDetails  community={community}/> 
-               <CommunityPosts communityId={community._id}   />
+               <CommunityPosts communityName={communityName}   />
                </>
            : <Loader />}
         </div>

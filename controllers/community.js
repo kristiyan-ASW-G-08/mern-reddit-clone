@@ -41,8 +41,8 @@ exports.getCommunity = async (req, res, next) => {
 };
 exports.getPosts = async (req, res, next) => {
   try {
-    const { communityId } = req.params;
-    const paginationData = await pagination(req,'community',communityId)
+    const { communityName } = req.params;
+    const paginationData = await pagination(req,'community',communityName)
     const {posts,postsCount}  = paginationData
     res.status(200).json({ posts ,postsCount});
   } catch (err) {

@@ -36,7 +36,7 @@ router.post(
 
 router.get('/get/:communityName', communityController.getCommunity);
 
-router.get('/posts/:communityId', communityController.getPosts);
+router.get('/posts/:communityName', communityController.getPosts);
 
 router.post('/report/:postId', isAuth, communityController.reportSpam);
 
