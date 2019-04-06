@@ -7,6 +7,7 @@ import useDocumentTitle from '../../hooks/useDocumentTitle/useDocumentTitle'
 import postData from '../../util/postData';
 import postImage from '../../util/postImage';
 import useAuthContext from '../../hooks/useAuthContext/useAuthContext'
+import useImagePicker from '../../hooks/useImagePicker/useImagePicker'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -18,7 +19,7 @@ const PostForm = props => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [type,setType] = useState('post')
-  const [image,setImage] = useState('null')
+  const {image,imagePickerHandler} = useImagePicker()
   const {token}  = useAuthContext()
   useDocumentTitle('Submit to Rereddit')
   const {
@@ -61,11 +62,7 @@ const PostForm = props => {
 
     }
   };
-  const imagePickerHandler = e => {
-    const image = e.target.files[0]
-    setImage(image)
-    
-  }
+  
   useEffect(() => {
     if (props.match.params.postId) {
       const { post } = props.history.location;
