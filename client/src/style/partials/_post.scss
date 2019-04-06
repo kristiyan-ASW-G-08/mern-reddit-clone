@@ -2,7 +2,8 @@
     @include border;
     width: 100vw;
     display: grid;
-    grid:'body'/1fr;
+    grid:'body body'
+          'votes postbar'/1fr 4fr;
     @include medium-screen{
         width: 90vw;
     }
@@ -11,6 +12,9 @@
     }
     @include larger-screen{
         width: 45vw;
+        grid:'votes body'
+             'votes body'
+            'votes postbar'/1fr 14fr;
     }
    
      &-body{

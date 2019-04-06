@@ -16,12 +16,9 @@ const PostFull= ({post}) => {
       <h1 className="post-title">
       {post.title}
       </h1>
-      <p className="post-content">
-      {post.content}
-      </p>
-      <PostBar   post={post} />
+      {post.imageUrl ? <img className="post-image" src={`http://localhost:8080/${post.imageUrl}`}/>: <p className="post-content">{post.content}</p> }
       </div>
-      </div>
+        </div>
         </div>
   )
 }

@@ -29,8 +29,10 @@ const Post = ({ post, deletePostElement }) => {
             <h3 className="post-title">{title}</h3>
             {post.imageUrl ? <img className="post-image" src={`http://localhost:8080/${post.imageUrl}`}/>: '' }
           </Link>
-        <PostBar post={post} deletePostElement={deletePostElement} />
+        
       </div>
+      <VotesContainer post={post}/>
+      <PostBar post={post} deletePostElement={deletePostElement} />
     </div>
   );
 };
