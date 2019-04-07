@@ -107,9 +107,7 @@ exports.changeIcon =  async (req, res, next) => {
     if(community.icon !== 'images/logo.svg'){
       fileDelete(community.icon)
     }
-  //   console.log(community.reportSpam)
-  //  await community.changeIcon(imageUrl)
-  //   res.status(200).json({community}); 
+     res.status(200).json({newIcon:imageUrl}); 
   } catch (err) {
     console.log(err);
   }

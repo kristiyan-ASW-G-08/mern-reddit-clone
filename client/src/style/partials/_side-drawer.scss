@@ -1,0 +1,29 @@
+.side-drawer{
+    display: none;
+    transform: translateX(-100vw);
+    &.active{
+    animation: slide 1000ms ease-in-out linear;
+    transform: translateX(0);
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid:'container backdrop'1fr/5fr 1fr;
+    }
+    &-container{
+        grid-area: container;
+        background: red;
+    }
+    &-backdrop{
+        grid-area: backdrop;
+        background: green;
+    }
+    @keyframes slide {
+        from{
+            transform: translateX(-100vw);
+        };
+        to{
+            transform: translateX(0);
+        }
+        
+    }
+}

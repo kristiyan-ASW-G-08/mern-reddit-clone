@@ -2,6 +2,7 @@ import React, { useState, Fragment, useContext } from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useAuthContext from '../../hooks/useAuthContext/useAuthContext'
+import useToggle from '../../hooks/useToggle/useToggle'
 import { Link } from 'react-router-dom';
 import {
   faCog,
@@ -13,12 +14,9 @@ import {
 library.add(faCaretDown, faCog, faMoon, faUser);
 const Dropdown = props => {
   const { isAuth, logoutReducer } = useAuthContext()
-  const [active, setActive] = useState(false);
+  const {on,toggle} = useToggle(false)
   let dropdownBody;
-  const dropDownHandler = () => {
-    setActive(!active);
-  };
-  if (active) {
+  if (on) {
     dropdownBody = (
       <ul className="dropdown__body">
   
@@ -60,7 +58,7 @@ const Dropdown = props => {
   return (
     <div className="dropdown">
       <div className="dropdown__header">
-        <button className="dropdown__button button" onClick={dropDownHandler}>
+        <button className="dropdown__button button" onClick={toggle}>
           <div className="dropdown__button__icon">
             <FontAwesomeIcon icon="user" />
           </div>
