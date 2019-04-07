@@ -6,9 +6,12 @@ const ruleSchema = new Schema({
     type: String,
     required: true
   },
-  description: {
+  description:{
     type: String,
     required: true
+  },
+  reason:{
+    type: String,
   },
   community: {
     type: Schema.Types.ObjectId,

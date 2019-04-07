@@ -1,21 +1,18 @@
 .side-drawer{
-    display: none;
+    position:fixed;
     transform: translateX(-100vw);
+    z-index: 15;
+    top:0;
     &.active{
-    animation: slide 1000ms ease-in-out linear;
-    transform: translateX(0);
+    animation: slide 200ms linear forwards  ;
+    // transform: translateX(0);
     width: 100vw;
     height: 100vh;
     display: grid;
-    grid:'container backdrop'1fr/5fr 1fr;
+    grid:'container backdrop'1fr/4fr 1fr;
+    @include large-screen{
+          grid:'container backdrop'1fr/2fr 9fr;
     }
-    &-container{
-        grid-area: container;
-        background: red;
-    }
-    &-backdrop{
-        grid-area: backdrop;
-        background: green;
     }
     @keyframes slide {
         from{
@@ -23,7 +20,39 @@
         };
         to{
             transform: translateX(0);
+            background: rgba(black,0.15);
         }
         
+    }
+    &-container{
+        grid-area: container;
+        background: $white;
+        &-header{
+            width: 100%;
+            height: 5rem;
+            border-bottom: solid 1px lighten($lighter-dark, 50%);
+        }
+        &-list{
+            width: 100%;
+            height: 100%;
+            list-style: none;
+            &-item{
+                a{
+                    padding: 1rem;
+                    color: $dark;
+                    width: 100%;
+                    height: 100%;
+                    display: block;
+                    &.active{
+                        background:lighten($lighter-dark, 50%);
+                    }
+                }
+               
+            }
+        }
+    }
+    &-backdrop{
+        grid-area: backdrop;
+       
     }
 }

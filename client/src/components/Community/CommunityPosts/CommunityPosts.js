@@ -7,7 +7,7 @@ const CommunityPosts = ({ communityName }) => {
   const [postsCount, setPostsCount] = useState(0);
   const [page, setPage] = useState(1);
   const getNextPage = async () => {
-   setPage(currentPage => currentPage + 1);
+   setPage(page + 1);
    console.log(page)
     const apiUrl = `http://localhost:8080/community/posts/${communityName}?page=${page + 1}`;
     const responseData = await getData(apiUrl);

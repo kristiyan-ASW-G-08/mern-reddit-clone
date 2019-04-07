@@ -1,21 +1,25 @@
 import React, { useState, lazy, Suspense, useContext, useEffect } from 'react';
 import getData from '../../util/getData';
-import IconForm from './IconForm'
+import IconForm from './IconForm';
 import { withRouter } from 'react-router-dom';
 import useAuthContext from '../../hooks/useAuthContext/useAuthContext';
+import useToggle from '../../hooks/useToggle/useToggle';
 import PostsContainer from '../PostsContainer/PostsContainer';
-import SideDrawer from '../SideDrawer/SideDrawer'
+import SideDrawer from '../SideDrawer/SideDrawer';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFile, faPalette, faLink,faGavel } from '@fortawesome/free-solid-svg-icons';
-library.add(faFile, faLink, faPalette,faGavel);
-const ModTools = props => {
-  const [posts, setPosts] = useState(false);
+import {
+  faFile,
+  faPalette,
+  faLink,
+  faGavel
+} from '@fortawesome/free-solid-svg-icons';
+library.add(faFile, faLink, faPalette, faGavel);
+const ModTools = ({ history, match }) => {
   const [community, setCommunity] = useState(false);
-  const [page, setPage] = useState(1);
-  const [tool, setTool] = useState('spam');
   const { isAuth, userId, token } = useAuthContext();
-  const { communityName } = props.match.params;
+  const { on, toggle } = useToggle();
+  const { communityName } = match.params;
   useEffect(() => {
     const apiUrl = `http://localhost:8080/community/get/${communityName}`;
     getData(apiUrl).then(data => {
@@ -24,53 +28,40 @@ const ModTools = props => {
       }
     });
   }, []);
-
-  const getNextPage = async () => {};
- 
   let content;
-  if (community) {
-    const contentObj = {
-      spam:<PostsContainer
-      posts={posts}
-      getNextPage={getNextPage}
-      setPosts={setPosts}
-      postsCount={0}
-    />,
-    customization:<IconForm  community={community} token={token}/>
-    }
-    content = contentObj[tool]
-    
+  let sideDrawerListItems = []
+  if(communityName){
+    const {url} = match
+    sideDrawerListItems = [
+      {
+        active: `/mod-tools/reports/${communityName}`,
+        content: 'Reports',
+        element:<h1>Reports</h1>
+      },
+      {
+        active: `/mod-tools/customization/${communityName}`,
+        content: 'Customization',
+        element:<h1>Customization</h1>
+      },
+      {
+        active: `/mod-tools/rules/${communityName}`,
+        content: 'Rules',
+        element:<h1>Rules</h1>
+      },
+      {
+        active: `/mod-tools/home/${communityName}`,
+        content: 'Home',
+        element:<h1>Home</h1>
+      }
+    ];
+    content = sideDrawerListItems.find(item => item.active === url).element
   }
+   
   return (
     <>
-      {community ? (
-        <div className="mod-tools">
-          <div className="mod-tools-tool-selector">
-          <SideDrawer />
-            {/* <button
-              onClick={() => setTool('spam')}
-              className={`button button-icon ${
-                tool === 'spam' ? 'active' : ''
-              }`}
-            >
-              <FontAwesomeIcon icon="file" /> <span>Spam</span>
-            </button>
-            <button
-              onClick={() => setTool('customization')}
-              className={`button button-icon ${
-                tool === 'customization' ? 'active' : ''
-              }`}
-            >
-              <FontAwesomeIcon icon="palette" />
-              <span>Customization</span>
-            </button>
-            <button onClick={() => setTool('rules')} className={`button button-icon ${tool === 'rules' ? "active" : ''}`}><FontAwesomeIcon icon="gavel" /><span>Rules</span></button> */}
-          </div>
-          {/* {content} */}
-        </div>
-      ) : (
-        <></>
-      )}
+      <button className="button" onClick={toggle}>Mod Options</button>
+      <SideDrawer on={on} toggle={toggle} listItems={sideDrawerListItems} />
+      {content}
     </>
   );
 };

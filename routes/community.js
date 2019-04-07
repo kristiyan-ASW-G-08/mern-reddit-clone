@@ -1,6 +1,7 @@
 const express = require('express');
 const { body } = require('express-validator/check');
 const Community = require('../models/community');
+const Rule = require('../models/rule');
 const communityController = require('../controllers/community');
 const isAuth = require('../middleware/is-auth');
 const router = express.Router();
@@ -73,4 +74,25 @@ router.get('/posts/:communityName', communityController.getPosts);
 router.post('/report/:postId', isAuth, communityController.reportSpam);
 
 router.get('/spam/:communityId', isAuth, communityController.getSpamPosts);
+
+
+const ruleValidationArr = [
+  body(
+    'title',
+    'Title must be 10 between 100 characters long!'
+  )
+    .trim()
+    .isLength({ min: 10, max: 100 })
+    .escape(),
+    body(
+      'description',
+      'Description must be 10 between 300 characters long!'
+    )
+      .trim()
+      .isLength({ min: 10, max: 300 })
+      .escape()
+]
+router.post('/rule/post/:communityId',ruleValidationArr,isAuth,communityController.postRule)
+router.post('/rule/edit/:ruleId',ruleValidationArr,isAuth,communityController.editRule)
+router.delete('rule/delete/:ruleId',isAuth,communityController.deleteRule)
 module.exports = router;

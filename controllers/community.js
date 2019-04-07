@@ -112,3 +112,56 @@ exports.changeIcon =  async (req, res, next) => {
     console.log(err);
   }
 };
+
+
+
+exports.postRule = async (req, res, next) => {
+  try {
+    errorsIsEmpty(validationResult(req))
+     const {communityId} = req.params
+     const {title,description,reason} = req.body
+     const rule = new rule({
+       title,
+       description,
+       community
+     })
+     if(reason){
+       rule['reason'] = reason
+     }
+     await rule.save()
+     res.status(200).json({rule}); 
+  } catch (err) {
+    console.log(err);
+    next(err)
+  }
+};
+exports.editRule = async (req, res, next) => {
+  try {
+    errorsIsEmpty(validationResult(req));
+    const { title,description,reason} = req.body;
+    const { ruleId } = req.params;
+    const rule = {
+      title,
+      content
+    };
+    if(reason){
+      rule['reason'] = reason
+    }
+    await Rule.findOneAndUpdate({ _id: ruleId }, rule);
+    res.status(201).json({ msg: 'updated' });
+  } catch (err) {
+
+    console.log(err);
+    next(err)
+  }
+};
+exports.deleteRule = async (req, res, next) => {
+  try {
+    const { ruleId } = req.params;
+    await Rule.findByIdAndDelete(ruleId);
+    res.status(200).json({ msg:'Deleted' })
+  } catch (err) {
+    console.log(err);
+    next(err)
+  }
+};
