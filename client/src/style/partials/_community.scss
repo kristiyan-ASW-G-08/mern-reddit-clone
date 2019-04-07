@@ -48,15 +48,17 @@
         }
     }
     &-logo{
-        height: 5rem;
-        width: 5rem;
+        height: 6rem;
+        width: 6rem;
         border-radius: 100%;
         background: $white;
         border:solid 1px $white;
         @include center;
         img{
-            height: 3rem;
-            width: 3rem;
+            object-fit: cover;
+            height: 5rem;
+            width: 5rem;
+            border-radius: 100%;
         }
     }
     

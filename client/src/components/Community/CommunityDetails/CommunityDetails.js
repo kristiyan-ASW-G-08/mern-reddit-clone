@@ -30,12 +30,12 @@ const CommunityDetails = ({communityName,isPost}) => {
             <div className="community-details">
             <div className="community-details-header">
             <h3 className="community-details-title">Community Details </h3>
-            {community.creator === userId ? <Link to={`/mod-tools/${community._id}`}><button className="button button-icon"><FontAwesomeIcon icon="shield-alt" /><span>Mod Tools</span>
+            {community.creator === userId ? <Link to={`/mod-tools/${community.name}`}><button className="button button-icon"><FontAwesomeIcon icon="shield-alt" /><span>Mod Tools</span>
             </button></Link> : <></> }
             </div>
             <div className="community-banner">
                 <div className="community-logo">
-                <img src={`http://localhost:8080/images/${community.icon}`}  alt={`${community.name}`} data-testid="community-logo"/>
+                <img src={`http://localhost:8080/${community.icon}`}  alt={`${community.name}`} data-testid="community-logo"/>
                 </div>
                 </div>
                 <h1 className="community-name">{community.name}</h1>

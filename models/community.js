@@ -8,7 +8,7 @@ const CommunitySchema = new Schema({
   },
   icon: {
     type: String,
-    default: 'logo.svg'
+    default: 'images/logo.svg'
   },
   subscribers: {
     type: Number,
@@ -54,7 +54,7 @@ CommunitySchema.methods.incrementSubscribers = function() {
   this.save();
 };
 
-CommunitySchema.methods.descrementSubscribers = function() {
+CommunitySchema.methods.decrementSubscribers = function() {
   if(this.subscribers >0){
     this.subscribers--
   }
@@ -70,5 +70,6 @@ CommunitySchema.methods.reportSpam = function(spamPostId) {
   return true
   }
 };
+
 
 module.exports = mongoose.model('Community', CommunitySchema);

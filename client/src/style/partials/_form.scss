@@ -4,6 +4,7 @@
     grid-gap: 1.2rem;
     @include border;
     padding: 1rem;
+    
     .form--logo{
         img{
             height: 3rem;
@@ -26,6 +27,9 @@
         &--error{
             border: solid 0.5px $danger
         }
+    }
+    .label{
+        font-size: 0.9rem;
     }
     button{
         background: $primary;

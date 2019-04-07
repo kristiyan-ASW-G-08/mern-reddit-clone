@@ -5,7 +5,7 @@ import ValidationErrorsList from '../ValidationErrorsList/ValidationErrorsList';
 import useValidationErrors from '../../hooks/useValidationErrors/useValidationErrors';
 import useDocumentTitle from '../../hooks/useDocumentTitle/useDocumentTitle'
 import postData from '../../util/postData';
-import postImage from '../../util/postImage';
+import postFormData from '../../util/postFormData';
 import useAuthContext from '../../hooks/useAuthContext/useAuthContext'
 import useImagePicker from '../../hooks/useImagePicker/useImagePicker'
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -56,7 +56,7 @@ const PostForm = props => {
       formData.append('image',image)
       console.log(image)
       console.log(formData.title)
-       const responseData = await postImage(apiUrl,formData,token)
+       const responseData = await postFormData(apiUrl,formData,token)
        postId = responseData.postId;
        props.history.replace(`/post/${postId}`);
 

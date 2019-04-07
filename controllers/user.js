@@ -172,7 +172,7 @@ exports.getUserComments = async (req, res, next) => {
       const {communityId}  = req.params
       const community = await Community.findById(communityId)
       const user = await User.findById(req.userId).select("-password")
-      await community.descrementSubscribers()
+      await community.decrementSubscribers()
       await user.unsubscribe(communityId)
       res.status(201).json({ message: 'Unsubscribed',userData:user});
      }
