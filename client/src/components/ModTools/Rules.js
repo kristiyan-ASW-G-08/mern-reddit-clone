@@ -1,6 +1,5 @@
 import React from 'react'
-const Reules= props => {
-
+const Rules = props => {
     return (
         <h1>Rules</h1>
     )

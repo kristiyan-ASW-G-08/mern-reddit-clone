@@ -95,4 +95,5 @@ const ruleValidationArr = [
 router.post('/rule/post/:communityId',ruleValidationArr,isAuth,communityController.postRule)
 router.post('/rule/edit/:ruleId',ruleValidationArr,isAuth,communityController.editRule)
 router.delete('rule/delete/:ruleId',isAuth,communityController.deleteRule)
+router.get('rules/get/:communityName',communityController.getRules)
 module.exports = router;

@@ -1,5 +1,6 @@
 const Community = require('../models/community');
 const Post = require('../models/post');
+const Rule = require('../models/rule');
 const { validationResult } = require('express-validator/check');
 const errorsIsEmpty = require('../util/errorsIsEmpty')
 const pagination  = require('../util/pagination')
@@ -120,10 +121,10 @@ exports.postRule = async (req, res, next) => {
     errorsIsEmpty(validationResult(req))
      const {communityId} = req.params
      const {title,description,reason} = req.body
-     const rule = new rule({
+     const rule = new Rule({
        title,
        description,
-       community
+       communityId
      })
      if(reason){
        rule['reason'] = reason
@@ -160,6 +161,17 @@ exports.deleteRule = async (req, res, next) => {
     const { ruleId } = req.params;
     await Rule.findByIdAndDelete(ruleId);
     res.status(200).json({ msg:'Deleted' })
+  } catch (err) {
+    console.log(err);
+    next(err)
+  }
+};
+
+exports.getRules = async (req, res, next) => {
+  try {
+    const { communityId } = req.params;
+     const rules =  await Rule.find({ communityId })
+    res.status(200).json({ rules });
   } catch (err) {
     console.log(err);
     next(err)

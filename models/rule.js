@@ -13,7 +13,7 @@ const ruleSchema = new Schema({
   reason:{
     type: String,
   },
-  community: {
+  communityId: {
     type: Schema.Types.ObjectId,
     ref: 'Community',
     required: true

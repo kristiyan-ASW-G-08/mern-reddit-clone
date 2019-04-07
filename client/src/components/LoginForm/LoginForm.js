@@ -39,7 +39,7 @@ const { loginReducer } = useAuthContext();
       toggleValidationErrors([
         {
           param: 'server-error',
-          msg: `Server isn't availdable.Please try again later!`
+          msg: `Server isn't available.Please try again later!`
         }
       ]);
     } else if (loginProcessData.data) {

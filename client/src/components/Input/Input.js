@@ -8,16 +8,14 @@ const errorFunc = (validationErrorParams, name) => {
   }
   return error;
 };
-const Input = props => {
-  const {
-    name,
-    setHook,
-    placeholder,
-    value,
-    type,
-    validationErrorParams,
-    textArea
-  } = props;
+const Input = ({ name,
+  setHook,
+  placeholder,
+  value,
+  type,
+  validationErrorParams,
+  textArea}) => {
+  
   const error = useMemo(() => errorFunc(validationErrorParams, name), [
     validationErrorParams,
     name

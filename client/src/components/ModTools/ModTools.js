@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import useAuthContext from '../../hooks/useAuthContext/useAuthContext';
 import useToggle from '../../hooks/useToggle/useToggle';
 import PostsContainer from '../PostsContainer/PostsContainer';
+import RulesPage from './RulesPage/RulesPage'
 import SideDrawer from '../SideDrawer/SideDrawer';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -30,7 +31,7 @@ const ModTools = ({ history, match }) => {
   }, []);
   let content;
   let sideDrawerListItems = []
-  if(communityName){
+  if(community){
     const {url} = match
     sideDrawerListItems = [
       {
@@ -46,7 +47,7 @@ const ModTools = ({ history, match }) => {
       {
         active: `/mod-tools/rules/${communityName}`,
         content: 'Rules',
-        element:<h1>Rules</h1>
+        element:<RulesPage communityId={community._id} communityName={community.name}/>
       },
       {
         active: `/mod-tools/home/${communityName}`,
