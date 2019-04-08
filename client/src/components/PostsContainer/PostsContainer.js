@@ -30,7 +30,7 @@ const PostsContainer = ({ posts, getNextPage, setPosts ,postsCount}) => {
 PostsContainer.propTypes = {
   posts: postsArrType.isRequired,
   setPosts: PropTypes.func.isRequired,
-  getNextPage: PropTypes.func.isRequired,
+  getNextPage:PropTypes.oneOfType(PropTypes.func.isRequired,PropTypes.bool.isRequired),
   postsCount:PropTypes.number.isRequired
 };
 export default PostsContainer;

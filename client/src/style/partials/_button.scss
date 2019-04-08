@@ -2,4 +2,12 @@
     border: none;
     padding: 0.3rem;
     background: none;
+    cursor: pointer;
+}
+.button-profile{
+    font-size: 1.2rem;
+    color: $white;
+    background: $primary;
+    padding:0.5rem 1rem 0.5rem 1rem;
+    @include border-radius;
 }

@@ -3,16 +3,12 @@ const User  = require('../models/user')
 const Comment =   require('../models/comment')
 const Community =   require('../models/community')
 const mongoose = require('mongoose')
+const pagination = require('../util/pagination')
 exports.getUserPosts = async (req, res, next) => {
   try {
-      
     const {userId} = req.params;
-    const {page} = req.query
-    console.log(userId)
-    const currentPage = page || 1
-    const postPerPage = 5
-    const posts = await Post.find({authorId:userId}).countDocuments().find().skip((currentPage -1) * postPerPage).limit(postPerPage)
-    res.status(200).json({posts}); 
+    const {posts,postsCount} = await pagination(req,'userPosts',userId)
+    res.status(200).json({posts,postsCount}); 
   } 
   catch (err) {
     if (!err.statusCode) {
@@ -42,17 +38,9 @@ exports.getUserComments = async (req, res, next) => {
     try {
         
       const {userId} = req.params;
-      const user = await User.findById(userId)
-      const {page} = req.query
-      const currentPage = page || 1
-      const postPerPage = 5
+      const user  = await User.findById(userId)
       const populatedUser = await user.populate('saved').execPopulate()
       const posts = populatedUser.saved
-      console.log(posts)
-      // const {page} = req.query
-      // const currentPage = page || 1
-      // const postPerPage = 5
-      // const comments = await Comment.find({authorId:userId}).countDocuments().find().skip((currentPage -1) * postPerPage).limit(postPerPage)
       res.status(200).json({posts}); 
     } 
     catch (err) {
@@ -70,16 +58,8 @@ exports.getUserComments = async (req, res, next) => {
         
       const {userId} = req.params;
       const user = await User.findById(userId)
-      const {page} = req.query
-      const currentPage = page || 1
-      const postPerPage = 5
       const populatedUser = await user.populate('upvoted').execPopulate()
       const posts = populatedUser.upvoted
-      console.log(posts)
-      // const {page} = req.query
-      // const currentPage = page || 1
-      // const postPerPage = 5
-      // const comments = await Comment.find({authorId:userId}).countDocuments().find().skip((currentPage -1) * postPerPage).limit(postPerPage)
       res.status(200).json({posts}); 
     } 
     catch (err) {
@@ -96,16 +76,8 @@ exports.getUserComments = async (req, res, next) => {
         
       const {userId} = req.params;
       const user = await User.findById(userId)
-      const {page} = req.query
-      const currentPage = page || 1
-      const postPerPage = 5
       const populatedUser = await user.populate('downvoted').execPopulate()
       const posts = populatedUser.downvoted
-      console.log(posts)
-      // const {page} = req.query
-      // const currentPage = page || 1
-      // const postPerPage = 5
-      // const comments = await Comment.find({authorId:userId}).countDocuments().find().skip((currentPage -1) * postPerPage).limit(postPerPage)
       res.status(200).json({posts}); 
     } 
     catch (err) {
@@ -121,16 +93,9 @@ exports.getUserComments = async (req, res, next) => {
         
       const {userId} = req.params;
       const user = await User.findById(userId)
-      const {page} = req.query
-      const currentPage = page || 1
-      const postPerPage = 5
       const populatedUser = await user.populate('communities').execPopulate()
       const communities = populatedUser.communities
       console.log(communities)
-      // const {page} = req.query
-      // const currentPage = page || 1
-      // const postPerPage = 5
-      // const comments = await Comment.find({authorId:userId}).countDocuments().find().skip((currentPage -1) * postPerPage).limit(postPerPage)
       res.status(200).json({communities}); 
     } 
     catch (err) {

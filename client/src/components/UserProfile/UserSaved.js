@@ -1,13 +1,11 @@
 import React,{useEffect,useContext,useState} from 'react'
-import Breadcrumbs from './Breadcrumbs'
 import getData from '../../util/getData'
-import {AuthContextData} from '../../AuthContext/AuthContext'
+import useAuthContext from '../../hooks/useAuthContext/useAuthContext'
 import PostsContainer from '../PostsContainer/PostsContainer';
 const UserSaved = props => { 
     const [posts,setPosts] = useState(false)
     const [page,setPage] = useState(1)
-    const {authState} = useContext(AuthContextData)
-    const {isAuth,userId} = authState
+    const {isAuth,userId} = useAuthContext()
     useEffect(() => {
         const apiUrl = `http://localhost:8080/user/saved/${userId}`
         if(isAuth){
@@ -21,21 +19,11 @@ const UserSaved = props => {
         }
         
     },[])
-    const getNextPage =async () => {
-    //     await setPage(page + 1);
-    //  const apiUrl = `http://localhost:8080/user-get-saved/${userId}?page=${page + 1}`;
-    // const responseData = await getData(apiUrl);
-    // if (responseData.posts) {
-    //     console.log(responseData.posts)
-    // //   setPosts(posts.concat(responseData.posts));
-    // }
-    }
+   
     return (
         <>
-        <div className="user-page">
-            <Breadcrumbs />
-        </div>
-         <PostsContainer posts={posts} getNextPage={getNextPage} setPosts={setPosts}/>
+
+         <PostsContainer posts={posts} getNextPage={false} setPosts={setPosts} postsCount={0}/>
         </>
     )
 }

@@ -5,7 +5,6 @@ import CommentForm from '../CommentsContainer/CommentForm';
 import getData from '../../util/getData';
 import {AuthContextData} from '../../AuthContext/AuthContext'
 import CommentsContainer from '../CommentsContainer/CommentsContainer'
-import Breadcrumbs from './Breadcrumbs';
 const UserComments = props => {
   const [comments, setComments] = useState(false);
   const [page, setPage] = useState(1);
@@ -43,9 +42,7 @@ const UserComments = props => {
   };
   return (
     <>
-    <div className="user-page">
-            <Breadcrumbs />
-        </div>
+
       {comments ? (
 
         <Suspense fallback={<Loader />}>

@@ -18,7 +18,7 @@ router.post(
   );
 router.get('/posts/:userId', userController.getUserPosts);
 router.get('/comments/:userId', userController.getUserComments);
-router.get('/saved:userId', userController.getUserSavedPosts);
+router.get('/saved/:userId', userController.getUserSavedPosts);
 router.get('/upvoted/:userId', userController.getUserUpvotedPosts);
 router.get('/downvoted/:userId', userController.getUserDownvotedPosts);
 router.get('/communities/:userId', userController.getUserCommunities);

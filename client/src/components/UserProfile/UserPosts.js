@@ -1,10 +1,12 @@
 import React ,{useState,lazy,Suspense,useContext,useEffect} from 'react'
 import getData from '../../util/getData'
 import {AuthContextData} from '../../AuthContext/AuthContext'
-import Breadcrumbs from './Breadcrumbs';
+
+
 import PostsContainer from '../PostsContainer/PostsContainer';
 const UserPosts= props => {
     const [posts,setPosts] = useState(false)
+    const [postsCount,setPostsCount] = useState(0)
     const [page,setPage] = useState(1)
     const {authState} = useContext(AuthContextData)
     const {isAuth,userId} = authState
@@ -15,6 +17,7 @@ const UserPosts= props => {
            .then(data => {
                if(data.posts){
                    setPosts(data.posts)
+                   console.log(data)
                }
            })
         }
@@ -32,10 +35,7 @@ const UserPosts= props => {
   
     return (
         <>
-        <div className="user-page">
-            <Breadcrumbs />
-        </div>
-         <PostsContainer posts={posts} getNextPage={getNextPage} setPosts={setPosts} community={null}/>
+         <PostsContainer posts={posts} getNextPage={getNextPage} setPosts={setPosts} community={null} postsCount={postsCount}/>
         </>
     )
 }

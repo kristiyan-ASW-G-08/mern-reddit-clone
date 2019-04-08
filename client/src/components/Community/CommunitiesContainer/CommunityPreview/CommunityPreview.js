@@ -9,7 +9,7 @@ const CommunityPreview = ({community}) => {
     <div  className="community-preview">
     <div className="community-preview-container">
     <div className="community-preview-container-icon">
-    <img src={`http://localhost:8080/images/${icon}`} alt={`${name}`} data-testid="community-logo"/>
+    <img src={`http://localhost:8080/${icon}`} alt={`${name}`} data-testid="community-logo"/>
     </div>
     </div>
     <div className="community-preview-body">

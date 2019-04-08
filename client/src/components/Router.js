@@ -14,13 +14,8 @@ const CommunityForm = lazy(() => import('./CommunityForm/CommunityForm'));
 const PostForm = lazy(() => import('./PostForm/PostForm'));
 const PostFull = lazy(() => import('./PostFull/PostFull'));
 const Community = lazy(() => import('./Community/Community'));
-const UserPosts = lazy(() => import('./UserProfile/UserPosts'));
-const UserComments = lazy(() => import('./UserProfile/UserComments'));
-const UserSaved = lazy(() => import('./UserProfile/UserSaved'));
-const UserUpvoted = lazy(() => import('./UserProfile/UserUpvoted'));
-const UserDownvoted = lazy(() => import('./UserProfile/UserDownvoted'));
-const UserCommunities = lazy(() => import('./UserProfile/UserCommunities'));
 const ModTools = lazy(() => import('./ModTools/ModTools'));
+const UserProfile = lazy(() => import('./UserProfile/UserProfile'));
 const Router = () => (
   <ModalContextConsumer>
     {modalData => {
@@ -55,7 +50,12 @@ const Router = () => (
                       Component={ModTools}
                       path={["/mod-tools/home/:communityName","/mod-tools/reports/:communityName","/mod-tools/customization/:communityName","/mod-tools/rules/:communityName"]}
                     /> 
-    
+                     <ProtectedRoute
+                      exact
+                      authState={authState}
+                      Component={UserProfile}
+                      path={["/user/posts","/user/comments","/user/saved","/user/upvoted","/user/downvoted","/user/communities"]}
+                    /> 
                      <Route
                       path="/community/:communityName"
                       render={props => (
@@ -91,44 +91,7 @@ const Router = () => (
                       Component={CommunityForm}
                       path="/create-community"
                     />
-                   <ProtectedRoute
-                    exact
-                    authState={authState}
-                    Component={UserPosts}
-                    path="/user/posts"
-                  /> 
-                    <ProtectedRoute
-                    exact
-                    authState={authState}
-                    Component={UserComments}
-                    path="/user/comments"
-                  /> 
-                    <ProtectedRoute
-                    exact
-                    authState={authState}
-                    Component={UserSaved}
-                    path="/user/saved"
-                  /> 
-                   <ProtectedRoute
-                    exact
-                    authState={authState}
-                    Component={UserUpvoted}
-                    path="/user/upvoted"
-                  /> 
-                 <ProtectedRoute
-                    exact
-                    authState={authState}
-                    Component={UserDownvoted}
-                    path="/user/downvoted"
-                  /> 
-                   <ProtectedRoute
-                    exact
-                    authState={authState}
-                    Component={UserCommunities}
-                    path="/user/communities"
-                  /> 
-      
-    
+                   
                     <Route
                       exact
                       path="/"

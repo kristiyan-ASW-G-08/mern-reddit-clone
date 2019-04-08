@@ -9,12 +9,12 @@
     }
     @include large-screen{
         width: 60vw;
-    }
-    @include larger-screen{
-        width: 45vw;
         grid:'votes body'
              'votes body'
             'votes postbar'/1fr 14fr;
+    }
+    @include larger-screen{
+        width: 45vw;
     }
      &-body{
          grid-area: body;

@@ -1,5 +1,5 @@
 import React,{useEffect,useContext,useState} from 'react'
-import Breadcrumbs from './Breadcrumbs'
+
 import getData from '../../util/getData'
 import {AuthContextData} from '../../AuthContext/AuthContext'
 import CommunitiesContainer from '../Community/CommunitiesContainer/CommunitiesContainer';
@@ -24,9 +24,7 @@ const UserCommunities = props => {
     },[])
     return (
         <>
-        <div className="user-page">
-            <Breadcrumbs />
-        </div>
+
          <CommunitiesContainer communities={communities}/>
         </>
     )

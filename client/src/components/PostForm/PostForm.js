@@ -54,8 +54,6 @@ const PostForm = props => {
       const formData = new FormData()
       formData.append('title',title)
       formData.append('image',image)
-      console.log(image)
-      console.log(formData.title)
        const responseData = await postFormData(apiUrl,formData,token)
        postId = responseData.postId;
        props.history.replace(`/post/${postId}`);

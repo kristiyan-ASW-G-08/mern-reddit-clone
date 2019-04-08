@@ -42,7 +42,7 @@ const ModTools = ({ history, match }) => {
       {
         active: `/mod-tools/customization/${communityName}`,
         content: 'Customization',
-        element:<h1>Customization</h1>
+        element:<IconForm community={community} token={token}/>
       },
       {
         active: `/mod-tools/rules/${communityName}`,
