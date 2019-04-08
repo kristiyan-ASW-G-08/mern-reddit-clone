@@ -28,6 +28,8 @@
 @import 'partials/home-banner';
 @import 'partials/buttons-container';
 @import 'partials/side-drawer';
+@import 'partials/rules-container';
+
 * {
   margin: 0;
   padding: 0;
@@ -51,4 +53,7 @@ body {
 // }
 a{
   text-decoration: none;
+}
+.mod-tools{
+  width:100%;
 }

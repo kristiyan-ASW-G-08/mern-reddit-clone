@@ -6,10 +6,12 @@ import useValidationErrors from '../../../../hooks/useValidationErrors/useValida
 import useAuthContext from '../../../../hooks/useAuthContext/useAuthContext';
 import  useModalContext from '../../../../hooks/useModalContext/useModalContext'
 import postData from '../../../../util/postData'
-const RulesForm = ({history}) => {
-const {isAuth,token} = useAuthContext();
+import Community from '../../../Community/Community';
+const RulesForm = ({history,communityId}) => {
+
+  const {isAuth,token} = useAuthContext();
   const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState(''); 
   const [reason, setReason] = useState('');
   const {toggleModalReducer} = useModalContext()
   const {
@@ -26,7 +28,7 @@ const {isAuth,token} = useAuthContext();
   const submitHandler = async e => {
     e.preventDefault();
     console.log(reason,title,description)
-    const apiUrl = `http://localhost:8080/community/rule/post/:communityId`
+    const apiUrl = `http://localhost:8080/community/rule/post/${communityId}`
     const rule = {
         reason,
         title,

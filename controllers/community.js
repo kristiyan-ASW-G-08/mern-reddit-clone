@@ -120,6 +120,9 @@ exports.postRule = async (req, res, next) => {
   try {
     errorsIsEmpty(validationResult(req))
      const {communityId} = req.params
+     console.log(communityId)
+     const community = await Community.findById(communityId)
+     console.log(community)
      const {title,description,reason} = req.body
      const rule = new Rule({
        title,
@@ -170,7 +173,9 @@ exports.deleteRule = async (req, res, next) => {
 exports.getRules = async (req, res, next) => {
   try {
     const { communityId } = req.params;
+    console.log(communityId)
      const rules =  await Rule.find({ communityId })
+     console.log(rules)
     res.status(200).json({ rules });
   } catch (err) {
     console.log(err);

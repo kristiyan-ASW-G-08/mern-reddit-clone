@@ -63,7 +63,7 @@ const ModTools = ({ history, match }) => {
       <button className="button" onClick={toggle}>Mod Options</button>
       <SideDrawer on={on} toggle={toggle} listItems={sideDrawerListItems} />
       {content}
-    </>
+      </>
   );
 };
 export default withRouter(ModTools);

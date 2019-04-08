@@ -1,0 +1,40 @@
+.rules-container{
+    @include center;
+    width: 100%;
+    .rules-list-container{
+        width: 70%;
+        padding: 0.5rem;
+        @include center;
+        &-header{
+            width: 100%;
+            padding: 0.5rem;
+            text-align: center;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            background: $primary;
+            color: $white;
+            margin-bottom: 0.3rem;
+        }
+    }
+    .rules-list{
+    width: 100%;
+    @include center;
+    &-rule{
+        width: 80%;
+        text-align: left;;
+        padding: 0.7rem;
+        border-bottom: solid 1px  lighten($lighter-dark, 50%);
+        details{
+            summary{
+                font-size: 0.8rem;
+                
+            }
+            p{
+                padding: 0.5rem;
+                font-size: 0.7rem;
+            }
+        }
+    }
+    }
+    
+}

@@ -8,6 +8,7 @@ import Loader from './Loader'
 }) => {
   return (
     <Route
+
       {...rest}
       render={props => {
         if (authState.isAuth) {
