@@ -5,16 +5,13 @@ import ValidationErrorsList from '../ValidationErrorsList/ValidationErrorsList';
 import postData from '../../util/postData';
 import useValidationErrors from '../../hooks/useValidationErrors/useValidationErrors';
 import useAuthContext from '../../hooks/useAuthContext/useAuthContext'
-const CommentForm = props => {
+const CommentForm = ({postId,
+  setNewComment,
+  toggle,
+  editComment,
+  setEditComment,
+  setEditCommentElement,history}) => {
   const { isAuth, token } = useAuthContext();
-  const {
-    postId,
-    setNewComment,
-    toggle,
-    editComment,
-    setEditComment,
-    setEditCommentElement
-  } = props;
   const [content, setContent] = useState('');
   const {
     validationErrorMessages,
@@ -50,7 +47,7 @@ const CommentForm = props => {
         toggle();
       }
     }else {
-      props.history.push(`/login`);
+      history.push(`/login`);
     }
   };
   return (

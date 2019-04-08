@@ -123,15 +123,12 @@ exports.postRule = async (req, res, next) => {
      console.log(communityId)
      const community = await Community.findById(communityId)
      console.log(community)
-     const {title,description,reason} = req.body
+     const {title,description} = req.body
      const rule = new Rule({
        title,
        description,
        communityId
      })
-     if(reason){
-       rule['reason'] = reason
-     }
      await rule.save()
      res.status(200).json({rule}); 
   } catch (err) {
@@ -142,17 +139,14 @@ exports.postRule = async (req, res, next) => {
 exports.editRule = async (req, res, next) => {
   try {
     errorsIsEmpty(validationResult(req));
-    const { title,description,reason} = req.body;
+    const { title,description} = req.body;
     const { ruleId } = req.params;
     const rule = {
       title,
-      content
+      description
     };
-    if(reason){
-      rule['reason'] = reason
-    }
-    await Rule.findOneAndUpdate({ _id: ruleId }, rule);
-    res.status(201).json({ msg: 'updated' });
+   const editedRule =   await Rule.findOneAndUpdate({ _id: ruleId }, rule,{new:true});
+    res.status(201).json({ msg: 'updated',rule:editedRule });
   } catch (err) {
 
     console.log(err);

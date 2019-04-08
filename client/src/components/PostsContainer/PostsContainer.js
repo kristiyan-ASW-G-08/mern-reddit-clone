@@ -11,7 +11,7 @@ const PostsContainer = ({ posts, getNextPage, setPosts ,postsCount}) => {
   };
   return (
     <>
-      {posts ? (
+      {posts && posts.length > 0? (
         <Suspense fallback={<Loader />}>
           <div className="posts-container" data-testid="posts-container">
             <Posts posts={posts} deletePostElement={deletePostElement} />
@@ -23,9 +23,7 @@ const PostsContainer = ({ posts, getNextPage, setPosts ,postsCount}) => {
             
           </div>
         </Suspense>
-      ) : (
-        <h1>No Posts</h1>
-      )}
+      ) : <h1>No Posts</h1>}
     </>
   );
 };

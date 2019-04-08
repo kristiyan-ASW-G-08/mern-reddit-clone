@@ -10,9 +10,6 @@ const ruleSchema = new Schema({
     type: String,
     required: true
   },
-  reason:{
-    type: String,
-  },
   communityId: {
     type: Schema.Types.ObjectId,
     ref: 'Community',

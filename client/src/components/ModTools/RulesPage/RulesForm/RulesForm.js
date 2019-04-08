@@ -7,12 +7,11 @@ import useAuthContext from '../../../../hooks/useAuthContext/useAuthContext';
 import  useModalContext from '../../../../hooks/useModalContext/useModalContext'
 import postData from '../../../../util/postData'
 import Community from '../../../Community/Community';
-const RulesForm = ({history,communityId}) => {
+const RulesForm = ({communityId,toggle,setNewRule,editRule,editRules,setEditRule,history}) => {
 
   const {isAuth,token} = useAuthContext();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState(''); 
-  const [reason, setReason] = useState('');
   const {toggleModalReducer} = useModalContext()
   const {
     validationErrorMessages,
@@ -22,24 +21,44 @@ const RulesForm = ({history,communityId}) => {
 
 
   useEffect(() => {
-   
+    console.log(editRule)
+   if(editRule){
+    setTitle(editRule.title)
+    setDescription(editRule.description)
+   }
   },[])
   
+  const cancelHandler = e => {
+    e.preventDefault()
+    toggle()
+  }
   const submitHandler = async e => {
-    e.preventDefault();
-    console.log(reason,title,description)
-    const apiUrl = `http://localhost:8080/community/rule/post/${communityId}`
-    const rule = {
-        reason,
-        title,
-        description
-    }
-    const responseData = await postData(apiUrl,rule,token)
-    if (responseData.validationErrors) {
+   e.preventDefault()
+    if (isAuth) {
+      console.log(editRule)
+      let apiUrl = editRule
+        ? `http://localhost:8080/community/rule/edit/${editRule._id}`
+        : `http://localhost:8080/community/rule/post/${communityId}`;
+      const responseData = await postData(apiUrl, { title,description }, token);
+      console.log(responseData)
+      if (responseData.validationErrors) {
         toggleValidationErrors(responseData.validationErrors);
       } else {
-       console.log(responseData)
+        const { rule } = responseData;
+        if (editRule) {
+          toggleModalReducer({on:true,message:'Rule was successfully edited!'})
+          setEditRule(null);
+          editRules(rule);
+        } else {
+          toggleModalReducer({on:true,message:'Rule was successfully added!'})
+          setNewRule(rule);
+        }
+        toggle();
       }
+    }else {
+      history.push(`/login`);
+    }
+    
     
   };
   return (
@@ -54,14 +73,6 @@ const RulesForm = ({history,communityId}) => {
         validationErrorParams={validationErrorParams}
       />
       <Input
-        setHook={setReason}
-        value={reason}
-        placeholder={'Report reason'}
-        type={'text'}
-        name={'reason'}
-        validationErrorParams={validationErrorParams}
-      />
-      <Input
         setHook={setDescription}
         value={description}
         placeholder={'Full description'}
@@ -71,6 +82,7 @@ const RulesForm = ({history,communityId}) => {
         textArea={true}
       />
       <button>ADD NEW RULE</button>
+      <button onClick={cancelHandler}>Cancel</button>
     </form>
   );
 }
