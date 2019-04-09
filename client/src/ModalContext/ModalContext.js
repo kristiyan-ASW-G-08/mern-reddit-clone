@@ -10,9 +10,11 @@ const ModalContext = props => {
   const toggleModalReducer = newModalState => {
     console.log(newModalState)
     dispatch({type:TOGGLEMODAL,newModalState})
-    // setTimeout(() => {
-    //   dispatch({type:TOGGLEMODAL,newModalState:{on:false,message:null}})
-    // },2000)
+    if(newModalState.message){
+      setTimeout(() => {
+      dispatch({type:TOGGLEMODAL,newModalState:{on:false,message:null}})
+    },2000)
+    }
   }
 
   return (

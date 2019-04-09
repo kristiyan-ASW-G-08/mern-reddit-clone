@@ -1,6 +1,7 @@
 const Community = require('../models/community');
 const Post = require('../models/post');
 const Rule = require('../models/rule');
+const Report = require('../models/report');
 const { validationResult } = require('express-validator/check');
 const errorsIsEmpty = require('../util/errorsIsEmpty')
 const pagination  = require('../util/pagination')
@@ -68,16 +69,22 @@ exports.getPosts = async (req, res, next) => {
 exports.postReport = async (req, res, next) => {
   try {
     const { postId } = req.params;
-    const { communityId } = req.body;
-    const community = await Community.findById(communityId);
-    const reportStatus = await community.reportSpam(postId);
-    if (reportStatus) {
-      res.status(200).json({ msg: 'Post has been reported' });
-    } else {
-      res
-        .status(200)
-        .json({ msg: 'Post has already been reported been reported' });
-    }
+    
+    const { ruleId,
+      communityId,
+      postAuthorId,
+      reportAuthorId, } = req.body;
+
+      const report = await new Report({
+        ruleId,
+      communityId,
+      postId,
+      postAuthorId,
+      reportAuthorId,
+      })
+      await report.save()
+      res.status(200).json({ msg: 'Reported successfully' });
+
   } catch (err) {
     console.log(err);
   }
@@ -167,9 +174,7 @@ exports.deleteRule = async (req, res, next) => {
 exports.getRules = async (req, res, next) => {
   try {
     const { communityId } = req.params;
-    console.log(communityId)
      const rules =  await Rule.find({ communityId })
-     console.log(rules)
     res.status(200).json({ rules });
   } catch (err) {
     console.log(err);

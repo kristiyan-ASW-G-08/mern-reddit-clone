@@ -1,10 +1,14 @@
 
 .form{
+    background: $white;
     @include center;
     grid-gap: 1.2rem;
     @include border;
     padding: 1rem;
-    
+    width: 90vw;
+    @include medium-screen{
+        width: 30rem;
+    }
     .form--logo{
         img{
             height: 3rem;

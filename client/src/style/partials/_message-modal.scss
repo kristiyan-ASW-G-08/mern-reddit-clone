@@ -1,0 +1,35 @@
+.message-modal-container{
+    transform: translateY(85vh);
+    position: absolute;
+    display: grid;
+    width: 100vw;
+    height: 4rem;
+    z-index: 10;
+    @include center;
+}
+.message-modal{
+    width: 90vw;
+    @include large-screen{
+        width: 30vw;
+    }
+    height: 4rem;
+    margin:1rem auto;
+    padding: 1rem;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content:left;;
+    background: $white;
+
+    box-shadow: 1px 1px 5px 0 rgba(0,0,0,.15);
+    @include border;
+    &-logo{
+        height: 2rem;
+        width: 2rem;
+        margin-right: 0.5rem;
+    }
+    &-message{
+        padding: 0.3rem;
+        font-size: 1.2rem;
+    }
+}

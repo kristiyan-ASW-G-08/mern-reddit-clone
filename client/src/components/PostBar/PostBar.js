@@ -8,7 +8,7 @@ import useAuthContext from '../../hooks/useAuthContext/useAuthContext'
 import useModalContext from '../../hooks/useModalContext/useModalContext'
 import {string,func,shape} from 'prop-types'
 import postType from '../PropTypes/postType'
-import ComponentName   from './testEl';
+import ReportForm from '../ReportForm/ReportForm'
 import {
   faShare,faCommentAlt, faBookmark,faTrashAlt,faPen,faCopy,faLink
 } from '@fortawesome/free-solid-svg-icons';
@@ -40,8 +40,14 @@ const PostBar= ({post,deletePostElement,history}) => {
     }
     }
     const reportHandler = async () => {
-       toggleModalReducer({on:true,message:null,Component: ComponentName })
-        console.log(post)
+        if(isAuth){
+            toggleModalReducer({on:true,message:null,Component: <ReportForm post={post} /> })
+            console.log(post)
+        }else{
+            history.push({pathname: '/login',
+            state: { message:"Login to report!" }})
+        }
+   
     }
     let authorizedContent = ''
     if(authorId === userId){
