@@ -5,6 +5,9 @@
     width: 90%;
     @include large-screen{
         grid-template-columns: 1fr ;
+        &-grid{
+        grid-template-columns: 1fr 1fr ;
+        }
     }
     button{
         @include border-radius;

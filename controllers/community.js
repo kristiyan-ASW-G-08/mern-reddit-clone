@@ -69,7 +69,6 @@ exports.getPosts = async (req, res, next) => {
 exports.postReport = async (req, res, next) => {
   try {
     const { postId } = req.params;
-    
     const { ruleId,
       communityId,
       reportAuthorId, } = req.body;
@@ -96,7 +95,19 @@ exports.getReports = async (req, res, next) => {
     console.log(err);
   }
 };
-
+exports.deleteReportPost =   async (req, res, next) => {
+  try {
+    const {reportId} = req.params;
+    console.log(reportId)
+    const report = await Report.findById(reportId)
+    const {postId} = report
+    await Post.deleteOne({_id:postId})
+    await Report.deleteOne({_id:reportId})
+   res.status(200).json({msg:"Deleted"}); 
+  } catch (err) {
+    console.log(err);
+  }
+};
 exports.changeIcon =  async (req, res, next) => {
   try {
     const {communityName} = req.params
@@ -163,6 +174,7 @@ exports.deleteRule = async (req, res, next) => {
     res.status(200).json({ msg:'Deleted' })
   } catch (err) {
     console.log(err);
+    
     next(err)
   }
 };

@@ -43,6 +43,9 @@ const ReportForm = ({history,post}) => {
         }
         const responseData = await postData(apiUrl,report,token)
         console.log(responseData)
+        if(responseData.msg === 'Reported successfully'){
+          toggleModalReducer({on:false,message:null,Component:null})
+        }
     }
   };
   const cancelHandler  = () => {
@@ -51,6 +54,7 @@ const ReportForm = ({history,post}) => {
   return (
     <form className="form" onSubmit={e => submitHandler(e)}>
       <ValidationErrorsList validationErrorMessages={validationErrorMessages} />
+      <label className="label">Report Post</label>
       {rules ?   
       <select className="input" defaultValue="default" onChange={e => setRule(e.target.value)} >
     <option  value="default"  disabled="disabled">Select A Rule</option>
@@ -60,7 +64,7 @@ const ReportForm = ({history,post}) => {
       </select> : '' }
     
       <div className="buttons-container">
-      <button className="button">SIGN UP</button>
+      <button className="button">Report</button>
       <button onClick={cancelHandler} className="button">Cancel</button></div>
      
     </form>
