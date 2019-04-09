@@ -72,14 +72,12 @@ exports.postReport = async (req, res, next) => {
     
     const { ruleId,
       communityId,
-      postAuthorId,
       reportAuthorId, } = req.body;
 
       const report = await new Report({
-        ruleId,
+      ruleId,
       communityId,
       postId,
-      postAuthorId,
       reportAuthorId,
       })
       await report.save()
@@ -92,10 +90,8 @@ exports.postReport = async (req, res, next) => {
 exports.getReports = async (req, res, next) => {
   try {
     const { communityId } = req.params;
-    const community = await Community.findById(communityId);
-   const populatedCommunity =  await community.populate('spam').execPopulate()
-   const posts = populatedCommunity.spam
-   res.status(200).json({posts}); 
+    const reports = await Report.find({ communityId })
+   res.status(200).json({reports}); 
   } catch (err) {
     console.log(err);
   }

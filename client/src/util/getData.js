@@ -1,7 +1,14 @@
-const getData  = async url  => {
-  const response  =  await fetch(url, {
-      method: 'GET',
-    });
+const getData  = async (url,token)  => {
+  const fetchObj = {
+    method: 'GET',
+  }
+  if(token){
+    fetchObj['headers'] =  {
+      Authorization: 'Bearer ' + token,
+      'Content-Type': 'application/json'
+    }
+  }
+  const response  =  await fetch(url,fetchObj);
 
     const responseData = await response.json()
 

@@ -39,31 +39,11 @@ const ReportForm = ({history,post}) => {
         const report = {
             ruleId:rule,
             communityId:communityId,
-            postAuthorId: authorId,
             reportAuthorId:userId
         }
         const responseData = await postData(apiUrl,report,token)
         console.log(responseData)
     }
-    // const signupData = {
-    //   email,
-    //   password,
-    //   matchPassword,
-    //   username
-    // }
-    // const responseData = await postData(apiUrl,signupData,'')
-    // if (responseData === undefined) {
-    //   toggleValidationErrors([
-    //     {
-    //       param: 'server-error',
-    //       msg: `Server isn't available.Please try again later!`
-    //     }
-    //   ]);
-    // } else if (responseData.validationErrors) {
-    //   toggleValidationErrors(responseData.validationErrors);
-    // } else {
-    //   history.replace(`/login`);
-    // }
   };
   const cancelHandler  = () => {
       toggleModalReducer({on:false,message:null,Component:null})

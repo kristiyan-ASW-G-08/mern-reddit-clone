@@ -17,11 +17,6 @@ const reportSchema = new Schema({
     ref: 'Community',
     required: true
   },
-  postAuthorId: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-  },
   reportAuthorId: {
     type: Schema.Types.ObjectId,
     ref: 'User',

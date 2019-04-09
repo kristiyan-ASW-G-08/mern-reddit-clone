@@ -12,6 +12,9 @@
         font-size: 0.9rem;
         padding: 0.4rem;
         color: $white;
+        a{
+            color:$white;
+        }
         &:hover{
             background: darken($primary,10%);
         }

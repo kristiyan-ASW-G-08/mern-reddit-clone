@@ -6,6 +6,7 @@ import useAuthContext from '../../hooks/useAuthContext/useAuthContext';
 import useToggle from '../../hooks/useToggle/useToggle';
 import PostsContainer from '../PostsContainer/PostsContainer';
 import RulesPage from './RulesPage/RulesPage'
+import ReportsPage from './ReportsPage/ReportsPage'
 import SideDrawer from '../SideDrawer/SideDrawer';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -38,7 +39,7 @@ const ModTools = ({ history, match }) => {
       {
         active: `/mod-tools/reports/${communityName}`,
         content: 'Reports',
-        element:<h1>Reports</h1>
+        element:<ReportsPage communityId={community._id} token={token}/>
       },
       {
         active: `/mod-tools/customization/${communityName}`,
