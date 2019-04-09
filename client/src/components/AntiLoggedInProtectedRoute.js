@@ -17,7 +17,7 @@ import Loader from './Loader'
                     pathname: "/",
                     state: {
                       from: props.location,
-                      error:'You are alreadt logged in.'
+                      message:'You are already logged in.'
                     }
                   }}
                 />

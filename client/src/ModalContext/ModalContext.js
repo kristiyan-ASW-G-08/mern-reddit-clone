@@ -5,19 +5,21 @@ const ModalContext = props => {
   const [modalState, dispatch] = useReducer(modalReducer, {
     on:false,
     message:null,
+    Component:null,
   });
   const toggleModalReducer = newModalState => {
+    console.log(newModalState)
     dispatch({type:TOGGLEMODAL,newModalState})
-    setTimeout(() => {
-      dispatch({type:TOGGLEMODAL,newModalState:{on:false,message:null}})
-    },2000)
+    // setTimeout(() => {
+    //   dispatch({type:TOGGLEMODAL,newModalState:{on:false,message:null}})
+    // },2000)
   }
 
   return (
     <Context.Provider
       value={{
        modalState,
-       toggleModalReducer
+       toggleModalReducer,
       }}
     >
       {props.children}

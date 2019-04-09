@@ -19,7 +19,6 @@ const UserProfile = lazy(() => import('./UserProfile/UserProfile'));
 const Router = () => (
   <ModalContextConsumer>
     {modalData => {
-      console.log(modalData)
       return (
         <AuthContextConsumer>
         {consumerData => {

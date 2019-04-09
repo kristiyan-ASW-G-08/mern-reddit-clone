@@ -8,6 +8,7 @@ import useAuthContext from '../../hooks/useAuthContext/useAuthContext'
 import useModalContext from '../../hooks/useModalContext/useModalContext'
 import {string,func,shape} from 'prop-types'
 import postType from '../PropTypes/postType'
+import ComponentName   from './testEl';
 import {
   faShare,faCommentAlt, faBookmark,faTrashAlt,faPen,faCopy,faLink
 } from '@fortawesome/free-solid-svg-icons';
@@ -38,23 +39,13 @@ const PostBar= ({post,deletePostElement,history}) => {
         
     }
     }
-    const spamHandler = async () => {
-        if(!isAuth) {  
-        history.push({pathname: '/login',
-        state: { message:"Login to report!" }})
-        }
-        else {
-            const apiUrl = `http://localhost:8080/community/report/${postId}`
-        const requestBody = {
-            communityId:post.community
-        }
-          const responseData =  await postData(apiUrl,requestBody,token)
-        }
-        
+    const reportHandler = async () => {
+       toggleModalReducer({on:true,message:null,Component: ComponentName })
+        console.log(post)
     }
-    let autorizedContent = ''
+    let authorizedContent = ''
     if(authorId === userId){
-        autorizedContent = 
+        authorizedContent = 
         <>
          <button onClick={deleteHandler} className="button postbar-button">
         <FontAwesomeIcon icon="trash-alt" /><span>Delete</span>
@@ -115,10 +106,10 @@ const PostBar= ({post,deletePostElement,history}) => {
         <button onClick={saveHandler} className={`button postbar-button ${saved ? 'saved' : ''} `}>
         <FontAwesomeIcon icon="bookmark" /><span>Save</span>
         </button>
-        <button onClick={spamHandler} className="button postbar-button">
-        <FontAwesomeIcon icon="copy" /><span>Spam</span>
+        <button onClick={reportHandler} className="button postbar-button">
+        <FontAwesomeIcon icon="copy" /><span>Report</span>
         </button>
-        {autorizedContent}
+        {authorizedContent}
         </div>
     )
 }

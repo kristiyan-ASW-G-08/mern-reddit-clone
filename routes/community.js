@@ -71,9 +71,9 @@ router.get('/get/:communityName', communityController.getCommunity);
 
 router.get('/posts/:communityName', communityController.getPosts);
 
-router.post('/report/:postId', isAuth, communityController.reportSpam);
+router.post('/report/:postId', isAuth, communityController.postReport);
 
-router.get('/spam/:communityId', isAuth, communityController.getSpamPosts);
+router.get('/reports/:communityId', isAuth, communityController.getReports);
 
 
 const ruleValidationArr = [

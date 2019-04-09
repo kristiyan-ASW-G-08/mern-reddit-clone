@@ -30,6 +30,7 @@ const ModTools = ({ history, match }) => {
     });
   }, []);
   let content;
+  let pageTitle
   let sideDrawerListItems = []
   if(community){
     const {url} = match
@@ -55,12 +56,14 @@ const ModTools = ({ history, match }) => {
         element:<h1>Home</h1>
       }
     ];
-    content = sideDrawerListItems.find(item => item.active === url).element
+    const selectedElement = sideDrawerListItems.find(item => item.active === url)
+    content = selectedElement.element
+    pageTitle = selectedElement.content
   }
    
   return (
-    <>
-      <button className="button" onClick={toggle}>Mod Options</button>
+    <> 
+      <button className="button" onClick={toggle}>{pageTitle} / More</button>
       <SideDrawer on={on} toggle={toggle} listItems={sideDrawerListItems} />
       {content}
       </>

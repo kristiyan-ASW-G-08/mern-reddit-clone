@@ -65,7 +65,7 @@ exports.getPosts = async (req, res, next) => {
     console.log(err);
   }
 };
-exports.reportSpam = async (req, res, next) => {
+exports.postReport = async (req, res, next) => {
   try {
     const { postId } = req.params;
     const { communityId } = req.body;
@@ -82,7 +82,7 @@ exports.reportSpam = async (req, res, next) => {
     console.log(err);
   }
 };
-exports.getSpamPosts = async (req, res, next) => {
+exports.getReports = async (req, res, next) => {
   try {
     const { communityId } = req.params;
     const community = await Community.findById(communityId);

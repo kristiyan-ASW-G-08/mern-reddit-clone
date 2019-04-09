@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import postsArrType from '../PropTypes/postsArrType';
 const Posts = lazy(() => import('./Posts/Posts'));
 const PostsContainer = ({ posts, getNextPage, setPosts ,postsCount}) => {
-  console.log(posts,postsCount)
   const deletePostElement = postId => {
     const editedPosts = posts.filter(post => post._id !== postId);
     setPosts(editedPosts);
@@ -30,7 +29,6 @@ const PostsContainer = ({ posts, getNextPage, setPosts ,postsCount}) => {
 PostsContainer.propTypes = {
   posts: postsArrType.isRequired,
   setPosts: PropTypes.func.isRequired,
-  getNextPage:PropTypes.oneOfType(PropTypes.func.isRequired,PropTypes.bool.isRequired),
   postsCount:PropTypes.number.isRequired
 };
 export default PostsContainer;
