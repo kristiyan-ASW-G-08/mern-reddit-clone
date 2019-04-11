@@ -64,7 +64,7 @@ const ModTools = ({ history, match }) => {
    
   return (
     <> 
-      <button className="button" onClick={toggle}>{pageTitle} / More</button>
+      <button className="button button-profile" onClick={toggle}>{pageTitle} / More</button>
       <SideDrawer on={on} toggle={toggle} listItems={sideDrawerListItems} />
       {content}
       </>

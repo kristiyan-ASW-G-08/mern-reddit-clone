@@ -75,7 +75,7 @@ router.post('/report/:postId', isAuth, communityController.postReport);
 
 router.get('/reports/:communityId', isAuth, communityController.getReports);
 router.delete('/report/:reportId', isAuth, communityController.deleteReportPost);
-
+router.post('/ban/:communityId',isAuth,communityController.banHandler)
 const ruleValidationArr = [
   body(
     'title',

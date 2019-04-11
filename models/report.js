@@ -17,6 +17,15 @@ const reportSchema = new Schema({
     ref: 'Community',
     required: true
   },
+  author: {
+    type:String,
+    required:true,
+  },
+  authorId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
   reportAuthorId: {
     type: Schema.Types.ObjectId,
     ref: 'User',

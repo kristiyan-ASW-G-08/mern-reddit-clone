@@ -35,10 +35,12 @@ const ReportForm = ({history,post}) => {
     e.preventDefault();
     const apiUrl = `http://localhost:8080/community/report/${post._id}`
     if(rule){
-        const {authorId,communityId,_id} = post
+        const {authorId,communityId,_id,author} = post
         const report = {
+            author,
+            authorId,
             ruleId:rule,
-            communityId:communityId,
+            communityId,
             reportAuthorId:userId
         }
         const responseData = await postData(apiUrl,report,token)

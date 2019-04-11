@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
-const CommunitySchema = new Schema({
+const includesCheck = require('../util/includesCheck')
+const communitySchema = new Schema({
   name: {
     type: String,
     required: true
@@ -29,38 +29,32 @@ const CommunitySchema = new Schema({
     ref: 'User',
     required: true
   },
-  moderators: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'User'
-    }
-  ],
   rules: [
     {
       type: Schema.Types.ObjectId,
       ref: 'Rule'
     }
+  ],
+  bannedUsers:[
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }
   ]
 });
 
-const includesCheck = (arr, id) => {
-  const check = arr.find(itemId => {
-    return itemId.equals(id);
-  });
-  return check;
-};
-CommunitySchema.methods.incrementSubscribers = function() {
+communitySchema.methods.incrementSubscribers = function() {
   this.subscribers++
   this.save();
 };
 
-CommunitySchema.methods.decrementSubscribers = function() {
+communitySchema.methods.decrementSubscribers = function() {
   if(this.subscribers >0){
     this.subscribers--
   }
   this.save();
 };
-CommunitySchema.methods.reportSpam = function(spamPostId) {
+communitySchema.methods.reportSpam = function(spamPostId) {
   const id = mongoose.Types.ObjectId(spamPostId);
   if(includesCheck(this.spam,id)){
     return false
@@ -71,5 +65,19 @@ CommunitySchema.methods.reportSpam = function(spamPostId) {
   }
 };
 
+communitySchema.methods.banHandler = function(userId,type) {
+  const id = mongoose.Types.ObjectId(userId);
 
-module.exports = mongoose.model('Community', CommunitySchema);
+  const check = includesCheck(this.bannedUsers,id)
+  if(check && type === 'unban'){
+    this.bannedUsers = this.bannedUsers.filter(communityBanId => !communityBanId.equals(id));
+  }else if(!check && type === 'ban') {
+    this.bannedUsers = [...this.bannedUsers,id]
+  }else {
+    const msg = type === 'ban' ? 'This user is already banned!' : "This user wasn't banned!"
+    return {msg}
+  }
+  this.save()
+};
+
+module.exports = mongoose.model('Community', communitySchema);

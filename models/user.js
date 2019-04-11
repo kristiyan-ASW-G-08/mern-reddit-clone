@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const  Post  = require('./post')
+const includesCheck = require('../util/includesCheck')
 const userSchema = new Schema({
   email: {
     type: String,
@@ -46,6 +47,12 @@ const userSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'Post'
     }
+  ],
+  banned:[
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Community'
+    }
   ]
 });
 
@@ -72,12 +79,7 @@ userSchema.methods.checkSubscriptions = function(communityId) {
   return subscribeCheck;
 };
 
-const includesCheck = (arr, id) => {
-  const check = arr.find(itemId => {
-    return itemId.equals(id);
-  });
-  return check;
-};
+
 userSchema.methods.voteHandler = async function(postId, type) {
   const post = await  Post.findById(postId)
   const id = mongoose.Types.ObjectId(postId);
@@ -122,4 +124,5 @@ userSchema.methods.saveHandler = function(postId) {
   }
   this.save()
 };
+
 module.exports = mongoose.model('User', userSchema);
