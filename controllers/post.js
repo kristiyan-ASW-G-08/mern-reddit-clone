@@ -5,16 +5,23 @@ const Community = require('../models/community');
 const { validationResult } = require('express-validator/check');
 const errorsIsEmpty = require('../util/errorsIsEmpty');
 const pagination = require('../util/pagination');
+
+
 exports.createPost = async (req, res, next) => {
   try {
     errorsIsEmpty(validationResult(req));
     const { communityId } = req.params;
     const { type } = req.query;
     const { title, content } = req.body;
-    const user = await User.findById(req.userId);
+    const user = await User.findById(req.userId)
     const community = await Community.findById(communityId);
-    let post;
-    if (type === 'text') {
+    const banned = await community.authorized(req.userId)
+    if(banned){
+      res.status(403).json({msg:'You are not allowed to post or comment in this community!'})
+    }
+    else {
+      let post;
+      if (type === 'text') {
       post = new Post({
         title,
         content,
@@ -39,9 +46,10 @@ exports.createPost = async (req, res, next) => {
         communityName: community.name
       });
     }
-    console.log(post)
     await post.save();
     res.status(201).json({ msg: 'Post successfully added', postId: post._id });
+    }
+    
   } catch (err) {
     console.log(err);
     next(err);

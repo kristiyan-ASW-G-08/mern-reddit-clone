@@ -5,6 +5,7 @@ import ValidationErrorsList from '../ValidationErrorsList/ValidationErrorsList';
 import postData from '../../util/postData';
 import useValidationErrors from '../../hooks/useValidationErrors/useValidationErrors';
 import useAuthContext from '../../hooks/useAuthContext/useAuthContext'
+import useModalContext from '../../hooks/useModalContext/useModalContext'
 const CommentForm = ({postId,
   setNewComment,
   toggle,
@@ -18,6 +19,9 @@ const CommentForm = ({postId,
     validationErrorParams,
     toggleValidationErrors
    } = useValidationErrors();
+   const {
+    toggleModalReducer
+   } = useModalContext();
   useEffect(() => {
     if (isAuth && editComment) {
       setContent(editComment.content);
@@ -34,7 +38,10 @@ const CommentForm = ({postId,
         ? `http://localhost:8080/comment/edit/${editComment._id}`
         : `http://localhost:8080/comment/post/${postId}`;
       const responseData = await postData(apiUrl, { content }, token);
-      if (responseData.validationErrors) {
+      if(responseData.status === 403){
+        toggleModalReducer({on:true,message:'You are no allowed to post or comment in this community?'})
+      }
+    else  if (responseData.validationErrors) {
         toggleValidationErrors(responseData.validationErrors);
       } else {
         const { comment } = responseData;

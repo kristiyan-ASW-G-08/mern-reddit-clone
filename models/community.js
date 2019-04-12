@@ -79,5 +79,9 @@ communitySchema.methods.banHandler = function(userId,type) {
   }
   this.save()
 };
+communitySchema.methods.authorized = function(userId) {
+  const id = mongoose.Types.ObjectId(userId);
+  return includesCheck(this.bannedUsers,userId)
+};
 
 module.exports = mongoose.model('Community', communitySchema);

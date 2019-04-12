@@ -1,5 +1,4 @@
 import React, { Suspense, lazy } from 'react';
-// import useToggle from '../../hooks/useToggle'
 import useModalContext from '../../hooks/useModalContext/useModalContext';
 import Loader from '../Loader';
 import logo from '../../assets/logo.svg';

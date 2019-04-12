@@ -1,6 +1,7 @@
 const Post = require('../models/post');
 const User = require('../models/user');
 const Comment = require('../models/comment');
+const Community = require('../models/community');
 const mongoose = require('mongoose');
 const { validationResult } = require('express-validator/check');
 const errorsIsEmpty = require('../util/errorsIsEmpty')
@@ -11,6 +12,12 @@ exports.createComment = async (req, res, next) => {
      const {  content } = req.body;
     const user = await User.findById(req.userId);
     const post = await Post.findById(postId);;
+    const community = await Community.findById(post.communityId)
+    const banned = await community.authorized(req.userId)
+    if(banned){
+      res.status(403).json({msg:'You are not allowed to post or comment in this community!'})
+    }
+    else{
       const comment = new Comment({
         content,
         postId,
@@ -22,7 +29,7 @@ exports.createComment = async (req, res, next) => {
       await post.incrementComments()
       await comment.save();
       res.status(201).json({comment});
-    
+    }
   } catch (err) {
     console.log(err);
     next(err)

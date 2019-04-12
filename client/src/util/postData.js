@@ -14,6 +14,11 @@ const postData = async (url,data,token) => {
     return {
       validationErrors,
     };
+  }else if(response.status === 403){
+    return {
+      status:403,
+      msg:responseData.msg
+    }
   }
   return responseData
 };

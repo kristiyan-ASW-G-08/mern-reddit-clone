@@ -7,6 +7,7 @@ import useDocumentTitle from '../../hooks/useDocumentTitle/useDocumentTitle'
 import postData from '../../util/postData';
 import postFormData from '../../util/postFormData';
 import useAuthContext from '../../hooks/useAuthContext/useAuthContext'
+import useModalContext from '../../hooks/useModalContext/useModalContext'
 import useImagePicker from '../../hooks/useImagePicker/useImagePicker'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -20,6 +21,7 @@ const PostForm = props => {
   const [content, setContent] = useState('');
   const [type,setType] = useState('post')
   const {image,imagePickerHandler} = useImagePicker()
+  const {toggleModalReducer} = useModalContext()
   const {token}  = useAuthContext()
   useDocumentTitle('Submit to Rereddit')
   const {
@@ -43,11 +45,11 @@ const PostForm = props => {
     }
     if(type === 'post'){
       const responseData = await postData(apiUrl, post, token);
-      if (responseData.validationErrors) {
-        toggleValidationErrors(responseData.validationErrors);
-      } else {
-        postId = postId ? postId : responseData.postId;
-        props.history.replace(`/post/${postId}`);
+      if(responseData.status === 403){
+        toggleModalReducer({on:true,message:'You are no allowed to post or comment in this community?'})
+      }else {
+       postId = responseData.postId;
+       props.history.replace(`/post/${postId}`);
       }
     }else if(type === 'image'){
       apiUrl = `http://localhost:8080/post/post/${communityId}?type=image`
@@ -55,8 +57,13 @@ const PostForm = props => {
       formData.append('title',title)
       formData.append('image',image)
        const responseData = await postFormData(apiUrl,formData,token)
-       postId = responseData.postId;
-       props.history.replace(`/post/${postId}`);
+       if(responseData.status === 403){
+         toggleModalReducer({on:true,message:'You are no allowed to post or comment in this community?'})
+       }else {
+        postId = responseData.postId;
+        props.history.replace(`/post/${postId}`);
+       }
+      
 
     }
   };

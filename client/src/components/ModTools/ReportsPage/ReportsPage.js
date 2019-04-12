@@ -18,7 +18,6 @@ const ReportsPage = ({communityId,token}) => {
     },[])
 
     const deleteReport = async(reportId,deletePost) => {
-        console.log(reportId)
         const apiUrl = `http://localhost:8080/community/report/${reportId}?deletePost=${deletePost}`
         const responseData = await deleteData(apiUrl,token)
         if(responseData.msg = 'Deleted'){
@@ -31,7 +30,7 @@ const ReportsPage = ({communityId,token}) => {
     const banHandler = async (authorId,author) => {
         const apiUrl = `http://localhost:8080/community/ban/${communityId}?type=ban`
         const responseData = await postData(apiUrl,{authorId,author},token)
-        console.log(responseData)
+        toggleModalReducer({on:true,message:responseData.msg})
     }
     return (
         <> 

@@ -70,7 +70,6 @@ exports.postReport = async (req, res, next) => {
   try {
     const { postId } = req.params;
     const { ruleId, communityId, reportAuthorId,author,authorId } = req.body;
-
     const report = await new Report({
       author,
       authorId,
