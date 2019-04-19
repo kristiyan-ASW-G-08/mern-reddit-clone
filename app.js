@@ -1,5 +1,8 @@
 const path = require('path');
+<<<<<<< HEAD
 
+=======
+>>>>>>> refactored user routes
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -9,10 +12,16 @@ const authRoutes = require('./routes/auth');
 const postRoutes = require('./routes/post');
 const commentRoutes = require('./routes/comment');
 const userRoutes = require('./routes/user');
+<<<<<<< HEAD
 const { mongoURI } = require('./config/keys');
 const app = express();
 
 
+=======
+const  mongoURI  = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0-zmcyw.mongodb.net/${process.env.MONGO_DATABASE}?retryWrites=true`
+const app = express();
+
+>>>>>>> refactored user routes
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'images');

@@ -14,7 +14,7 @@ const reportSchema = new Schema({
   },
   postId: {
     type: Schema.Types.ObjectId,
-    ref: 'Community',
+    ref: 'Post',
     required: true
   },
   author: {

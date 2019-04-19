@@ -1,7 +1,11 @@
 const { validationResult } = require('express-validator/check');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+<<<<<<< HEAD
 const {secret} =  require('../config/keys')
+=======
+const secret = process.env.SECRET
+>>>>>>> refactored user routes
 const User = require('../models/user');
 const errorsIsEmpty = require('../util/errorsIsEmpty')
 exports.signup = async (req, res, next) => {

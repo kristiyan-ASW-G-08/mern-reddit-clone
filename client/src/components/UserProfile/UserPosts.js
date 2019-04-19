@@ -1,10 +1,16 @@
 import React ,{useState,lazy,Suspense,useContext,useEffect} from 'react'
 import getData from '../../util/getData'
 import {AuthContextData} from '../../AuthContext/AuthContext'
+<<<<<<< HEAD
 
 
 import PostsContainer from '../PostsContainer/PostsContainer';
 const UserPosts= props => {
+=======
+import PostsContainer from '../PostsContainer/PostsContainer';
+const UserPosts= props => {
+    console.log('User Posts here')
+>>>>>>> refactored user routes
     const [posts,setPosts] = useState(false)
     const [postsCount,setPostsCount] = useState(0)
     const [page,setPage] = useState(1)

@@ -74,8 +74,10 @@ router.get('/posts/:communityName', communityController.getPosts);
 router.post('/report/:postId', isAuth, communityController.postReport);
 
 router.get('/reports/:communityId', isAuth, communityController.getReports);
+
 router.delete('/report/:reportId', isAuth, communityController.deleteReportPost);
 router.post('/ban/:communityId',isAuth,communityController.banHandler)
+router.get('/banned-users/:communityId',isAuth,communityController.getBannedUsers)
 const ruleValidationArr = [
   body(
     'title',

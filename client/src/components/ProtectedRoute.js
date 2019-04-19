@@ -3,11 +3,16 @@ import { Route, Redirect } from "react-router-dom";
 import Loader from './Loader'
  const ProtectedRoute = ({
   Component,
+<<<<<<< HEAD
   authState,
+=======
+  isAuth,
+>>>>>>> refactored user routes
   ...rest
 }) => {
   return (
     <Route
+<<<<<<< HEAD
 
       {...rest}
       render={props => {
@@ -15,6 +20,13 @@ import Loader from './Loader'
           return  <Suspense fallback={<Loader />}>
           <Component  authState={authState}
           />
+=======
+      {...rest}
+      render={props => {
+        if (isAuth) {
+          return  <Suspense fallback={<Loader />}>
+          <Component />
+>>>>>>> refactored user routes
         </Suspense>;
         } else {
           return (
